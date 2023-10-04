@@ -12,10 +12,7 @@ class ImageOutput:
 
         Parâmetros:
 
-            - image: Union[np.ndarray, Image.Image]
-
-                Imagem a ser salva ou visualizada. Pode ser um objeto PIL.Image ou uma matriz numpy.
-                A matriz numpy pode possuir valores entre 0 e 1 e ser do tipo float ou ser uma matriz do tipo uint8.
+            - image: Union[np.ndarray, Image.Image] - Imagem a ser salva ou visualizada. Pode ser um objeto PIL.Image ou uma matriz numpy. A matriz numpy pode possuir valores entre 0 e 1 e ser do tipo float ou ser uma matriz do tipo uint8.
         '''
         if not isinstance(image, np.ndarray) and not isinstance(image, Image.Image):
             raise TypeError('A imagem precisa ser uma matriz numpy ou um objeto PIL.Image')
@@ -30,13 +27,29 @@ class ImageOutput:
             # Já é um objeto PIL.Image, não precisa fazer nenhum tratamento
             self.image = image
     
-    def save(self, path: str, format: str = 'png'):
+    def save(self, path: str, format: Union[str, None] = None):
         '''
+        Salva a imagem em um arquivo.
+
+        ---
+
+        Parâmetros:
+    
+                - path: str - Caminho do arquivo a ser salvo.
+    
+                - format: Union[str, None] - Formato do arquivo a ser salvo. Se não for especificado, o formato será inferido a partir da extensão do arquivo.
         '''
         self.image.save(fp=path, format=format)
     
     def save_as_ppm(self, path: str):
         '''
+        Salva a imagem em um arquivo PPM. Utiliza o algoritmo aprendido no tutorial para salvar o arquivo
+
+        ---
+
+        Parâmetros:
+            
+                - path: str - Caminho do arquivo a ser salvo.
         '''
         img_matrix = np.asarray(self.image)
         img_height, img_width, _ = img_matrix.shape
@@ -58,9 +71,6 @@ class ImageOutput:
         
     def display(self):
         '''
+        Mostra a imagem na tela.
         '''
         self.image.show()
-
-
-teste = ImageOutput(np.zeros((256, 256, 3)))
-teste.save_as_ppm('teste.ppm')
