@@ -4,10 +4,18 @@ Atividade01 package
 Submodules
 ----------
 
-Atividade01.ImageOutput module
-------------------------------
+Atividade01.ImageIO module
+--------------------------
 
-.. automodule:: Atividade01.ImageOutput
+.. automodule:: Atividade01.ImageIO
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Atividade01.test\_ImageIO module
+--------------------------------
+
+.. automodule:: Atividade01.test_ImageIO
    :members:
    :undoc-members:
    :show-inheritance:
