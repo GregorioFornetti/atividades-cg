@@ -2,11 +2,11 @@ from typing import Union
 import numpy as np 
 from PIL import Image
 
-class ImageOutput:
+class ImageWriter:
 
     def __init__(self, image: Union[np.ndarray, Image.Image]):
         '''
-        Construtor da classe ImageOutput. Recebe um objeto ou uma matriz representando uma imagem, para ser posteriormente salva ou visualizada.
+        Construtor da classe ImageWriter. Recebe um objeto ou uma matriz representando uma imagem, para ser posteriormente salva ou visualizada.
 
         --- 
 
@@ -74,3 +74,67 @@ class ImageOutput:
         Mostra a imagem na tela.
         '''
         self.image.show()
+
+
+class ImageReader:
+    
+        def read_as_float_matrix(self, path: str) -> np.ndarray:
+            '''
+            Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.
+            
+            ---
+
+            Parâmetros:
+
+                    - path: str - Caminho do arquivo a ser lido.
+    
+            ---
+    
+            Retorno:
+    
+                    - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 1 e é do tipo float.
+            '''
+            img = Image.open(path)
+            img_matrix = np.asarray(img)
+            img_matrix = img_matrix / 255.0
+            return img_matrix
+    
+        def read_as_uint8_matrix(self, path: str) -> np.ndarray:
+            '''
+            Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.
+            
+            ---
+
+            Parâmetros:
+
+                    - path: str - Caminho do arquivo a ser lido.
+    
+            ---
+    
+            Retorno:
+    
+                    - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.
+            '''
+            img = Image.open(path)
+            img_matrix = np.asarray(img)
+            img_matrix = img_matrix.astype(np.uint8)
+            return img_matrix
+        
+        def read_as_pil_image(self, path: str) -> Image.Image:
+            '''
+            Lê o arquivo de imagem e retorna um objeto PIL.Image representando a imagem.
+            
+            ---
+
+            Parâmetros:
+
+                    - path: str - Caminho do arquivo a ser lido.
+    
+            ---
+    
+            Retorno:
+    
+                    - Image - Objeto PIL.Image representando a imagem.
+            '''
+            img = Image.open(path)
+            return img
