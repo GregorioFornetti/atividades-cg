@@ -10,7 +10,7 @@ RA: 792181
 
 A linguagem escolhida para a implementação geral do projeto foi [Python](https://www.python.org/)
 
-Todas as atividades feitas estão nos repositórios `AtividadeXX`, sendo XX o número da atividade. Por exemplo, a implementação da atividade 1 está disponível na pasta `Atividade01`.
+Todas as atividades feitas estão nos repositórios `AtividadeXX`, sendo XX o número da atividade. Por exemplo, a implementação da atividade 1 está disponível na pasta `Atividade01`. Cada pasta de atividade possui um arquivo `readme.md`, explicando sobre a atividade em questão.
 
 ### Principais bibliotecas utilizadas no projeto
 
