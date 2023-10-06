@@ -2,6 +2,7 @@ from typing import Union
 import numpy as np 
 from PIL import Image
 
+
 class ImageWriter:
 
     def __init__(self, image: Union[np.ndarray, Image.Image]):
