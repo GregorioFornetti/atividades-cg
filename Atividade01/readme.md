@@ -1,6 +1,12 @@
 
 # Atividade 01 - I/O de imagens
 
+## Documentação online
+
+É possível acessar a documentação gerada no [Github Pages do projeto](https://gregoriofornetti.github.io/atividades-cg/Atividade01/doc/)
+
+## Descrição original da atividade
+
 Criar classes para Input e Output de imagens.
 
 Descrição original da atividade:
@@ -12,7 +18,6 @@ Descrição original da atividade:
 3- Gere pelo menos três imagens. Exemplos: degradê, círculo, quadrado, etc...
 
 4- Faça uma breve documentação: doxygen + readme
-
 
 ## Execução da atividade
 
