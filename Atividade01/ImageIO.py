@@ -79,63 +79,63 @@ class ImageWriter:
 
 class ImageReader:
     
-        def read_as_float_matrix(self, path: str) -> np.ndarray:
-            '''
-            Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.
-            
-            ---
-
-            Parâmetros:
-
-                    - path: str - Caminho do arquivo a ser lido.
-    
-            ---
-    
-            Retorno:
-    
-                    - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 1 e é do tipo float.
-            '''
-            img = Image.open(path)
-            img_matrix = np.asarray(img)
-            img_matrix = img_matrix / 255.0
-            return img_matrix
-    
-        def read_as_uint8_matrix(self, path: str) -> np.ndarray:
-            '''
-            Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.
-            
-            ---
-
-            Parâmetros:
-
-                    - path: str - Caminho do arquivo a ser lido.
-    
-            ---
-    
-            Retorno:
-    
-                    - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.
-            '''
-            img = Image.open(path)
-            img_matrix = np.asarray(img)
-            img_matrix = img_matrix.astype(np.uint8)
-            return img_matrix
+    def read_as_float_matrix(self, path: str) -> np.ndarray:
+        '''
+        Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.
         
-        def read_as_pil_image(self, path: str) -> Image.Image:
-            '''
-            Lê o arquivo de imagem e retorna um objeto PIL.Image representando a imagem.
-            
-            ---
+        ---
 
-            Parâmetros:
+        Parâmetros:
 
-                    - path: str - Caminho do arquivo a ser lido.
+                - path: str - Caminho do arquivo a ser lido.
+
+        ---
+
+        Retorno:
+
+                - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 1 e é do tipo float.
+        '''
+        img = Image.open(path)
+        img_matrix = np.asarray(img)
+        img_matrix = img_matrix / 255.0
+        return img_matrix
     
-            ---
-    
-            Retorno:
-    
-                    - Image - Objeto PIL.Image representando a imagem.
-            '''
-            img = Image.open(path)
-            return img
+    def read_as_uint8_matrix(self, path: str) -> np.ndarray:
+        '''
+        Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.
+        
+        ---
+
+        Parâmetros:
+
+                - path: str - Caminho do arquivo a ser lido.
+
+        ---
+
+        Retorno:
+
+                - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.
+        '''
+        img = Image.open(path)
+        img_matrix = np.asarray(img)
+        img_matrix = img_matrix.astype(np.uint8)
+        return img_matrix
+        
+    def read_as_pil_image(self, path: str) -> Image.Image:
+        '''
+        Lê o arquivo de imagem e retorna um objeto PIL.Image representando a imagem.
+        
+        ---
+
+        Parâmetros:
+
+                - path: str - Caminho do arquivo a ser lido.
+
+        ---
+
+        Retorno:
+
+                - Image - Objeto PIL.Image representando a imagem.
+        '''
+        img = Image.open(path)
+        return img

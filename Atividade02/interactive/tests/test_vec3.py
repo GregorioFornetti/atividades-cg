@@ -274,3 +274,11 @@ class TestVec3:
         assert v.x == 2 * 6 - 3 * 5
         assert v.y == 3 * 4 - 1 * 6
         assert v.z == 1 * 5 - 2 * 4
+    
+    def test_unit_vector(self):
+        v = Vec3(1, 2, 3)
+        v = v.unit_vector()
+
+        assert v.x == 1 / np.sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
+        assert v.y == 2 / np.sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
+        assert v.z == 3 / np.sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
