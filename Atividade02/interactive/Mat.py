@@ -6,6 +6,7 @@ from Atividade02.interactive.Vec import Vec
 class Mat:
     """
     Classe base para matrizes. Não deve ser instanciada diretamente.
+
     .. automethod:: __neg__
     .. automethod:: __getitem__
     .. automethod:: __add__
@@ -36,19 +37,11 @@ class Mat:
         '''
         Inverte o sinal de todos elementos da matriz.
 
-        Exemplo:
-
-        >>> v = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> print(-v)
-        -1.0 -2.0 -3.0
-        -4.0 -5.0 -6.0
-        -7.0 -8.0 -9.0
-
         ---
 
         Retorno:
 
-            - Mat - Versão negativa do vetor.
+            - Mat - Versão negativa da matriz.
         '''
         new_matrix = np.zeros(self.shape, dtype=np.float64)
         for i in range(self.shape[0]):
@@ -59,26 +52,6 @@ class Mat:
     def __getitem__(self, key) -> Union[np.float64, np.ndarray]:
         '''
         Retorna o valor (ou valores) dos indices escolhidos.
-
-        Acessando uma linha:
-
-        >>> v = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> print(v[0])
-        1.0 2.0 3.0
-
-        Acessando um elemento:
-
-        >>> v = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> print(v[0,0])
-        1.0
-
-        Acessando uma coluna:
-
-        >>> v = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-        >>> print(v[:,0])
-        1.0
-        4.0
-        7.0
 
         Para mais operações de índices, veja: https://numpy.org/doc/stable/user/basics.indexing.html
 
@@ -92,7 +65,7 @@ class Mat:
 
         Retorno:
             
-            - np.float64 - Valor da coordenada escolhida.
+            - Union[np.ndarray, np.float64] - Valores contidos nos índices escolhidos.
         '''
         return self.matrix[key]
     
@@ -427,6 +400,12 @@ class Mat:
     def __repr__(self) -> str:
         '''
         Retorna uma string representando a matriz.
+
+        ---
+
+        Retorno:
+            
+                - str - String representando a matriz.
         '''
         string = ""
         for i in range(self.shape[0]):
