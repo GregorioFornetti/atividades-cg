@@ -3,7 +3,7 @@ from Atividade02.interactive.Vec2 import Vec2
 import numpy as np
 
 
-class TestVec3:
+class Testvec2:
 
     def test_init(self):
         v = Vec2(1, 2)
@@ -43,7 +43,7 @@ class TestVec3:
         assert v.x == 2
         assert v.y == 3
 
-    def test_add_vec3(self):
+    def test_add_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(3, 4)
         v = v1 + v2
@@ -51,7 +51,7 @@ class TestVec3:
         assert v.x == 4
         assert v.y == 6
     
-    def test_add_negative_vec3(self):
+    def test_add_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v = v1 + v2
@@ -66,7 +66,7 @@ class TestVec3:
         assert v.x == 0
         assert v.y == 1
     
-    def test_sub_vec3(self):
+    def test_sub_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(3, 4)
         v = v1 - v2
@@ -74,7 +74,7 @@ class TestVec3:
         assert v.x == -2
         assert v.y == -2
     
-    def test_sub_negative_vec3(self):
+    def test_sub_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v = v1 - v2
@@ -89,7 +89,7 @@ class TestVec3:
         assert v.x == 2
         assert v.y == 4
     
-    def test_mul_vec3(self):
+    def test_mul_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(3, 4)
         v = v1 * v2
@@ -97,7 +97,7 @@ class TestVec3:
         assert v.x == 3
         assert v.y == 8
     
-    def test_mul_negative_vec3(self):
+    def test_mul_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v = v1 * v2
@@ -112,7 +112,7 @@ class TestVec3:
         assert v.x == 1
         assert v.y == 2
     
-    def test_div_vec3(self):
+    def test_div_vec2(self):
         v1 = Vec2(4, 10)
         v2 = Vec2(4, 5)
         v = v1 / v2
@@ -120,7 +120,7 @@ class TestVec3:
         assert v.x == 1
         assert v.y == 2
     
-    def test_div_negative_vec3(self):
+    def test_div_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v = v1 / v2
@@ -135,7 +135,7 @@ class TestVec3:
         assert v.x == 2
         assert v.y == 3
     
-    def test_iadd_vec3(self):
+    def test_iadd_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(3, 4)
         v1 += v2
@@ -143,7 +143,7 @@ class TestVec3:
         assert v1.x == 4
         assert v1.y == 6
     
-    def test_iadd_negative_vec3(self):
+    def test_iadd_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v1 += v2
@@ -158,7 +158,7 @@ class TestVec3:
         assert v.x == 0
         assert v.y == 1
     
-    def test_isub_vec3(self):
+    def test_isub_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(3, 4)
         v1 -= v2
@@ -166,7 +166,7 @@ class TestVec3:
         assert v1.x == -2
         assert v1.y == -2
     
-    def test_isub_negative_vec3(self):
+    def test_isub_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v1 -= v2
@@ -181,7 +181,7 @@ class TestVec3:
         assert v.x == 2
         assert v.y == 4
     
-    def test_imul_vec3(self):
+    def test_imul_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(3, 4)
         v1 *= v2
@@ -189,7 +189,7 @@ class TestVec3:
         assert v1.x == 3
         assert v1.y == 8
     
-    def test_imul_negative_vec3(self):
+    def test_imul_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v1 *= v2
@@ -204,7 +204,7 @@ class TestVec3:
         assert v.x == 1
         assert v.y == 2
     
-    def test_itruediv_vec3(self):
+    def test_itruediv_vec2(self):
         v1 = Vec2(4, 10)
         v2 = Vec2(4, 5)
         v1 /= v2
@@ -212,7 +212,7 @@ class TestVec3:
         assert v1.x == 1
         assert v1.y == 2
     
-    def test_itruediv_negative_vec3(self):
+    def test_itruediv_negative_vec2(self):
         v1 = Vec2(1, 2)
         v2 = Vec2(-1, -2)
         v1 /= v2
