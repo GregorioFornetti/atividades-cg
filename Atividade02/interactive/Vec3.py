@@ -8,15 +8,29 @@ class Vec3:
     def __init__(self, x: np.float64 = 0.0, y: np.float64 = 0.0, z: np.float64 = 0.0):
         self.vec = np.array([x, y, z], dtype=np.float64)
     
-
+    @property
     def x(self) -> np.float64:
         return self.vec[0]
     
+    @x.setter
+    def x(self, value: np.float64):
+        self.vec[0] = value
+    
+    @property
     def y(self) -> np.float64:
         return self.vec[1]
     
+    @y.setter
+    def y(self, value: np.float64):
+        self.vec[1] = value
+
+    @property
     def z(self) -> np.float64:
         return self.vec[2]
+
+    @z.setter
+    def z(self, value: np.float64):
+        self.vec[2] = value
     
 
     def __neg__(self) -> 'Vec3':
