@@ -1,9 +1,10 @@
 
 from typing import Union
 import numpy as np
+from Atividade02.interactive.Vec import Vec
 
 
-class Vec3:
+class Vec3(Vec):
     """
     .. automethod:: __neg__
     .. automethod:: __getitem__
