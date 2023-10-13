@@ -3,7 +3,7 @@ from typing import Union
 import numpy as np
 
 
-class Vec3:
+class Vec2:
     """
     .. automethod:: __neg__
     .. automethod:: __getitem__
@@ -19,9 +19,9 @@ class Vec3:
     
     """
 
-    def __init__(self, x: np.float64 = 0.0, y: np.float64 = 0.0, z: np.float64 = 0.0):
+    def __init__(self, x: np.float64 = 0.0, y: np.float64 = 0.0):
         '''
-        Construtor da classe Vec3. Recebe as coordenadas x, y e z do vetor.
+        Construtor da classe Vec2. Recebe as coordenadas x e y.
 
         --- 
 
@@ -30,10 +30,8 @@ class Vec3:
             - x: np.float64 = 0.0 - Coordenada x do vetor.
 
             - y: np.float64 = 0.0 - Coordenada y do vetor.
-
-            - z: np.float64 = 0.0 - Coordenada z do vetor.
         '''
-        self.vec = np.array([x, y, z], dtype=np.float64)
+        self.vec = np.array([x, y], dtype=np.float64)
     
     @property
     def x(self) -> np.float64:
@@ -56,36 +54,25 @@ class Vec3:
     @y.setter
     def y(self, value: np.float64):
         self.vec[1] = value
-
-    @property
-    def z(self) -> np.float64:
-        '''
-        Coordenada z do vetor.
-        '''
-        return self.vec[2]
-
-    @z.setter
-    def z(self, value: np.float64):
-        self.vec[2] = value
     
 
-    def __neg__(self) -> 'Vec3':
+    def __neg__(self) -> 'Vec2':
         '''
         Inverte o sinal de todas as coordenadas do vetor.
 
         Exemplo:
 
-        >>> v = Vec3(1, 2, 3)
+        >>> v = Vec2(1, 2)
         >>> print(-v)
-        -1.0 -2.0 -3.0
+        -1.0 -2.0
 
         ---
 
         Retorno:
 
-            - Vec3 - Versão negativa do vetor.
+            - Vec2 - Versão com sinais invertidos do vetor.
         '''
-        return Vec3(-self.vec[0], -self.vec[1], -self.vec[2])
+        return Vec2(-self.vec[0], -self.vec[1])
     
     def __getitem__(self, key: int) -> np.float64:
         '''
@@ -93,7 +80,7 @@ class Vec3:
 
         Exemplo:
 
-        >>> v = Vec3(1, 2, 3)
+        >>> v = Vec2(1, 2)
         >>> print(v[0])
         1.0
 
@@ -101,7 +88,7 @@ class Vec3:
 
         Parâmetros:
             
-            - key: int - Índice da coordenada do vetor (0 = x, y = 1 e z = 2).
+            - key: int - Índice da coordenada do vetor (0 = x e y = 1).
 
         ---
 
@@ -112,7 +99,7 @@ class Vec3:
         return self.vec[key]
     
 
-    def __add__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __add__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Soma elemento a elemento de dois vetores. Ou soma um número a cada elemento do vetor.
 
@@ -120,36 +107,36 @@ class Vec3:
 
         Somando dois vetores
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> print(v1 + v2)
-        5.0 7.0 9.0
+        4.0 6.0
 
         Somando um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> print(v1 + 1)
-        2.0 3.0 4.0
+        2.0 3.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser somado.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser somado.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da soma.
+            - Vec2 - Resultado da soma.
 
         '''
-        if isinstance(other, Vec3):
-            return Vec3(self.vec[0] + other.vec[0], self.vec[1] + other.vec[1], self.vec[2] + other.vec[2])
+        if isinstance(other, Vec2):
+            return Vec2(self.vec[0] + other.vec[0], self.vec[1] + other.vec[1])
         else:
-            return Vec3(self.vec[0] + other, self.vec[1] + other, self.vec[2] + other)
+            return Vec2(self.vec[0] + other, self.vec[1] + other)
     
-    def __sub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __sub__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Subtrai elemento a elemento de dois vetores. Ou subtrai um número a cada elemento do vetor.
 
@@ -157,36 +144,36 @@ class Vec3:
 
         Subtraindo dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> print(v1 - v2)
-        -3.0 -3.0 -3.0
+        -2.0 -2.0
 
         Subtraindo um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> print(v1 - 1)
-        0.0 1.0 2.0
+        0.0 1.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser subtraído.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser subtraído.
 
         ---
 
         Retorno:
             
-                - Vec3 - Resultado da subtração.
+                - Vec2 - Resultado da subtração.
         
         '''
-        if isinstance(other, Vec3):
-            return Vec3(self.vec[0] - other.vec[0], self.vec[1] - other.vec[1], self.vec[2] - other.vec[2])
+        if isinstance(other, Vec2):
+            return Vec2(self.vec[0] - other.vec[0], self.vec[1] - other.vec[1])
         else:
-            return Vec3(self.vec[0] - other, self.vec[1] - other, self.vec[2] - other)
+            return Vec2(self.vec[0] - other, self.vec[1] - other)
     
-    def __mul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __mul__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Multiplica elemento a elemento de dois vetores. Ou multiplica um número a cada elemento do vetor.
 
@@ -194,35 +181,35 @@ class Vec3:
 
         Multiplicando dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> print(v1 * v2)
-        4.0 10.0 18.0
+        3.0 8.0
 
         Multiplicando um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> print(v1 * 2)
-        2.0 4.0 6.0
+        2.0 4.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser multiplicado.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser multiplicado.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da multiplicação.
+            - Vec2 - Resultado da multiplicação.
         '''
-        if isinstance(other, Vec3):
-            return Vec3(self.vec[0] * other.vec[0], self.vec[1] * other.vec[1], self.vec[2] * other.vec[2])
+        if isinstance(other, Vec2):
+            return Vec2(self.vec[0] * other.vec[0], self.vec[1] * other.vec[1])
         else:
-            return Vec3(self.vec[0] * other, self.vec[1] * other, self.vec[2] * other)
+            return Vec2(self.vec[0] * other, self.vec[1] * other)
     
-    def __truediv__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __truediv__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Divide elemento a elemento de dois vetores. Ou divide um número a cada elemento do vetor.
 
@@ -230,36 +217,36 @@ class Vec3:
 
         Dividindo dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> print(v1 / v2)
-        0.25 0.4 0.5
+        0.33 0.50
 
         Dividindo um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> print(v1 / 2)
-        0.5 1.0 1.5
+        0.5 1.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser utilizado como divisor.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser utilizado como divisor.
 
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da divisão.
+            - Vec2 - Resultado da divisão.
         '''
-        if isinstance(other, Vec3):
-            return Vec3(self.vec[0] / other.vec[0], self.vec[1] / other.vec[1], self.vec[2] / other.vec[2])
+        if isinstance(other, Vec2):
+            return Vec2(self.vec[0] / other.vec[0], self.vec[1] / other.vec[1])
         else:
-            return Vec3(self.vec[0] / other, self.vec[1] / other, self.vec[2] / other)
+            return Vec2(self.vec[0] / other, self.vec[1] / other)
 
 
-    def __iadd__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __iadd__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Soma elemento a elemento de dois vetores. Ou soma um número a cada elemento do vetor.
 
@@ -267,42 +254,40 @@ class Vec3:
 
         Somando dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> v1 += v2
         >>> print(v1)
-        5.0 7.0 9.0
+        4.0 6.0
 
         Somando um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> v1 += 1
         >>> print(v1)
-        2.0 3.0 4.0
+        2.0 3.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser somado.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser somado.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da soma.
+            - Vec2 - Resultado da soma.
         '''
-        if isinstance(other, Vec3):
+        if isinstance(other, Vec2):
             self.vec[0] += other.vec[0]
             self.vec[1] += other.vec[1]
-            self.vec[2] += other.vec[2]
         else:
             self.vec[0] += other
             self.vec[1] += other
-            self.vec[2] += other
         return self
     
-    def __isub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __isub__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Subtrai elemento a elemento de dois vetores. Ou subtrai um número a cada elemento do vetor.
 
@@ -310,42 +295,40 @@ class Vec3:
 
         Subtraindo dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> v1 -= v2
         >>> print(v1)
-        -3.0 -3.0 -3.0
+        -2.0 -2.0
 
         Subtraindo um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> v1 -= 1
         >>> print(v1)
-        0.0 1.0 2.0
+        0.0 1.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser subtraído.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser subtraído.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da subtração.
+            - Vec2 - Resultado da subtração.
         '''
-        if isinstance(other, Vec3):
+        if isinstance(other, Vec2):
             self.vec[0] -= other.vec[0]
             self.vec[1] -= other.vec[1]
-            self.vec[2] -= other.vec[2]
         else:
             self.vec[0] -= other
             self.vec[1] -= other
-            self.vec[2] -= other
         return self
     
-    def __imul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __imul__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Multiplica elemento a elemento de dois vetores. Ou multiplica um número a cada elemento do vetor.
 
@@ -353,42 +336,40 @@ class Vec3:
 
         Multiplicando dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> v1 *= v2
         >>> print(v1)
-        4.0 10.0 18.0
+        3.0 8.0
 
         Multiplicando um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> v1 *= 2
         >>> print(v1)
-        2.0 4.0 6.0
+        2.0 4.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser multiplicado.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser multiplicado.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da multiplicação.
+            - Vec2 - Resultado da multiplicação.
         '''
-        if isinstance(other, Vec3):
+        if isinstance(other, Vec2):
             self.vec[0] *= other.vec[0]
             self.vec[1] *= other.vec[1]
-            self.vec[2] *= other.vec[2]
         else:
             self.vec[0] *= other
             self.vec[1] *= other
-            self.vec[2] *= other
         return self
 
-    def __itruediv__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
+    def __itruediv__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
         Divide elemento a elemento de dois vetores. Ou divide um número a cada elemento do vetor.
 
@@ -396,54 +377,52 @@ class Vec3:
 
         Dividindo dois vetores:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> v1 /= v2
         >>> print(v1)
-        0.25 0.4 0.5
+        0.33 0.50
 
         Dividindo um vetor e um número:
 
-        >>> v1 = Vec3(1, 2, 3)
+        >>> v1 = Vec2(1, 2)
         >>> v1 /= 2
         >>> print(v1)
-        0.5 1.0 1.5
+        0.5 1.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Vec3', np.float64] - Vetor ou número a ser dividido.
+            - other: Union['Vec2', np.float64] - Vetor ou número a ser dividido.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado da divisão.
+            - Vec2 - Resultado da divisão.
         '''
-        if isinstance(other, Vec3):
+        if isinstance(other, Vec2):
             self.vec[0] /= other.vec[0]
             self.vec[1] /= other.vec[1]
-            self.vec[2] /= other.vec[2]
         else:
             self.vec[0] /= other
             self.vec[1] /= other
-            self.vec[2] /= other
         return self
     
     def __repr__(self) -> str:
         '''
         Retorna uma string representando o vetor.
 
-        A string é composta pelas coordenadas x, y e z do vetor, separadas por um espaço.
+        A string é composta pelas coordenadas x e y do vetor, separadas por um espaço.
 
         Exemplo:
 
-        >>> v = Vec3(1, 2, 3)
+        >>> v = Vec2(1, 2)
         >>> print(v)
-        1.0 2.0 3.0
+        1.0 2.0
         '''
-        return f"{self.vec[0]} {self.vec[1]} {self.vec[2]}"
+        return f"{self.vec[0]} {self.vec[1]}"
     
     
     def length(self) -> np.float64:
@@ -452,9 +431,9 @@ class Vec3:
 
         Exemplo:
 
-        >>> v = Vec3(1, 2, 3)
-        >>> print(v.length())  # sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
-        3.7416573867739413
+        >>> v = Vec2(1, 2)
+        >>> print(v.length())  # sqrt(1 ** 2 + 2 ** 2)
+        2.23606797749979
         '''
         return np.sqrt(self.squared_length())
     
@@ -464,28 +443,28 @@ class Vec3:
 
         Exemplo:
 
-        >>> v = Vec3(1, 2, 3)
-        >>> print(v.squared_length())  # 1 ** 2 + 2 ** 2 + 3 ** 2
-        14.0
+        >>> v = Vec2(1, 2)
+        >>> print(v.squared_length())  # 1 ** 2 + 2 ** 2
+        5.0
         '''
-        return self.vec[0] ** 2 + self.vec[1] ** 2 + self.vec[2] ** 2
+        return self.vec[0] ** 2 + self.vec[1] ** 2
     
-    def dot(self, other: 'Vec3') -> np.float64:
+    def dot(self, other: 'Vec2') -> np.float64:
         '''
         Retorna o produto escalar entre dois vetores.
 
         Exemplo:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> print(v1.dot(v2))
-        32.0
+        11.0
 
         ---
 
         Parâmetros:
 
-            - other: 'Vec3' - Segundo vetor do produto escalar.
+            - other: 'Vec2' - Segundo vetor do produto escalar.
         
         ---
 
@@ -493,49 +472,47 @@ class Vec3:
             
             - np.float64 - Resultado do produto escalar.
         '''
-        return self.vec[0] * other.vec[0] + self.vec[1] * other.vec[1] + self.vec[2] * other.vec[2]
+        return self.vec[0] * other.vec[0] + self.vec[1] * other.vec[1]
     
-    def cross(self, other: 'Vec3') -> 'Vec3':
+    def cross(self, other: 'Vec2') -> np.float64:
         '''
         Retorna o produto vetorial entre dois vetores.
 
         Exemplo:
 
-        >>> v1 = Vec3(1, 2, 3)
-        >>> v2 = Vec3(4, 5, 6)
+        >>> v1 = Vec2(1, 2)
+        >>> v2 = Vec2(3, 4)
         >>> print(v1.cross(v2))
-        -3.0 6.0 -3.0
+        -2.0
 
         ---
 
         Parâmetros:
 
-            - other: 'Vec3' - Segundo vetor do produto vetorial.
+            - other: 'Vec2' - Segundo vetor do produto vetorial.
         
         ---
 
         Retorno:
 
-            - Vec3 - Resultado do produto vetorial.
+            - np.float64 - Resultado do produto vetorial.
         '''
-        return Vec3(self.vec[1] * other.vec[2] - self.vec[2] * other.vec[1],
-                    self.vec[2] * other.vec[0] - self.vec[0] * other.vec[2],
-                    self.vec[0] * other.vec[1] - self.vec[1] * other.vec[0])
+        return self.vec[0] * other.vec[1] - self.vec[1] * other.vec[0]
     
-    def unit_vector(self) -> 'Vec3':
+    def unit_vector(self) -> 'Vec2':
         '''
         Retorna o vetor unitário.
 
         Exemplo:
 
-        >>> v = Vec3(1, 2, 3)
+        >>> v = Vec2(1, 2)
         >>> print(v.unit_vector())
-        0.27 0.53 0.80
+        0.45 0.89
 
         ---
 
         Retorno:
 
-            - Vec3 - Vetor unitário.
+            - Vec2 - Vetor unitário.
         '''
         return self / self.length()
