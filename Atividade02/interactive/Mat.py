@@ -5,8 +5,6 @@ from Atividade02.interactive.Vec import Vec
 
 class Mat:
     """
-    Classe base para matrizes. Não deve ser instanciada diretamente.
-
     .. automethod:: __neg__
     .. automethod:: __getitem__
     .. automethod:: __add__

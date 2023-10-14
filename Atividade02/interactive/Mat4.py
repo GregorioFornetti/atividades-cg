@@ -6,7 +6,6 @@ from Atividade02.interactive.Mat import Mat
 
 class Mat4(Mat):
     """
-    Classe base para matrizes. Não deve ser instanciada diretamente.
     .. automethod:: __neg__
     .. automethod:: __getitem__
     .. automethod:: __add__
