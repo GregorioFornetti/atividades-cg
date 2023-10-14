@@ -400,8 +400,6 @@ class TestMat2:
         m = Mat2(np.array([[1, 2], [3, 4]]))
         m /= 2.0
 
-        print(m)
-
         assert m[0,0] == 0.5
         assert m[0,1] == 1
         assert m[1,0] == 1.5
