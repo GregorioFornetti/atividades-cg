@@ -3,7 +3,7 @@ from Atividade02.interactive.Vec2 import Vec2
 import numpy as np
 
 
-class Testvec2:
+class TestVec2:
 
     def test_init(self):
         v = Vec2(1, 2)

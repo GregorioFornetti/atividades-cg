@@ -20,7 +20,7 @@ class Mat:
     .. automethod:: __repr__
     """
 
-    def __init__(self, matrix: np.ndarray):
+    def __init__(self, matrix: Union[np.ndarray, list]):
         '''
         Construtor da classe de matrizes. Recebe uma matriz numpy que será utilizada para guardar os dados da matriz.
 
@@ -31,6 +31,10 @@ class Mat:
             - matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.
         '''
         self.matrix = matrix
+        if isinstance(matrix, list):
+            self.matrix = np.array(matrix, dtype=np.float64)
+        elif isinstance(matrix, np.ndarray) and matrix.dtype != np.float64:
+            self.matrix = matrix.astype(np.float64)
         self.shape = None  # Devem ser definidos nas classes filhas
 
     def __neg__(self) -> 'Mat':
@@ -68,6 +72,21 @@ class Mat:
             - Union[np.ndarray, np.float64] - Valores contidos nos índices escolhidos.
         '''
         return self.matrix[key]
+
+    def __setitem__(self, key, value):
+        '''
+        Atribui valores aos indices escolhidos
+
+        ---
+
+        Parâmetros:
+            
+            - key: - Índice de acesso à matriz
+
+            - value: - Valores a serem colocado
+        '''
+        self.matrix[key] = value
+
     
 
     def __add__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -304,19 +323,19 @@ class Mat:
             # Subtraindo duas matrizes - elemento a elemento
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] + other.matrix[i,j]
+                    self.matrix[i,j] = self.matrix[i,j] - other.matrix[i,j]
             return self
         elif isinstance(other, Vec):
             # Subtraindo uma matriz e um vetor - cada linha da matriz é subtraida com o vetor
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] + other.vec[j]
+                    self.matrix[i,j] = self.matrix[i,j] - other.vec[j]
             return self
         else:
             # Subtraindo uma matriz e um número - cada elemento da matriz é subtraido com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] + other
+                    self.matrix[i,j] = self.matrix[i,j] - other
             return self
     
     def __imul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -394,7 +413,10 @@ class Mat:
             # Dividindo uma matriz e um número - cada elemento da matriz é dividido com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
+                    print(self.matrix[i,j])
+                    print(other)
                     self.matrix[i,j] = self.matrix[i,j] / other
+                    print(self.matrix[i,j])
             return self
     
     def __repr__(self) -> str:

@@ -20,7 +20,7 @@ class Mat2(Mat):
     .. automethod:: __repr__
     """
 
-    def __init__(self, matrix: np.ndarray):
+    def __init__(self, matrix: np.ndarray = np.zeros((2, 2), dtype=np.float64)):
         '''
         Construtor da classe de matrizes. Recebe uma matriz numpy que será utilizada para guardar os dados da matriz.
 
@@ -52,7 +52,7 @@ class Mat2(Mat):
 
             - Mat - Versão negativa da matriz.
         '''
-        super().__neg__()
+        return super().__neg__()
     
     def __getitem__(self, key) -> Union[np.float64, np.ndarray]:
         '''
