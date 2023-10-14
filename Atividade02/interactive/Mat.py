@@ -1,7 +1,12 @@
+'''
+Classe base para as Matrizes (Mat2, Mat3 e Mat4)
+'''
+
 
 from typing import Union
 import numpy as np
 from Atividade02.interactive.Vec import Vec
+
 
 class Mat:
     """
@@ -20,20 +25,20 @@ class Mat:
 
     def __init__(self, matrix: Union[np.ndarray, list]):
         '''
-        Construtor da classe de matrizes. Recebe uma matriz numpy que será utilizada para guardar os dados da matriz.
+        Construtor da classe de matrizes. Recebe uma matriz numpy (ou uma lista) que será utilizada para guardar os dados da matriz.
 
         --- 
 
         Parâmetros:
 
-            - matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.
+            - matrix: Union[np.ndarray, list] - Matriz numpy (ou lista) que será utilizada para guardar os dados da matriz.
         '''
         self.matrix = matrix
         if isinstance(matrix, list):
             self.matrix = np.array(matrix, dtype=np.float64)
         elif isinstance(matrix, np.ndarray) and matrix.dtype != np.float64:
             self.matrix = matrix.astype(np.float64)
-        self.shape = None  # Devem ser definidos nas classes filhas
+        self.shape = None  # Deve ser definido nas classes filhas
 
     def __neg__(self) -> 'Mat':
         '''
