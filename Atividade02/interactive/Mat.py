@@ -413,10 +413,7 @@ class Mat:
             # Dividindo uma matriz e um número - cada elemento da matriz é dividido com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
-                    print(self.matrix[i,j])
-                    print(other)
                     self.matrix[i,j] = self.matrix[i,j] / other
-                    print(self.matrix[i,j])
             return self
     
     def __repr__(self) -> str:
