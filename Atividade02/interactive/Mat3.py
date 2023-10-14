@@ -1,10 +1,10 @@
 
 from typing import Union
 import numpy as np
-from Atividade02.interactive.Vec2 import Vec2
+from Atividade02.interactive.Vec3 import Vec3
 from Atividade02.interactive.Mat import Mat
 
-class Mat2(Mat):
+class Mat3(Mat):
     """
     Classe base para matrizes. Não deve ser instanciada diretamente.
     .. automethod:: __neg__
@@ -20,7 +20,7 @@ class Mat2(Mat):
     .. automethod:: __repr__
     """
 
-    def __init__(self, matrix: np.ndarray = np.zeros((2, 2), dtype=np.float64)):
+    def __init__(self, matrix: np.ndarray = np.zeros((3, 3), dtype=np.float64)):
         '''
         Construtor da classe de matrizes. Recebe uma matriz numpy que será utilizada para guardar os dados da matriz.
 
@@ -31,26 +31,27 @@ class Mat2(Mat):
             - matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.
         '''
         super().__init__(matrix)
-        self.shape = (2, 2)
+        self.shape = (3, 3)
         if matrix.shape != self.shape:
             raise ValueError(f"Matriz deve ter tamanho {self.shape}.")
 
-    def __neg__(self) -> 'Mat2':
+    def __neg__(self) -> 'Mat3':
         '''
         Inverte o sinal de todos elementos da matriz.
 
         Exemplo:
 
-        >>> m = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(-m)
-        -1.0 -2.0
-        -3.0 -4.0
+        -1.0 -2.0 -3.0
+        -4.0 -5.0 -6.0
+        -7.0 -8.0 -9.0
 
         ---
 
         Retorno:
 
-            - Mat2 - Versão negativa da matriz.
+            - Mat3 - Versão negativa da matriz.
         '''
         return super().__neg__()
     
@@ -60,22 +61,23 @@ class Mat2(Mat):
 
         Acessando uma linha:
 
-        >>> m = Mat2(np.array([[1, 2], [3, 4]))
+        >>> m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m[0])
-        1.0 2.0
+        1.0 2.0 3.0
 
         Acessando um elemento:
 
-        >>> m = Mat2(np.array([[1, 2], [3, 4]))
+        >>> m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m[0,0])
         1.0
 
         Acessando uma coluna:
 
-        >>> m = Mat2(np.array([[1, 2], [3, 4]))
+        >>> m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m[:,0])
         1.0
-        3.0
+        4.0
+        7.0
 
         Para mais operações de índices, veja: https://numpy.org/doc/stable/user/basics.indexing.html
 
@@ -94,7 +96,7 @@ class Mat2(Mat):
         return super().__getitem__(key)
     
 
-    def __add__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __add__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Soma elemento a elemento de duas matrizes.
         
@@ -106,42 +108,45 @@ class Mat2(Mat):
 
         Para soma de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 + m2)
-        6.0 8.0
-        10.0 12.0
+        2.0 4.0 6.0
+        8.0 10.0 12.0
+        14.0 16.0 18.0
 
         Para soma de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> print(m1 + v1)
-        6.0 8.0
-        8.0 10.0
+        2.0 4.0 6.0
+        5.0 7.0 9.0
+        8.0 10.0 12.0
 
         Para soma de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 + 1)
-        2.0 3.0
-        4.0 5.0
+        2.0 3.0 4.0
+        5.0 6.0 7.0
+        8.0 9.0 10.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser somado.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser somado.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da soma.
+            - Mat3 - Resultado da soma.
         '''
         return super().__add__(other)
     
-    def __sub__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __sub__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Subtrai elemento a elemento de duas matrizes.
         
@@ -153,42 +158,45 @@ class Mat2(Mat):
 
         Para subtração de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 - m2)
-        -4.0 -4.0
-        -4.0 -4.0
+        0.0 0.0 0.0
+        0.0 0.0 0.0
+        0.0 0.0 0.0
 
         Para subtração de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> print(m1 - v1)
-        -4.0 -4.0
-        -2.0 -2.0
+        0.0 0.0 0.0
+        3.0 3.0 3.0
+        6.0 6.0 6.0
 
         Para subtração de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 - 1)
-        0.0 1.0
-        2.0 3.0
+        0.0 1.0 2.0
+        3.0 4.0 5.0
+        6.0 7.0 8.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser subtraido.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser subtraido.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da subtração.
+            - Mat3 - Resultado da subtração.
         '''
         return super().__sub__(other)
     
-    def __mul__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __mul__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Multiplica elemento a elemento de duas matrizes.
         
@@ -200,42 +208,45 @@ class Mat2(Mat):
 
         Para multiplicação de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 * m2)
-        5.0 12.0
-        21.0 32.0
+        1.0 4.0 9.0
+        16.0 25.0 36.0
+        49.0 64.0 81.0
 
         Para multiplicação de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> print(m1 * v1)
-        5.0 12.0
-        15.0 24.0
+        1.0 4.0 9.0
+        4.0 10.0 18.0
+        7.0 16.0 27.0
 
         Para multiplicação de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 * 2)
-        2.0 4.0
-        6.0 8.0
+        2.0 4.0 6.0
+        8.0 10.0 12.0
+        14.0 16.0 18.0
         
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser multiplicado.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser multiplicado.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da multiplicação.
+            - Mat3 - Resultado da multiplicação.
         '''
         return super().__mul__(other)
     
-    def __truediv__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __truediv__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Divide elemento a elemento de duas matrizes.
         
@@ -247,43 +258,46 @@ class Mat2(Mat):
 
         Para divisão de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 / m2)
-        0.2 0.33
-        0.43 0.5
+        1.0 1.0 1.0
+        1.0 1.0 1.0
+        1.0 1.0 1.0
 
         Para divisão de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> print(m1 / v1)
-        0.2 0.33
-        0.6 0.67
+        1.0 1.0 1.0
+        4.0 2.5 2.0
+        7.0 4.0 3.0
 
         Para divisão de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1 / 2)
-        0.5 1.0
-        1.5 2.0
+        0.5 1.0 1.5
+        2.0 2.5 3.0
+        3.5 4.0 4.5
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser multiplicado.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser multiplicado.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da divisão.
+            - Mat3 - Resultado da divisão.
         '''
         return super().__truediv__(other)
 
 
-    def __iadd__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __iadd__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Soma elemento a elemento de duas matrizes.
         
@@ -295,46 +309,49 @@ class Mat2(Mat):
 
         Para soma de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 += m2
         >>> print(m1)
-        6.0 8.0
-        10.0 12.0
+        2.0 4.0 6.0
+        8.0 10.0 12.0
+        14.0 16.0 18.0
 
         Para soma de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> m1 += v1
         >>> print(m1)
-        6.0 8.0
-        8.0 10.0
+        2.0 4.0 6.0
+        5.0 7.0 9.0
+        8.0 10.0 12.0
 
         Para soma de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 += 1
         >>> print(m1)
-        2.0 3.0
-        4.0 5.0
+        2.0 3.0 4.0
+        5.0 6.0 7.0
+        8.0 9.0 10.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser somado.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser somado.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da soma.
+            - Mat3 - Resultado da soma.
 
         '''
         return super().__iadd__(other)
     
-    def __isub__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __isub__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Subtrai elemento a elemento de duas matrizes.
         
@@ -346,45 +363,48 @@ class Mat2(Mat):
 
         Para subtração de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 -= m2
         >>> print(m1)
-        -4.0 -4.0
-        -4.0 -4.0
+        0.0 0.0 0.0
+        0.0 0.0 0.0
+        0.0 0.0 0.0
 
         Para subtração de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> m1 -= v1
         >>> print(m1)
-        -4.0 -4.0
-        -2.0 -2.0
+        0.0 0.0 0.0
+        3.0 3.0 3.0
+        6.0 6.0 6.0
 
         Para subtração de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 -= 1
         >>> print(m1)
-        0.0 1.0
-        2.0 3.0
+        0.0 1.0 2.0
+        3.0 4.0 5.0
+        6.0 7.0 8.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser subtraido.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser subtraido.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da subtração.
+            - Mat3 - Resultado da subtração.
         '''
         return super().__isub__(other)
     
-    def __imul__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __imul__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Multiplica elemento a elemento de duas matrizes.
         
@@ -396,45 +416,48 @@ class Mat2(Mat):
 
         Para multiplicação de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 *= m2
         >>> print(m1)
-        5.0 12.0
-        21.0 32.0
+        1.0 4.0 9.0
+        16.0 25.0 36.0
+        49.0 64.0 81.0
 
         Para multiplicação de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> m1 *= v1
         >>> print(m1)
-        5.0 12.0
-        15.0 24.0
+        1.0 4.0 9.0
+        4.0 10.0 18.0
+        7.0 16.0 27.0
 
         Para multiplicação de um número:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 *= 2
         >>> print(m1)
-        2.0 4.0
-        6.0 8.0
+        2.0 4.0 6.0
+        8.0 10.0 12.0
+        14.0 16.0 18.0
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser multiplicado.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser multiplicado.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da multiplicação.
+            - Mat3 - Resultado da multiplicação.
         '''
         return super().__imul__(other)
 
-    def __itruediv__(self, other: Union['Mat2', Vec2, np.float64]) -> 'Mat2':
+    def __itruediv__(self, other: Union['Mat3', Vec3, np.float64]) -> 'Mat3':
         '''
         Divide elemento a elemento de duas matrizes.
         
@@ -446,40 +469,43 @@ class Mat2(Mat):
 
         Para divisão de matrizes:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 /= m2
         >>> print(m1)
-        0.2 0.33
-        0.43 0.5
+        1.0 1.0 1.0
+        1.0 1.0 1.0
+        1.0 1.0 1.0
 
         Para divisão de um vetor:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> v1 = Vec3(1, 2, 3)
         >>> m1 /= v1
         >>> print(m1)
-        0.2 0.33
-        0.6 0.67
+        1.0 1.0 1.0
+        4.0 2.5 2.0
+        7.0 4.0 3.0
 
         Para divisão de um número:
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> m1 /= 2
         >>> print(m1)
-        0.5 1.0
-        1.5 2.0
+        0.5 1.0 1.5
+        2.0 2.5 3.0
+        3.5 4.0 4.5
 
         ---
 
         Parâmetros:
 
-            - other: Union['Mat2', Vec2, np.float64] - Matriz, vetor ou número a ser multiplicado.
+            - other: Union['Mat3', Vec3, np.float64] - Matriz, vetor ou número a ser multiplicado.
         
         ---
 
         Retorno:
 
-            - Mat2 - Resultado da divisão.
+            - Mat3 - Resultado da divisão.
         '''
         return super().__itruediv__(other)
     
@@ -489,10 +515,11 @@ class Mat2(Mat):
 
         Exemplo:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1)
-        1.0 2.0
-        3.0 4.0
+        1.0 2.0 3.0
+        4.0 5.0 6.0
+        7.0 8.0 9.0
 
         ---
 
@@ -502,28 +529,29 @@ class Mat2(Mat):
         '''
         return super().__repr__()
     
-    def dot(self, other: 'Mat2') -> 'Mat2':
+    def dot(self, other: 'Mat3') -> 'Mat3':
         '''
         Retorna o resultado da multiplicação de matrizes.
 
         Exemplo:
 
-        >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> m2 = Mat2(np.array([[5, 6], [7, 8]]))
+        >>> m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        >>> m2 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         >>> print(m1.dot(m2))
-        19.0 22.0
-        43.0 50.0
+        30.0 36.0 42.0
+        66.0 81.0 96.0
+        102.0 126.0 150.0
 
         ---
 
         Parâmetros:
 
-            - other: Mat2 - Segundo vetor do produto escalar.
+            - other: Mat3 - Segundo vetor do produto escalar.
         
         ---
 
         Retorno:
             
-            - Mat2 - Resultado do produto escalar.
+            - Mat3 - Resultado do produto escalar.
         '''
         return super().dot(other)
