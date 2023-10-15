@@ -92,9 +92,10 @@
 </section>
 <section id="module-Atividade02.interactive.Mat">
 <span id="atividade02-interactive-mat-module"></span><h2>Atividade02.interactive.Mat module<a class="headerlink" href="#module-Atividade02.interactive.Mat" title="Link permanente para este cabeçalho"></a></h2>
+<p>Classe base para as Matrizes (Mat2, Mat3 e Mat4)</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="Atividade02.interactive.Mat.Mat">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Atividade02.interactive.Mat.</span></span><span class="sig-name descname"><span class="pre">Mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Atividade02/interactive/Mat.html#Mat"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#Atividade02.interactive.Mat.Mat" title="Link permanente para esta definição"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Atividade02.interactive.Mat.</span></span><span class="sig-name descname"><span class="pre">Mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Atividade02/interactive/Mat.html#Mat"><span class="viewcode-link"><span class="pre">[código</span> <span class="pre">fonte]</span></span></a><a class="headerlink" href="#Atividade02.interactive.Mat.Mat" title="Link permanente para esta definição"></a></dt>
 <dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="Atividade02.interactive.Mat.Mat.__neg__">
@@ -319,12 +320,13 @@
 </div></blockquote>
 </dd></dl>
 
-<p>Construtor da classe de matrizes. Recebe uma matriz numpy que será utilizada para guardar os dados da matriz.</p>
+<p>Construtor da classe de matrizes. Recebe uma matriz numpy (ou uma lista) que será utilizada para guardar os dados da matriz.</p>
 <p>—</p>
 <p>Parâmetros:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.</p></li>
+<li><p>matrix: Union[np.ndarray, list] - Matriz numpy (ou lista) que será utilizada para guardar os dados da matriz.</p></li>
+<li><p>shape: tuple - Shape da matriz.</p></li>
 </ul>
 </div></blockquote>
 <dl class="py method">
