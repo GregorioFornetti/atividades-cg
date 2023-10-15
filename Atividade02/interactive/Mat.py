@@ -136,13 +136,15 @@ class Mat:
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] + other.vec[j]
             return self.__class__(new_matrix)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             new_matrix = np.zeros(self.shape, dtype=np.float64)
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] + other
             return self.__class__(new_matrix)
+        else:
+            raise TypeError(f"Tipo inválido para soma, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
     def __sub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -178,13 +180,15 @@ class Mat:
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] - other.vec[j]
             return self.__class__(new_matrix)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Subtraindo uma matriz e um número - cada elemento da matriz é subtraido com o número
             new_matrix = np.zeros(self.shape, dtype=np.float64)
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] - other
             return self.__class__(new_matrix)
+        else:
+            raise TypeError(f"Tipo inválido para subtração, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
     def __mul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -220,13 +224,15 @@ class Mat:
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] * other.vec[j]
             return self.__class__(new_matrix)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Multiplicando uma matriz e um número - cada elemento da matriz é multiplicada com o número
             new_matrix = np.zeros(self.shape, dtype=np.float64)
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] * other
             return self.__class__(new_matrix)
+        else:
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
     def __truediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -262,13 +268,15 @@ class Mat:
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] / other.vec[j]
             return self.__class__(new_matrix)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Dividindo uma matriz e um número - cada elemento da matriz é dividida com o número
             new_matrix = np.zeros(self.shape, dtype=np.float64)
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     new_matrix[i,j] = self.matrix[i,j] / other
             return self.__class__(new_matrix)
+        else:
+            raise TypeError(f"Tipo inválido para divisão, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
 
 
     def __iadd__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -304,12 +312,14 @@ class Mat:
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] + other.vec[j]
             return self
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] + other
             return self
+        else:
+            raise TypeError(f"Tipo inválido para soma, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
     def __isub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -343,12 +353,14 @@ class Mat:
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] - other.vec[j]
             return self
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Subtraindo uma matriz e um número - cada elemento da matriz é subtraido com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] - other
             return self
+        else:
+            raise TypeError(f"Tipo inválido para subtração, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
     def __imul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -382,12 +394,14 @@ class Mat:
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] * other.vec[j]
             return self
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Multiplicando uma matriz e um número - cada elemento da matriz é multiplicado com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] * other
             return self
+        else:
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
 
     def __itruediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -421,12 +435,14 @@ class Mat:
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] / other.vec[j]
             return self
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Dividindo uma matriz e um número - cada elemento da matriz é dividido com o número
             for i in range(self.shape[0]):
                 for j in range(self.shape[1]):
                     self.matrix[i,j] = self.matrix[i,j] / other
             return self
+        else:
+            raise TypeError(f"Tipo inválido para divisão, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
     def __repr__(self) -> str:
         '''
@@ -462,6 +478,9 @@ class Mat:
             
             - Mat - Resultado do produto escalar.
         '''
+        if not isinstance(other, Mat):
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Mat, recebido: {type(other)}")
+        
         new_matrix = np.zeros((self.shape[0], other.shape[1]), dtype=np.float64)
         for i in range(self.shape[0]):
             for j in range(other.shape[1]):
