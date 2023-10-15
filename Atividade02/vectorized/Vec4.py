@@ -1,7 +1,7 @@
 
 from typing import Union
 import numpy as np
-from Atividade02.interactive.Vec import Vec
+from Atividade02.vectorized.Vec import Vec
 
 
 class Vec4(Vec):
