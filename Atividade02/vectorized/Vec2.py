@@ -28,9 +28,7 @@ class Vec2(Vec):
 
         Parâmetros:
 
-            - x: np.float64 = 0.0 - Coordenada x do vetor.
-
-            - y: np.float64 = 0.0 - Coordenada y do vetor.
+            - vector: Union[np.ndarray, list] - Lista ou array com as coordenadas x e y do vetor.
         '''
         super().__init__(vector, (2,))
     
@@ -63,7 +61,7 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v = Vec2(1, 2)
+        >>> v = Vec2([1, 2])
         >>> print(-v)
         -1.0 -2.0
 
@@ -73,7 +71,7 @@ class Vec2(Vec):
 
             - Vec2 - Versão com sinais invertidos do vetor.
         '''
-        return Vec2(-self.vec[0], -self.vec[1])
+        return super().__neg__()
     
     def __getitem__(self, key: int) -> np.float64:
         '''
@@ -81,7 +79,7 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v = Vec2(1, 2)
+        >>> v = Vec2([1, 2])
         >>> print(v[0])
         1.0
 
@@ -97,7 +95,7 @@ class Vec2(Vec):
             
             - np.float64 - Valor da coordenada escolhida.
         '''
-        return self.vec[key]
+        return super().__getitem__(key)
     
 
     def __add__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
@@ -108,8 +106,8 @@ class Vec2(Vec):
 
         Somando dois vetores
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> print(v1 + v2)
         4.0 6.0
 
@@ -132,10 +130,7 @@ class Vec2(Vec):
             - Vec2 - Resultado da soma.
 
         '''
-        if isinstance(other, Vec2):
-            return Vec2(self.vec[0] + other.vec[0], self.vec[1] + other.vec[1])
-        else:
-            return Vec2(self.vec[0] + other, self.vec[1] + other)
+        return super().__add__(other)
     
     def __sub__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
@@ -145,15 +140,15 @@ class Vec2(Vec):
 
         Subtraindo dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> print(v1 - v2)
         -2.0 -2.0
 
         Subtraindo um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
-        >>> print(v1 - 1)
+        >>> v1 = Vec2([1, 2])
+        >>> print([v1 - 1])
         0.0 1.0
 
         ---
@@ -169,10 +164,7 @@ class Vec2(Vec):
                 - Vec2 - Resultado da subtração.
         
         '''
-        if isinstance(other, Vec2):
-            return Vec2(self.vec[0] - other.vec[0], self.vec[1] - other.vec[1])
-        else:
-            return Vec2(self.vec[0] - other, self.vec[1] - other)
+        return super().__sub__(other)
     
     def __mul__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
@@ -182,14 +174,14 @@ class Vec2(Vec):
 
         Multiplicando dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> print(v1 * v2)
         3.0 8.0
 
         Multiplicando um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
+        >>> v1 = Vec2([1, 2])
         >>> print(v1 * 2)
         2.0 4.0
 
@@ -205,10 +197,7 @@ class Vec2(Vec):
 
             - Vec2 - Resultado da multiplicação.
         '''
-        if isinstance(other, Vec2):
-            return Vec2(self.vec[0] * other.vec[0], self.vec[1] * other.vec[1])
-        else:
-            return Vec2(self.vec[0] * other, self.vec[1] * other)
+        return super().__mul__(other)
     
     def __truediv__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
@@ -218,14 +207,14 @@ class Vec2(Vec):
 
         Dividindo dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> print(v1 / v2)
         0.33 0.50
 
         Dividindo um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
+        >>> v1 = Vec2([1, 2])
         >>> print(v1 / 2)
         0.5 1.0
 
@@ -241,10 +230,7 @@ class Vec2(Vec):
 
             - Vec2 - Resultado da divisão.
         '''
-        if isinstance(other, Vec2):
-            return Vec2(self.vec[0] / other.vec[0], self.vec[1] / other.vec[1])
-        else:
-            return Vec2(self.vec[0] / other, self.vec[1] / other)
+        return super().__truediv__(other)
 
 
     def __iadd__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
@@ -255,15 +241,15 @@ class Vec2(Vec):
 
         Somando dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> v1 += v2
         >>> print(v1)
         4.0 6.0
 
         Somando um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
+        >>> v1 = Vec2([1, 2])
         >>> v1 += 1
         >>> print(v1)
         2.0 3.0
@@ -280,13 +266,7 @@ class Vec2(Vec):
 
             - Vec2 - Resultado da soma.
         '''
-        if isinstance(other, Vec2):
-            self.vec[0] += other.vec[0]
-            self.vec[1] += other.vec[1]
-        else:
-            self.vec[0] += other
-            self.vec[1] += other
-        return self
+        return super().__iadd__(other)
     
     def __isub__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
@@ -296,15 +276,15 @@ class Vec2(Vec):
 
         Subtraindo dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> v1 -= v2
         >>> print(v1)
         -2.0 -2.0
 
         Subtraindo um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
+        >>> v1 = Vec2([1, 2])
         >>> v1 -= 1
         >>> print(v1)
         0.0 1.0
@@ -321,13 +301,7 @@ class Vec2(Vec):
 
             - Vec2 - Resultado da subtração.
         '''
-        if isinstance(other, Vec2):
-            self.vec[0] -= other.vec[0]
-            self.vec[1] -= other.vec[1]
-        else:
-            self.vec[0] -= other
-            self.vec[1] -= other
-        return self
+        return super().__isub__(other)
     
     def __imul__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
@@ -337,15 +311,15 @@ class Vec2(Vec):
 
         Multiplicando dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> v1 *= v2
         >>> print(v1)
         3.0 8.0
 
         Multiplicando um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
+        >>> v1 = Vec2([1, 2])
         >>> v1 *= 2
         >>> print(v1)
         2.0 4.0
@@ -362,13 +336,7 @@ class Vec2(Vec):
 
             - Vec2 - Resultado da multiplicação.
         '''
-        if isinstance(other, Vec2):
-            self.vec[0] *= other.vec[0]
-            self.vec[1] *= other.vec[1]
-        else:
-            self.vec[0] *= other
-            self.vec[1] *= other
-        return self
+        return super().__imul__(other)
 
     def __itruediv__(self, other: Union['Vec2', np.float64]) -> 'Vec2':
         '''
@@ -378,15 +346,15 @@ class Vec2(Vec):
 
         Dividindo dois vetores:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> v1 /= v2
         >>> print(v1)
         0.33 0.50
 
         Dividindo um vetor e um número:
 
-        >>> v1 = Vec2(1, 2)
+        >>> v1 = Vec2([1, 2])
         >>> v1 /= 2
         >>> print(v1)
         0.5 1.0
@@ -403,13 +371,7 @@ class Vec2(Vec):
 
             - Vec2 - Resultado da divisão.
         '''
-        if isinstance(other, Vec2):
-            self.vec[0] /= other.vec[0]
-            self.vec[1] /= other.vec[1]
-        else:
-            self.vec[0] /= other
-            self.vec[1] /= other
-        return self
+        return super().__itruediv__(other)
     
     def __repr__(self) -> str:
         '''
@@ -419,7 +381,7 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v = Vec2(1, 2)
+        >>> v = Vec2([1, 2])
         >>> print(v)
         1.0 2.0
         '''
@@ -432,11 +394,11 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v = Vec2(1, 2)
+        >>> v = Vec2([1, 2])
         >>> print(v.length())  # sqrt(1 ** 2 + 2 ** 2)
         2.23606797749979
         '''
-        return np.sqrt(self.squared_length())
+        return super().length()
     
     def squared_length(self) -> np.float64:
         '''
@@ -444,11 +406,11 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v = Vec2(1, 2)
+        >>> v = Vec2([1, 2])
         >>> print(v.squared_length())  # 1 ** 2 + 2 ** 2
         5.0
         '''
-        return self.vec[0] ** 2 + self.vec[1] ** 2
+        return super().squared_length()
     
     def dot(self, other: 'Vec2') -> np.float64:
         '''
@@ -456,8 +418,8 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> print(v1.dot(v2))
         11.0
 
@@ -473,7 +435,7 @@ class Vec2(Vec):
             
             - np.float64 - Resultado do produto escalar.
         '''
-        return self.vec[0] * other.vec[0] + self.vec[1] * other.vec[1]
+        return super().dot(other)
     
     def cross(self, other: 'Vec2') -> np.float64:
         '''
@@ -481,8 +443,8 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v1 = Vec2(1, 2)
-        >>> v2 = Vec2(3, 4)
+        >>> v1 = Vec2([1, 2])
+        >>> v2 = Vec2([3, 4])
         >>> print(v1.cross(v2))
         -2.0
 
@@ -506,7 +468,7 @@ class Vec2(Vec):
 
         Exemplo:
 
-        >>> v = Vec2(1, 2)
+        >>> v = Vec2([1, 2])
         >>> print(v.unit_vector())
         0.45 0.89
 
@@ -516,4 +478,4 @@ class Vec2(Vec):
 
             - Vec2 - Vetor unitário.
         '''
-        return self / self.length()
+        return super().unit_vector()
