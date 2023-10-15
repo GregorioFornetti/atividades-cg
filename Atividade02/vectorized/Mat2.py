@@ -111,7 +111,7 @@ class Mat2(Mat):
         Para soma de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> print(m1 + v1)
         6.0 8.0
         8.0 10.0
@@ -158,7 +158,7 @@ class Mat2(Mat):
         Para subtração de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> print(m1 - v1)
         -4.0 -4.0
         -2.0 -2.0
@@ -205,7 +205,7 @@ class Mat2(Mat):
         Para multiplicação de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> print(m1 * v1)
         5.0 12.0
         15.0 24.0
@@ -252,7 +252,7 @@ class Mat2(Mat):
         Para divisão de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> print(m1 / v1)
         0.2 0.33
         0.6 0.67
@@ -301,7 +301,7 @@ class Mat2(Mat):
         Para soma de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> m1 += v1
         >>> print(m1)
         6.0 8.0
@@ -352,7 +352,7 @@ class Mat2(Mat):
         Para subtração de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> m1 -= v1
         >>> print(m1)
         -4.0 -4.0
@@ -402,7 +402,7 @@ class Mat2(Mat):
         Para multiplicação de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> m1 *= v1
         >>> print(m1)
         5.0 12.0
@@ -452,7 +452,7 @@ class Mat2(Mat):
         Para divisão de um vetor:
 
         >>> m1 = Mat2(np.array([[1, 2], [3, 4]]))
-        >>> v1 = Vec2(5, 6)
+        >>> v1 = Vec2([5, 6])
         >>> m1 /= v1
         >>> print(m1)
         0.2 0.33
