@@ -34,6 +34,13 @@ class Vec3(Vec):
 
             - z: np.float64 = 0.0 - Coordenada z do vetor.
         '''
+        if not isinstance(x, np.float64) and not isinstance(x, float) and not isinstance(x, int):
+            raise TypeError(f"x precisa ser um número. Tipo recebido: {type(x)}")
+        if not isinstance(y, np.float64) and not isinstance(y, float) and not isinstance(y, int):
+            raise TypeError(f"y precisa ser um número. Tipo recebido: {type(y)}")
+        if not isinstance(z, np.float64) and not isinstance(z, float) and not isinstance(z, int):
+            raise TypeError(f"z precisa ser um número. Tipo recebido: {type(z)}")
+        
         self.vec = np.array([x, y, z], dtype=np.float64)
     
     @property
@@ -147,8 +154,10 @@ class Vec3(Vec):
         '''
         if isinstance(other, Vec3):
             return Vec3(self.vec[0] + other.vec[0], self.vec[1] + other.vec[1], self.vec[2] + other.vec[2])
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] + other, self.vec[1] + other, self.vec[2] + other)
+        else:
+            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, recebido: {type(other)}")
     
     def __sub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         '''
@@ -184,8 +193,10 @@ class Vec3(Vec):
         '''
         if isinstance(other, Vec3):
             return Vec3(self.vec[0] - other.vec[0], self.vec[1] - other.vec[1], self.vec[2] - other.vec[2])
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] - other, self.vec[1] - other, self.vec[2] - other)
+        else:
+            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, recebido: {type(other)}")
     
     def __mul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         '''
@@ -220,8 +231,10 @@ class Vec3(Vec):
         '''
         if isinstance(other, Vec3):
             return Vec3(self.vec[0] * other.vec[0], self.vec[1] * other.vec[1], self.vec[2] * other.vec[2])
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] * other, self.vec[1] * other, self.vec[2] * other)
+        else:
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, recebido: {type(other)}")
     
     def __truediv__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         '''
@@ -256,8 +269,10 @@ class Vec3(Vec):
         '''
         if isinstance(other, Vec3):
             return Vec3(self.vec[0] / other.vec[0], self.vec[1] / other.vec[1], self.vec[2] / other.vec[2])
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] / other, self.vec[1] / other, self.vec[2] / other)
+        else:
+            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, recebido: {type(other)}")
 
 
     def __iadd__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
@@ -297,10 +312,12 @@ class Vec3(Vec):
             self.vec[0] += other.vec[0]
             self.vec[1] += other.vec[1]
             self.vec[2] += other.vec[2]
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             self.vec[0] += other
             self.vec[1] += other
             self.vec[2] += other
+        else:
+            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, recebido: {type(other)}")
         return self
     
     def __isub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
@@ -340,10 +357,12 @@ class Vec3(Vec):
             self.vec[0] -= other.vec[0]
             self.vec[1] -= other.vec[1]
             self.vec[2] -= other.vec[2]
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             self.vec[0] -= other
             self.vec[1] -= other
             self.vec[2] -= other
+        else:
+            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, recebido: {type(other)}")
         return self
     
     def __imul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
@@ -383,10 +402,13 @@ class Vec3(Vec):
             self.vec[0] *= other.vec[0]
             self.vec[1] *= other.vec[1]
             self.vec[2] *= other.vec[2]
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             self.vec[0] *= other
             self.vec[1] *= other
             self.vec[2] *= other
+        else:
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, recebido: {type(other)}")
+        
         return self
 
     def __itruediv__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
@@ -426,10 +448,12 @@ class Vec3(Vec):
             self.vec[0] /= other.vec[0]
             self.vec[1] /= other.vec[1]
             self.vec[2] /= other.vec[2]
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             self.vec[0] /= other
             self.vec[1] /= other
             self.vec[2] /= other
+        else:
+            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, recebido: {type(other)}")
         return self
     
     def __repr__(self) -> str:
@@ -494,6 +518,9 @@ class Vec3(Vec):
             
             - np.float64 - Resultado do produto escalar.
         '''
+        if not isinstance(other, Vec3):
+            raise TypeError(f"Tipo inválido para produto escalar, esperado: Vec3, recebido: {type(other)}")
+        
         return self.vec[0] * other.vec[0] + self.vec[1] * other.vec[1] + self.vec[2] * other.vec[2]
     
     def cross(self, other: 'Vec3') -> 'Vec3':
@@ -519,6 +546,9 @@ class Vec3(Vec):
 
             - Vec3 - Resultado do produto vetorial.
         '''
+        if not isinstance(other, Vec3):
+            raise TypeError(f"Tipo inválido para produto vetorial, esperado: Vec3, recebido: {type(other)}")
+        
         return Vec3(self.vec[1] * other.vec[2] - self.vec[2] * other.vec[1],
                     self.vec[2] * other.vec[0] - self.vec[0] * other.vec[2],
                     self.vec[0] * other.vec[1] - self.vec[1] * other.vec[0])
