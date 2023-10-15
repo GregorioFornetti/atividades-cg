@@ -29,11 +29,8 @@ class Mat4(Mat):
 
             - matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.
         '''
-        super().__init__(matrix)
-        self.shape = (4, 4)
-        if matrix.shape != self.shape:
-            raise ValueError(f"Matriz deve ter tamanho {self.shape}.")
-
+        super().__init__(matrix, (4, 4))
+        
     def __neg__(self) -> 'Mat4':
         '''
         Inverte o sinal de todos elementos da matriz.

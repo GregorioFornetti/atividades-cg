@@ -23,7 +23,7 @@ class Mat:
     .. automethod:: __repr__
     """
 
-    def __init__(self, matrix: Union[np.ndarray, list]):
+    def __init__(self, matrix: Union[np.ndarray, list], shape: tuple):
         '''
         Construtor da classe de matrizes. Recebe uma matriz numpy (ou uma lista) que será utilizada para guardar os dados da matriz.
 
@@ -33,12 +33,19 @@ class Mat:
 
             - matrix: Union[np.ndarray, list] - Matriz numpy (ou lista) que será utilizada para guardar os dados da matriz.
         '''
-        self.matrix = matrix
         if isinstance(matrix, list):
             self.matrix = np.array(matrix, dtype=np.float64)
-        elif isinstance(matrix, np.ndarray) and matrix.dtype != np.float64:
-            self.matrix = matrix.astype(np.float64)
-        self.shape = None  # Deve ser definido nas classes filhas
+        elif isinstance(matrix, np.ndarray):
+            if matrix.dtype != np.float64:
+                self.matrix = matrix.astype(np.float64)
+            else:
+                self.matrix = matrix
+        else:
+            raise TypeError(f"Matriz com tipo inválido, esperado: list ou np.ndarray, recebido: {type(matrix)}")
+        
+        self.shape = shape
+        if self.matrix.shape != self.shape:
+            raise ValueError(f"Matriz com shape inválido, esperado: {self.shape}, recebido: {self.matrix.shape}")
 
     def __neg__(self) -> 'Mat':
         '''

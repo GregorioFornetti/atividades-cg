@@ -29,10 +29,7 @@ class Mat3(Mat):
 
             - matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.
         '''
-        super().__init__(matrix)
-        self.shape = (3, 3)
-        if matrix.shape != self.shape:
-            raise ValueError(f"Matriz deve ter tamanho {self.shape}.")
+        super().__init__(matrix, (3, 3))
 
     def __neg__(self) -> 'Mat3':
         '''

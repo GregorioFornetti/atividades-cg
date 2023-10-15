@@ -29,10 +29,7 @@ class Mat2(Mat):
 
             - matrix: np.ndarray - Matriz numpy que será utilizada para guardar os dados da matriz.
         '''
-        super().__init__(matrix)
-        self.shape = (2, 2)
-        if matrix.shape != self.shape:
-            raise ValueError(f"Matriz deve ter tamanho {self.shape}.")
+        super().__init__(matrix, (2, 2))
 
     def __neg__(self) -> 'Mat2':
         '''

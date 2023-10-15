@@ -22,7 +22,7 @@ class Vec:
     .. automethod:: __repr__
     """
 
-    def __init__(self, vector: Union[np.ndarray, list]):
+    def __init__(self, vector: Union[np.ndarray, list], shape: tuple):
         '''
         Construtor da classe de vetores. Recebe um array numpy (ou uma lista) que será utilizada para guardar os dados do vetor.
 
@@ -30,12 +30,19 @@ class Vec:
 
             - vector: Union[np.ndarray, list] - Vetor numpy (ou lista) que será utilizada para guardar os dados do vetor.
         '''
-        self.vec = vector
         if isinstance(vector, list):
-            self.vec = np.array(vector, dtype=np.float32)
-        elif isinstance(vector, np.ndarray) and vector.dtype != np.float64:
-            self.vec = vector.astype(np.float32)
-        self.shape = None  # Deve ser definido nas classes filhas
+            self.vec = np.array(vector, dtype=np.float64)
+        elif isinstance(vector, np.ndarray):
+            if vector.dtype != np.float64:
+                self.vec = vector
+            else:
+                self.vec = vector.astype(np.float64)
+        else:
+            raise TypeError(f"Vetor com tipo inválido, esperado: list ou np.ndarray, recebido: {type(vector)}")
+        
+        self.shape = shape
+        if self.vec.shape != shape:
+            raise ValueError(f"Vetor com shape inválido, esperado: {shape}, recebido: {self.vec.shape}")
     
     def __neg__(self) -> 'Vec':
         '''
