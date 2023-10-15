@@ -5,7 +5,7 @@ Classe base para as Matrizes (Mat2, Mat3 e Mat4)
 
 from typing import Union
 import numpy as np
-from Atividade02.interactive.Vec import Vec
+from Atividade02.vectorized.Vec import Vec
 
 
 class Mat:
@@ -59,11 +59,7 @@ class Mat:
 
             - Mat - Versão negativa da matriz.
         '''
-        new_matrix = np.zeros(self.shape, dtype=np.float64)
-        for i in range(self.shape[0]):
-            for j in range(self.shape[1]):
-                new_matrix[i,j] = -self.matrix[i,j]
-        return self.__class__(new_matrix)
+        return self.__class__(-self.matrix)
     
     def __getitem__(self, key) -> Union[np.float64, np.ndarray]:
         '''
@@ -124,25 +120,13 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Somando duas matrizes - elemento a elemento
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] + other.matrix[i,j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix + other.matrix)
         elif isinstance(other, Vec):
             # Somando uma matriz e um vetor - cada linha da matriz é somada com o vetor
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] + other.vec[j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix + other.vec)
         else:
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] + other
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix + other)
     
     def __sub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -166,25 +150,13 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Subtraindo duas matrizes - elemento a elemento
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] - other.matrix[i,j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix - other.matrix)
         elif isinstance(other, Vec):
             # Subtraindo uma matriz e um vetor - cada linha da matriz é subtraida com o vetor
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] - other.vec[j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix - other.vec)
         else:
             # Subtraindo uma matriz e um número - cada elemento da matriz é subtraido com o número
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] - other
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix - other)
     
     def __mul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -208,25 +180,13 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Multiplicando duas matrizes - elemento a elemento
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] * other.matrix[i,j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix * other.matrix)
         elif isinstance(other, Vec):
             # Multiplicando uma matriz e um vetor - cada linha da matriz é multiplicada com o vetor
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] * other.vec[j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix * other.vec)
         else:
-            # Multiplicando uma matriz e um número - cada elemento da matriz é multiplicada com o número
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] * other
-            return self.__class__(new_matrix)
+            # Multiplicando uma matriz e um número - cada elemento da matriz é multiplicado com o número
+            return self.__class__(self.matrix * other)
     
     def __truediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -250,25 +210,13 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Dividindo duas matrizes - elemento a elemento
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] / other.matrix[i,j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix / other.matrix)
         elif isinstance(other, Vec):
             # Dividindo uma matriz e um vetor - cada linha da matriz é dividida com o vetor
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] / other.vec[j]
-            return self.__class__(new_matrix)
+            return self.__class__(self.matrix / other.vec)
         else:
-            # Dividindo uma matriz e um número - cada elemento da matriz é dividida com o número
-            new_matrix = np.zeros(self.shape, dtype=np.float64)
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    new_matrix[i,j] = self.matrix[i,j] / other
-            return self.__class__(new_matrix)
+            # Dividindo uma matriz e um número - cada elemento da matriz é dividido com o número
+            return self.__class__(self.matrix / other)
 
 
     def __iadd__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -294,21 +242,15 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Somando duas matrizes - elemento a elemento
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] + other.matrix[i,j]
+            self.matrix += other.matrix
             return self
         elif isinstance(other, Vec):
             # Somando uma matriz e um vetor - cada linha da matriz é somada com o vetor
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] + other.vec[j]
+            self.matrix += other.vec
             return self
         else:
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] + other
+            self.matrix += other
             return self
     
     def __isub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -333,21 +275,15 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Subtraindo duas matrizes - elemento a elemento
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] - other.matrix[i,j]
+            self.matrix -= other.matrix
             return self
         elif isinstance(other, Vec):
             # Subtraindo uma matriz e um vetor - cada linha da matriz é subtraida com o vetor
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] - other.vec[j]
+            self.matrix -= other.vec
             return self
         else:
             # Subtraindo uma matriz e um número - cada elemento da matriz é subtraido com o número
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] - other
+            self.matrix -= other
             return self
     
     def __imul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -372,21 +308,15 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Multiplicando duas matrizes - elemento a elemento
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] * other.matrix[i,j]
+            self.matrix *= other.matrix
             return self
         elif isinstance(other, Vec):
             # Multiplicando uma matriz e um vetor - cada linha da matriz é multiplicada com o vetor
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] * other.vec[j]
+            self.matrix *= other.vec
             return self
         else:
             # Multiplicando uma matriz e um número - cada elemento da matriz é multiplicado com o número
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] * other
+            self.matrix *= other
             return self
 
     def __itruediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
@@ -411,21 +341,15 @@ class Mat:
         '''
         if isinstance(other, Mat):
             # Dividindo duas matrizes - elemento a elemento
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] / other.matrix[i,j]
+            self.matrix /= other.matrix
             return self
         elif isinstance(other, Vec):
             # Dividindo uma matriz e um vetor - cada linha da matriz é dividida com o vetor
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] / other.vec[j]
+            self.matrix /= other.vec
             return self
         else:
             # Dividindo uma matriz e um número - cada elemento da matriz é dividido com o número
-            for i in range(self.shape[0]):
-                for j in range(self.shape[1]):
-                    self.matrix[i,j] = self.matrix[i,j] / other
+            self.matrix /= other
             return self
     
     def __repr__(self) -> str:
@@ -462,9 +386,4 @@ class Mat:
             
             - Mat - Resultado do produto escalar.
         '''
-        new_matrix = np.zeros((self.shape[0], other.shape[1]), dtype=np.float64)
-        for i in range(self.shape[0]):
-            for j in range(other.shape[1]):
-                for k in range(self.shape[1]):
-                    new_matrix[i,j] += self.matrix[i,k] * other.matrix[k,j]
-        return self.__class__(new_matrix)
+        return self.__class__(self.matrix.dot(other.matrix))

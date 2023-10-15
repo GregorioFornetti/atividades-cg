@@ -29,6 +29,8 @@ class Vec:
         ---
 
             - vector: Union[np.ndarray, list] - Vetor numpy (ou lista) que será utilizada para guardar os dados do vetor.
+
+            - shape: tuple - Shape do vetor.
         '''
         if isinstance(vector, list):
             self.vec = np.array(vector, dtype=np.float64)
