@@ -460,6 +460,9 @@ class Vec2(Vec):
 
             - np.float64 - Resultado do produto vetorial.
         '''
+        if not isinstance(other, Vec2):
+            raise TypeError(f"Tipo inválido para produto vetorial, esperado: Vec2, recebido: {type(other)}")
+        
         return self.vec[0] * other.vec[1] - self.vec[1] * other.vec[0]
     
     def unit_vector(self) -> 'Vec2':

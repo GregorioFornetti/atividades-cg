@@ -114,9 +114,11 @@ class Vec:
         if isinstance(other, Vec):
             # Somando um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             return self.__class__(self.vec + other.vec)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec + other)
+        else:
+            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
     
     def __sub__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -140,9 +142,11 @@ class Vec:
         if isinstance(other, Vec):
             # Subtraindo um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             return self.__class__(self.vec - other.vec)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Subtraindo uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec - other)
+        else:
+            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
     
     def __mul__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -166,9 +170,11 @@ class Vec:
         if isinstance(other, Vec):
             # Multiplicando um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             return self.__class__(self.vec * other.vec)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Multiplicando uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec * other)
+        else:
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
     
     def __truediv__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -192,9 +198,11 @@ class Vec:
         if isinstance(other, Vec):
             # Dividindo um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             return self.__class__(self.vec / other.vec)
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Dividindo uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec / other)
+        else:
+            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
     
     def __iadd__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -218,9 +226,11 @@ class Vec:
         if isinstance(other, Vec):
             # Somando um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             self.vec += other.vec
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec += other
+        else:
+            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
         return self
 
     def __isub__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -245,9 +255,11 @@ class Vec:
         if isinstance(other, Vec):
             # Subtraindo um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             self.vec -= other.vec
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Subtraindo uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec -= other
+        else:
+            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
         return self
     
     def __imul__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -272,9 +284,11 @@ class Vec:
         if isinstance(other, Vec):
             # Multiplicando um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             self.vec *= other.vec
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Multiplicando uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec *= other
+        else:
+            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
         return self
     
     def __itruediv__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -299,9 +313,11 @@ class Vec:
         if isinstance(other, Vec):
             # Dividindo um vetor com outro vetor - cada elemento do vetor é somado com o elemento correspondente do outro vetor
             self.vec /= other.vec
-        else:
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             # Dividindo uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec /= other
+        else:
+            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
         return self
     
     def __repr__(self) -> str:
@@ -347,6 +363,9 @@ class Vec:
             
             - np.float64 - Resultado do produto escalar.
         '''
+        if not isinstance(other, Vec):
+            raise TypeError(f"Tipo inválido para produto escalar, esperado: Vec, recebido: {type(other)}")
+        
         return np.dot(self.vec, other.vec)
 
     def unit_vector(self) -> 'Vec':
