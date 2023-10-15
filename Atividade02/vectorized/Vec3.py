@@ -471,9 +471,9 @@ class Vec3(Vec):
 
             - Vec3 - Resultado do produto vetorial.
         '''
-        return Vec3(self.vec[1] * other.vec[2] - self.vec[2] * other.vec[1],
+        return Vec3([self.vec[1] * other.vec[2] - self.vec[2] * other.vec[1],
                     self.vec[2] * other.vec[0] - self.vec[0] * other.vec[2],
-                    self.vec[0] * other.vec[1] - self.vec[1] * other.vec[0])
+                    self.vec[0] * other.vec[1] - self.vec[1] * other.vec[0]])
     
     def unit_vector(self) -> 'Vec3':
         '''
