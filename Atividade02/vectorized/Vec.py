@@ -54,7 +54,7 @@ class Vec:
 
             - Vec - Vetor com sinal invertido.
         '''
-        return Vec(-self.vec)
+        return self.__class__(-self.vec)
     
     def __getitem__(self, key) -> Union[np.float64, np.ndarray]:
         '''

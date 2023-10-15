@@ -20,7 +20,7 @@ class Vec2(Vec):
     
     """
 
-    def __init__(self, vector: Union[np.ndarray, list]):
+    def __init__(self, vector: Union[np.ndarray, list] = np.zeros((2,), dtype=np.float64)):
         '''
         Construtor da classe Vec2. Recebe as coordenadas x e y.
 
