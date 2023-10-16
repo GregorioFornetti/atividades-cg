@@ -1,4 +1,5 @@
 
+import pytest
 from Atividade02.vectorized.Vec2 import Vec2
 import numpy as np
 
@@ -10,6 +11,19 @@ class TestVec2Vectorized:
 
         assert v.x == 1
         assert v.y == 2
+    
+    def test_init_exception(self):
+        with pytest.raises(ValueError):
+            Vec2([1, 2, 3])
+        
+        with pytest.raises(ValueError):
+            Vec2([[1], 2])
+        
+        with pytest.raises(TypeError):
+            Vec2("1")
+        
+        with pytest.raises(TypeError):
+            Vec2(1)
     
     def test_xyz_atribuition(self):
         v = Vec2()
@@ -59,6 +73,19 @@ class TestVec2Vectorized:
         assert v.x == 0
         assert v.y == 0
     
+    def test_add_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 + "1"
+        
+        with pytest.raises(TypeError):
+            v1 + [1]
+        
+        with pytest.raises(TypeError):
+            v1 + (1, 2)
+
+    
     def test_sub_number(self):
         v = Vec2([1, 2])
         v = v - 1
@@ -81,6 +108,18 @@ class TestVec2Vectorized:
 
         assert v.x == 2
         assert v.y == 4
+    
+    def test_sub_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 - "1"
+        
+        with pytest.raises(TypeError):
+            v1 - [1]
+        
+        with pytest.raises(TypeError):
+            v1 - (1, 2)
     
     def test_mul_number(self):
         v = Vec2([1, 2])
@@ -105,6 +144,18 @@ class TestVec2Vectorized:
         assert v.x == -1
         assert v.y == -4
     
+    def test_mul_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 * "1"
+        
+        with pytest.raises(TypeError):
+            v1 * [1]
+        
+        with pytest.raises(TypeError):
+            v1 * (1, 2)
+    
     def test_div_number(self):
         v = Vec2([2, 4])
         v = v / 2
@@ -127,6 +178,18 @@ class TestVec2Vectorized:
 
         assert v.x == -1
         assert v.y == -1
+    
+    def test_div_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 / "1"
+        
+        with pytest.raises(TypeError):
+            v1 / [1]
+        
+        with pytest.raises(TypeError):
+            v1 / (1, 2)
     
     def test_iadd_number(self):
         v = Vec2([1, 2])
@@ -151,6 +214,18 @@ class TestVec2Vectorized:
         assert v1.x == 0
         assert v1.y == 0
     
+    def test_iadd_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 += "1"
+        
+        with pytest.raises(TypeError):
+            v1 += [1]
+        
+        with pytest.raises(TypeError):
+            v1 += (1, 2)
+    
     def test_isub_number(self):
         v = Vec2([1, 2])
         v -= 1
@@ -173,6 +248,18 @@ class TestVec2Vectorized:
 
         assert v1.x == 2
         assert v1.y == 4
+    
+    def test_isub_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 -= "1"
+        
+        with pytest.raises(TypeError):
+            v1 -= [1]
+        
+        with pytest.raises(TypeError):
+            v1 -= (1, 2)
     
     def test_imul_number(self):
         v = Vec2([1, 2])
@@ -197,6 +284,18 @@ class TestVec2Vectorized:
         assert v1.x == -1
         assert v1.y == -4
     
+    def test_imul_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 *= "1"
+        
+        with pytest.raises(TypeError):
+            v1 *= [1]
+        
+        with pytest.raises(TypeError):
+            v1 *= (1, 2)
+    
     def test_itruediv_number(self):
         v = Vec2([2, 4])
         v /= 2
@@ -220,6 +319,18 @@ class TestVec2Vectorized:
         assert v1.x == -1
         assert v1.y == -1
     
+    def test_itruediv_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1 /= "1"
+        
+        with pytest.raises(TypeError):
+            v1 /= [1]
+        
+        with pytest.raises(TypeError):
+            v1 /= (1, 2)
+    
     def test_length(self):
         v = Vec2([1, 2])
 
@@ -236,12 +347,36 @@ class TestVec2Vectorized:
 
         assert v1.dot(v2) == 1 * 3 + 2 * 4
     
+    def test_dot_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1.dot("1")
+        
+        with pytest.raises(TypeError):
+            v1.dot([1])
+        
+        with pytest.raises(TypeError):
+            v1.dot((1, 2))
+    
     def test_cross(self):
         v1 = Vec2([1, 2])
         v2 = Vec2([3, 4])
         res = v1.cross(v2)
 
         assert res == 1 * 4 - 2 * 3
+    
+    def test_cross_exception(self):
+        v1 = Vec2([1, 2])
+
+        with pytest.raises(TypeError):
+            v1.cross("1")
+        
+        with pytest.raises(TypeError):
+            v1.cross([1])
+        
+        with pytest.raises(TypeError):
+            v1.cross((1, 2))
     
     def test_unit_vector(self):
         v = Vec2([1, 2])
