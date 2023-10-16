@@ -1,4 +1,5 @@
 
+import pytest
 from Atividade02.vectorized.Mat4 import Mat4
 from Atividade02.vectorized.Vec4 import Vec4
 import numpy as np
@@ -25,6 +26,19 @@ class TestMat3:
         assert m[3,1] == 14
         assert m[3,2] == 15
         assert m[3,3] == 16
+    
+    def test_init_exception(self):
+        with pytest.raises(ValueError):
+            Mat4(np.array([[1, 2], [3, 4], [5, 6]]))
+        
+        with pytest.raises(ValueError):
+            Mat4(np.array([[1, 2], [3, 4, 5]]))
+        
+        with pytest.raises(TypeError):
+            Mat4(1)
+        
+        with pytest.raises(TypeError):
+            Mat4("1")
     
     def test_atribuition(self):
         m = Mat4()
@@ -247,6 +261,18 @@ class TestMat3:
         assert m[3,2] == 14
         assert m[3,3] == 15
     
+    def test_add_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 + "1"
+        
+        with pytest.raises(TypeError):
+            m1 + [1]
+        
+        with pytest.raises(TypeError):
+            m1 + (1, 2)
+    
     def test_sub_vec4(self):
         m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         v1 = Vec4([1, 2, 3, 4])
@@ -334,6 +360,18 @@ class TestMat3:
         assert m[3,1] == 28
         assert m[3,2] == 30
         assert m[3,3] == 32
+    
+    def test_sub_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 - "1"
+        
+        with pytest.raises(TypeError):
+            m1 - [1]
+        
+        with pytest.raises(TypeError):
+            m1 - (1, 2)
     
     def test_mul_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -444,8 +482,19 @@ class TestMat3:
         assert m[3,1] == -196
         assert m[3,2] == -225
         assert m[3,3] == -256
-
     
+    def test_mul_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 * "1"
+        
+        with pytest.raises(TypeError):
+            m1 * [1]
+        
+        with pytest.raises(TypeError):
+            m1 * (1, 2)
+
     def test_div_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m = m / 2
@@ -554,6 +603,18 @@ class TestMat3:
         assert m[3,1] == -1
         assert m[3,2] == -1
         assert m[3,3] == -1
+    
+    def test_div_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 / "1"
+        
+        with pytest.raises(TypeError):
+            m1 / [1]
+        
+        with pytest.raises(TypeError):
+            m1 / (1, 2)
     
     def test_iadd_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -664,6 +725,18 @@ class TestMat3:
         assert m[3,2] == 0
         assert m[3,3] == 0
     
+    def test_iadd_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 += "1"
+        
+        with pytest.raises(TypeError):
+            m1 += [1]
+        
+        with pytest.raises(TypeError):
+            m1 += (1, 2)
+    
     def test_isub_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m -= 1
@@ -773,6 +846,18 @@ class TestMat3:
         assert m[3,2] == 30
         assert m[3,3] == 32
     
+    def test_isub_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 -= "1"
+        
+        with pytest.raises(TypeError):
+            m1 -= [1]
+        
+        with pytest.raises(TypeError):
+            m1 -= (1, 2)
+    
     def test_imul_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m *= 2
@@ -881,6 +966,18 @@ class TestMat3:
         assert m[3,1] == -196
         assert m[3,2] == -225
         assert m[3,3] == -256
+    
+    def test_imul_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 *= "1"
+        
+        with pytest.raises(TypeError):
+            m1 *= [1]
+        
+        with pytest.raises(TypeError):
+            m1 *= (1, 2)
     
     def test_itruediv_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -992,6 +1089,18 @@ class TestMat3:
         assert m[3,2] == -1
         assert m[3,3] == -1
     
+    def test_itruediv_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1 /= "1"
+        
+        with pytest.raises(TypeError):
+            m1 /= [1]
+        
+        with pytest.raises(TypeError):
+            m1 /= (1, 2)
+    
     def test_dot(self):
         m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -1014,3 +1123,14 @@ class TestMat3:
         assert m[3,2] == 542
         assert m[3,3] == 600
     
+    def test_dot_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+
+        with pytest.raises(TypeError):
+            m1.dot("1")
+        
+        with pytest.raises(TypeError):
+            m1.dot([1])
+        
+        with pytest.raises(TypeError):
+            m1.dot((1, 2))
