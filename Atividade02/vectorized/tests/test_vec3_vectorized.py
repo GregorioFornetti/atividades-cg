@@ -1,4 +1,5 @@
 
+import pytest
 from Atividade02.vectorized.Vec3 import Vec3
 import numpy as np
 
@@ -11,6 +12,19 @@ class TestVec3:
         assert v.x == 1
         assert v.y == 2
         assert v.z == 3
+    
+    def test_init_exception(self):
+        with pytest.raises(ValueError):
+            Vec3([1, 2])
+        
+        with pytest.raises(ValueError):
+            Vec3([[1], 2])
+        
+        with pytest.raises(TypeError):
+            Vec3("1")
+        
+        with pytest.raises(TypeError):
+            Vec3(1)
     
     def test_xyz_atribuition(self):
         v = Vec3()
@@ -68,6 +82,18 @@ class TestVec3:
         assert v.y == 0
         assert v.z == 0
     
+    def test_add_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 + "1"
+        
+        with pytest.raises(TypeError):
+            v1 + [1]
+        
+        with pytest.raises(TypeError):
+            v1 + (1, 2)
+    
     def test_sub_number(self):
         v = Vec3([1, 2, 3])
         v = v - 1
@@ -94,6 +120,18 @@ class TestVec3:
         assert v.y == 4
         assert v.z == 6
     
+    def test_sub_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 - "1"
+        
+        with pytest.raises(TypeError):
+            v1 - [1]
+        
+        with pytest.raises(TypeError):
+            v1 - (1, 2)
+    
     def test_mul_number(self):
         v = Vec3([1, 2, 3])
         v = v * 2
@@ -119,6 +157,18 @@ class TestVec3:
         assert v.x == -1
         assert v.y == -4
         assert v.z == -9
+
+    def test_mul_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 * "1"
+        
+        with pytest.raises(TypeError):
+            v1 * [1]
+        
+        with pytest.raises(TypeError):
+            v1 * (1, 2)
     
     def test_div_number(self):
         v = Vec3([2, 4, 6])
@@ -146,6 +196,18 @@ class TestVec3:
         assert v.y == -1
         assert v.z == -1
     
+    def test_div_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 / "1"
+        
+        with pytest.raises(TypeError):
+            v1 / [1]
+        
+        with pytest.raises(TypeError):
+            v1 / (1, 2)
+    
     def test_iadd_number(self):
         v = Vec3([1, 2, 3])
         v += 1
@@ -171,6 +233,18 @@ class TestVec3:
         assert v1.x == 0
         assert v1.y == 0
         assert v1.z == 0
+    
+    def test_iadd_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 += "1"
+        
+        with pytest.raises(TypeError):
+            v1 += [1]
+        
+        with pytest.raises(TypeError):
+            v1 += (1, 2)
     
     def test_isub_number(self):
         v = Vec3([1, 2, 3])
@@ -198,6 +272,18 @@ class TestVec3:
         assert v1.y == 4
         assert v1.z == 6
     
+    def test_isub_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 -= "1"
+        
+        with pytest.raises(TypeError):
+            v1 -= [1]
+        
+        with pytest.raises(TypeError):
+            v1 -= (1, 2)
+    
     def test_imul_number(self):
         v = Vec3([1, 2, 3])
         v *= 2
@@ -223,6 +309,18 @@ class TestVec3:
         assert v1.x == -1
         assert v1.y == -4
         assert v1.z == -9
+    
+    def test_imul_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 *= "1"
+        
+        with pytest.raises(TypeError):
+            v1 *= [1]
+        
+        with pytest.raises(TypeError):
+            v1 *= (1, 2)
     
     def test_itruediv_number(self):
         v = Vec3([2, 4, 6])
@@ -250,6 +348,18 @@ class TestVec3:
         assert v1.y == -1
         assert v1.z == -1
     
+    def test_itruediv_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1 /= "1"
+        
+        with pytest.raises(TypeError):
+            v1 /= [1]
+        
+        with pytest.raises(TypeError):
+            v1 /= (1, 2)
+    
     def test_length(self):
         v = Vec3([1, 2, 3])
 
@@ -266,6 +376,18 @@ class TestVec3:
 
         assert v1.dot(v2) == 1 * 4 + 2 * 5 + 3 * 6
     
+    def test_dot_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1.dot("1")
+        
+        with pytest.raises(TypeError):
+            v1.dot([1])
+        
+        with pytest.raises(TypeError):
+            v1.dot((1, 2))
+    
     def test_cross(self):
         v1 = Vec3([1, 2, 3])
         v2 = Vec3([4, 5, 6])
@@ -274,6 +396,18 @@ class TestVec3:
         assert v.x == 2 * 6 - 3 * 5
         assert v.y == 3 * 4 - 1 * 6
         assert v.z == 1 * 5 - 2 * 4
+    
+    def test_cross_exception(self):
+        v1 = Vec3([1, 2, 3])
+
+        with pytest.raises(TypeError):
+            v1.cross("1")
+        
+        with pytest.raises(TypeError):
+            v1.cross([1])
+        
+        with pytest.raises(TypeError):
+            v1.cross((1, 2))
     
     def test_unit_vector(self):
         v = Vec3([1, 2, 3])
