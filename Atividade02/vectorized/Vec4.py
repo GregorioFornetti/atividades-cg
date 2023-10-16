@@ -476,3 +476,5 @@ class Vec4(Vec):
             - Vec4 - Vetor unitário.
         '''
         return super().unit_vector()
+
+Point4 = Vec4

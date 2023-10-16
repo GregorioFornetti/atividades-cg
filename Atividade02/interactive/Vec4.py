@@ -562,3 +562,5 @@ class Vec4(Vec):
             - Vec4 - Vetor unitário.
         '''
         return self / self.length()
+
+Point4 = Vec4

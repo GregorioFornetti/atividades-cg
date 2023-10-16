@@ -544,3 +544,5 @@ class Vec2(Vec):
             - Vec2 - Vetor unitário.
         '''
         return self / self.length()
+
+Point2 = Vec2

@@ -31,4 +31,6 @@ Para concluir a atividade, os seguintes arquivos foram criados:
 
 - `vectorized/tests`: nesta pasta, estão todos os testes automatizados relacionados às classes de vetores e matrizes citadas na pasta `vectorized`.
 
+- `test.ipynb`: teste para imprimir imagem, igual ao [tutorial](https://raytracing.github.io/books/RayTracingInOneWeekend.html).
+
 - `doc/index.html`: documentação gerada para essa atividade, usando o `sphinx`

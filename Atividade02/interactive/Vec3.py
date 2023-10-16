@@ -570,3 +570,10 @@ class Vec3(Vec):
             - Vec3 - Vetor unitário.
         '''
         return self / self.length()
+
+Point3 = Vec3
+
+class Color(Vec3):
+
+    def __repr__(self):
+        return f"{int(255.999 * self.vec[0])} {int(255.999 * self.vec[1])} {int(255.999 * self.vec[2])}"

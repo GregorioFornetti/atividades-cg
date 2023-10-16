@@ -482,3 +482,5 @@ class Vec2(Vec):
             - Vec2 - Vetor unitário.
         '''
         return super().unit_vector()
+
+Point2 = Vec2
