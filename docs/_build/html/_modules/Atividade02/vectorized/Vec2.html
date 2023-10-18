@@ -532,6 +532,9 @@
 
 <span class="sd">            - np.float64 - Resultado do produto vetorial.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Vec2</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tipo inválido para produto vetorial, esperado: Vec2, recebido: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
     
 <div class="viewcode-block" id="Vec2.unit_vector"><a class="viewcode-back" href="../../../Atividade02.vectorized.html#Atividade02.vectorized.Vec2.Vec2.unit_vector">[documentos]</a>    <span class="k">def</span> <span class="nf">unit_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Vec2&#39;</span><span class="p">:</span>
@@ -551,6 +554,8 @@
 <span class="sd">            - Vec2 - Vetor unitário.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">unit_vector</span><span class="p">()</span></div></div>
+
+<span class="n">Point2</span> <span class="o">=</span> <span class="n">Vec2</span>
 </pre></div>
 
            </div>
