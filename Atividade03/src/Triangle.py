@@ -8,16 +8,16 @@ class Triangle:
         self.__vertexes = np.array([vertex_1, vertex_2, vertex_3])
     
     @property
-    def vertex_1(self):
+    def vertex_1(self) -> Vec3:
         return self.__vertexes[0]
     
     @property
-    def vertex_2(self):
+    def vertex_2(self) -> Vec3:
         return self.__vertexes[1]
     
     @property
-    def vertex_3(self):
+    def vertex_3(self) -> Vec3:
         return self.__vertexes[2]
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Vec3:
         return self.__vertexes[index]

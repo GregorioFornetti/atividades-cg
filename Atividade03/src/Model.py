@@ -31,9 +31,19 @@ class Model:
                     current_face_indexes: list[FaceIndex] = []
 
                     for face_str in current_faces_str:
-                        current_face_index = [int(index) - 1 for index in face_str.split('/')]
-                        current_face_index = FaceIndex(current_face_index[0], current_face_index[1], current_face_index[2])
+                        current_face_index = [int(index) - 1 if index != '' else None for index in face_str.split('/')]
+                        current_face_index = FaceIndex(*current_face_index)
                         current_face_indexes.append(current_face_index)
 
+                    if len(current_face_indexes) > 3:
+                        raise Exception('Modelo não suporta faces com mais de 3 vértices')
                     self.__faces_indexes.append(current_face_indexes)
                     self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0].vertex_index], self.__vertexes[current_face_indexes[1].vertex_index], self.__vertexes[current_face_indexes[2].vertex_index]))
+    
+    @property
+    def vertexes(self):
+        return self.__vertexes
+    
+    @property
+    def faces(self):
+        return self.__faces
