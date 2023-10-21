@@ -1,7 +1,7 @@
 
 from Atividade02.src.vectorized.Vec3 import Vec3
 from Atividade03.src.Triangle import Triangle
-from Atividade03.src.FaceIndex import FaceIndex
+from Atividade03.src.TriangleFaceIndexes import TriangleFaceIndexes
 import numpy as np
 
 class Model:
@@ -22,38 +22,63 @@ class Model:
         '''
         self.__vertexes: list[Vec3] = []
         self.__faces: list[Triangle] = []
-        self.__faces_indexes: list[list[FaceIndex]] = []
+        self.__faces_indexes: list[TriangleFaceIndexes] = []
 
         with open(file_path, 'r') as file:
-            for line in file:
+            for line_num, line in enumerate(file):
                 if line.startswith('v '):
                     # Lendo novos vértices
 
-                    line = line.replace('v ', '')
-                    current_vertex_coordinates = [float(coordinate) for coordinate in line.split()]
+                    line_values_str = line.replace('v ', '')
+                    current_vertex_coordinates = [float(coordinate) for coordinate in line_values_str.split()]
 
                     if len(current_vertex_coordinates) == 3:
                         self.__vertexes.append(Vec3(current_vertex_coordinates))
-                    else:
+                    elif len(current_vertex_coordinates) == 4:
                         self.__vertexes.append(Vec3(current_vertex_coordinates[:-1]))  # A ultima coordenada é ignorada
+                    else:
+                        raise Exception(f'Modelo com número de coordenadas inválido para um vértice: {len(current_vertex_coordinates)}. Deve ser apenas 3 ou 4.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
                 
                 elif line.startswith('f '):
                     # Lendo novas faces
 
-                    line = line.replace('f ', '')
-                    current_faces_str = line.split()
-                    current_face_indexes: list[FaceIndex] = []
+                    line_values_str = line.replace('f ', '')
+                    current_faces_str = line_values_str.split()
+
+                    if len(current_faces_str) != 3:
+                        raise Exception(f'Modelo com número de faces inválido: {len(current_faces_str)}. Deve ser apenas 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
+                    
+                    vertexes_indexes = []
+                    textures_indexes = []
+                    normals_indexes = []
 
                     for face_str in current_faces_str:
                         current_face_index = [int(index) - 1 if index != '' else None for index in face_str.split('/')]
-                        current_face_index = FaceIndex(*current_face_index)
-                        current_face_indexes.append(current_face_index)
 
-                    if len(current_face_indexes) > 3:  # Atualmente, o modelo só suporta faces com 3 vértices (triângulos)
-                        raise Exception('Modelo não suporta faces com mais de 3 vértices')
-                    
-                    self.__faces_indexes.append(current_face_indexes)
-                    self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0].vertex_index], self.__vertexes[current_face_indexes[1].vertex_index], self.__vertexes[current_face_indexes[2].vertex_index]))
+                        if len(current_face_index) == 1:
+                            # Apenas os índices dos vértices foram especificados
+                            vertexes_indexes.append(current_face_index[0])
+                            textures_indexes.append(None)
+                            normals_indexes.append(None)
+                        
+                        elif len(current_face_index) == 2:
+                            # Os índices dos vértices e das texturas foram especificados
+                            vertexes_indexes.append(current_face_index[0])
+                            textures_indexes.append(current_face_index[1])
+                            normals_indexes.append(None)
+                        
+                        elif len(current_face_index) == 3:
+                            # Os índices dos vértices, das texturas (talvez não, mas já vai estar None) e das normais foram especificados
+                            vertexes_indexes.append(current_face_index[0])
+                            textures_indexes.append(current_face_index[1])
+                            normals_indexes.append(current_face_index[2])
+
+                        else:
+                            raise Exception(f'Modelo com número de índices inválido para uma face: {len(current_face_index)}. Deve ser apenas 1, 2 ou 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
+
+                    current_face_indexes = TriangleFaceIndexes(vertexes_indexes, textures_indexes, normals_indexes)
+                    self.__faces_indexes.append(TriangleFaceIndexes(vertexes_indexes, textures_indexes, normals_indexes))
+                    self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0][0]], self.__vertexes[current_face_indexes[0][1]], self.__vertexes[current_face_indexes[0][2]]))
     
     @property
     def vertexes(self):
