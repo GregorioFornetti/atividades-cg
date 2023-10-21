@@ -31,44 +31,37 @@ class TestLoadObjs:
         assert model.faces[0].vertex_3.z == 9.0
     
     def test_load_only_vertex(self):
-        model = Model()
-        model.read_from_obj_file('Atividade03/objs/TestOnlyVertexFace.obj')
+        model = Model('Atividade03/objs/TestOnlyVertexFace.obj')
 
         self.make_model_basic_assertions(model)
 
     def test_load_vertex_and_texture(self):
-        model = Model()
-        model.read_from_obj_file('Atividade03/objs/TestVertexAndTexture.obj')
+        model = Model('Atividade03/objs/TestVertexAndTexture.obj')
 
         self.make_model_basic_assertions(model)
     
     def test_load_vertex_and_normal(self):
-        model = Model()
-        model.read_from_obj_file('Atividade03/objs/TestVertexAndTexture.obj')
+        model = Model('Atividade03/objs/TestVertexAndTexture.obj')
 
         self.make_model_basic_assertions(model)
     
     def test_load_vertex_texture_normal(self):
-        model = Model()
-        model.read_from_obj_file('Atividade03/objs/TestVertexTextureNornal.obj')
+        model = Model('Atividade03/objs/TestVertexTextureNornal.obj')
 
         self.make_model_basic_assertions(model)
     
     def test_load_four_coord_vertex_obj(self):
-        model = Model()
-        model.read_from_obj_file('Atividade03/objs/TestFourCoordVertexes.obj')
+        model = Model('Atividade03/objs/TestFourCoordVertexes.obj')
 
         self.make_model_basic_assertions(model)
     
     def test_load_not_triangle(self):
-        model = Model()
-
         with pytest.raises(Exception):
-            model.read_from_obj_file('Atividade03/objs/NotTriangle.obj')
+            Model('Atividade03/objs/NotTriangle.obj')
+
 
     def test_load_cube(self):
-        model = Model()
-        model.read_from_obj_file('Atividade03/objs/cube.obj')
+        model = Model('Atividade03/objs/cube.obj')
 
         assert len(model.vertexes) == 8
         assert len(model.faces) == 12

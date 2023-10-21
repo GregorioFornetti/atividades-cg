@@ -8,6 +8,10 @@ class Triangle:
         self.__vertexes = np.array([vertex_1, vertex_2, vertex_3])
     
     @property
+    def vertexes(self) -> np.ndarray:
+        return self.__vertexes
+    
+    @property
     def vertex_1(self) -> Vec3:
         return self.__vertexes[0]
     
