@@ -14,6 +14,8 @@ class Model:
 
         Ainda não há suporte para faces com texturas ou normais (elas são ignoradas, não gerando erro caso o arquivo .obj contenha essas informações).
 
+        Definição de formato definida em: https://en.wikipedia.org/wiki/Wavefront_.obj_file
+
         ---
 
         Parâmetros:
