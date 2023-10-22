@@ -58,7 +58,7 @@ class TriangleFaceIndexes:
         return self.__infos[key]
     
     @property
-    def vertex_index(self):
+    def vertexes_indexes(self):
         '''
         Retorna uma tupla com os índices dos vértices da face.
 
@@ -71,7 +71,7 @@ class TriangleFaceIndexes:
         return self.__infos[0]
     
     @property
-    def texture_index(self):
+    def textures_indexes(self):
         '''
         Retorna uma tupla com os índices das texturas da face. Pode conter None caso o índice não tenha sido especificado.
 
@@ -84,7 +84,7 @@ class TriangleFaceIndexes:
         return self.__infos[1]
     
     @property
-    def normal_index(self):
+    def normals_indexes(self):
         '''
         Retorna o índice da normal da face.
 

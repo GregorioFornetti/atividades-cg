@@ -35,20 +35,102 @@ class TestLoadObjs:
 
         self.make_model_basic_assertions(model)
 
+        assert model.faces_indexes[0][0] == (0, 1, 2)
+        assert model.faces_indexes[0][1] == (None, None, None)
+        assert model.faces_indexes[0][2] == (None, None, None)
+
+        assert model.faces_indexes[0].vertexes_indexes == (0, 1, 2)
+        assert model.faces_indexes[0].textures_indexes == (None, None, None)
+        assert model.faces_indexes[0].normals_indexes == (None, None, None)
+
+        assert model.faces_indexes[0].vertex_1 == 0
+        assert model.faces_indexes[0].vertex_2 == 1
+        assert model.faces_indexes[0].vertex_3 == 2
+
+        assert model.faces_indexes[0].texture_1 == None
+        assert model.faces_indexes[0].texture_2 == None
+        assert model.faces_indexes[0].texture_3 == None
+
+        assert model.faces_indexes[0].normal_1 == None
+        assert model.faces_indexes[0].normal_2 == None
+        assert model.faces_indexes[0].normal_3 == None
+
+
+
     def test_load_vertex_and_texture(self):
         model = Model('Atividade03/objs/TestVertexAndTexture.obj')
 
         self.make_model_basic_assertions(model)
+
+        assert model.faces_indexes[0][0] == (0, 1, 2)
+        assert model.faces_indexes[0][1] == (0, 1, 2)
+        assert model.faces_indexes[0][2] == (None, None, None)
+
+        assert model.faces_indexes[0].vertexes_indexes == (0, 1, 2)
+        assert model.faces_indexes[0].textures_indexes == (0, 1, 2)
+        assert model.faces_indexes[0].normals_indexes == (None, None, None)
+
+        assert model.faces_indexes[0].vertex_1 == 0
+        assert model.faces_indexes[0].vertex_2 == 1
+        assert model.faces_indexes[0].vertex_3 == 2
+
+        assert model.faces_indexes[0].texture_1 == 0
+        assert model.faces_indexes[0].texture_2 == 1
+        assert model.faces_indexes[0].texture_3 == 2
+
+        assert model.faces_indexes[0].normal_1 == None
+        assert model.faces_indexes[0].normal_2 == None
+        assert model.faces_indexes[0].normal_3 == None
     
     def test_load_vertex_and_normal(self):
-        model = Model('Atividade03/objs/TestVertexAndTexture.obj')
+        model = Model('Atividade03/objs/TestVertexAndNormal.obj')
 
         self.make_model_basic_assertions(model)
+
+        assert model.faces_indexes[0][0] == (0, 1, 2)
+        assert model.faces_indexes[0][1] == (None, None, None)
+        assert model.faces_indexes[0][2] == (0, 1, 2)
+
+        assert model.faces_indexes[0].vertexes_indexes == (0, 1, 2)
+        assert model.faces_indexes[0].textures_indexes == (None, None, None)
+        assert model.faces_indexes[0].normals_indexes == (0, 1, 2)
+
+        assert model.faces_indexes[0].vertex_1 == 0
+        assert model.faces_indexes[0].vertex_2 == 1
+        assert model.faces_indexes[0].vertex_3 == 2
+
+        assert model.faces_indexes[0].texture_1 == None
+        assert model.faces_indexes[0].texture_2 == None
+        assert model.faces_indexes[0].texture_3 == None
+
+        assert model.faces_indexes[0].normal_1 == 0
+        assert model.faces_indexes[0].normal_2 == 1
+        assert model.faces_indexes[0].normal_3 == 2
     
     def test_load_vertex_texture_normal(self):
         model = Model('Atividade03/objs/TestVertexTextureNornal.obj')
 
         self.make_model_basic_assertions(model)
+
+        assert model.faces_indexes[0][0] == (0, 1, 2)
+        assert model.faces_indexes[0][1] == (0, 1, 2)
+        assert model.faces_indexes[0][2] == (0, 1, 2)
+
+        assert model.faces_indexes[0].vertexes_indexes == (0, 1, 2)
+        assert model.faces_indexes[0].textures_indexes == (0, 1, 2)
+        assert model.faces_indexes[0].normals_indexes == (0, 1, 2)
+
+        assert model.faces_indexes[0].vertex_1 == 0
+        assert model.faces_indexes[0].vertex_2 == 1
+        assert model.faces_indexes[0].vertex_3 == 2
+
+        assert model.faces_indexes[0].texture_1 == 0
+        assert model.faces_indexes[0].texture_2 == 1
+        assert model.faces_indexes[0].texture_3 == 2
+
+        assert model.faces_indexes[0].normal_1 == 0
+        assert model.faces_indexes[0].normal_2 == 1
+        assert model.faces_indexes[0].normal_3 == 2
     
     def test_load_four_coord_vertex_obj(self):
         model = Model('Atividade03/objs/TestFourCoordVertexes.obj')
@@ -56,8 +138,20 @@ class TestLoadObjs:
         self.make_model_basic_assertions(model)
     
     def test_load_not_triangle(self):
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             Model('Atividade03/objs/NotTriangle.obj')
+        
+    def test_load_invalid_vertex_2_coordinates(self):
+        with pytest.raises(ValueError):
+            Model('Atividade03/objs/InvalidVertex2Coordinates.obj')
+    
+    def test_load_invalid_vertex_5_coordinates(self):
+        with pytest.raises(ValueError):
+            Model('Atividade03/objs/InvalidVertex5Coordinates.obj')
+        
+    def test_load_invalid_vertex_index(self):
+        with pytest.raises(ValueError):
+            Model('Atividade03/objs/InvalidVertexIndex.obj')
 
 
     def test_load_cube(self):

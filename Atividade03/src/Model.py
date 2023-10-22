@@ -28,7 +28,7 @@ class Model:
             for line_num, line in enumerate(file):
                 if line.startswith('v '):
                     # Lendo novos vértices
-
+                    
                     line_values_str = line.replace('v ', '')
                     current_vertex_coordinates = [float(coordinate) for coordinate in line_values_str.split()]
 
@@ -37,7 +37,7 @@ class Model:
                     elif len(current_vertex_coordinates) == 4:
                         self.__vertexes.append(Vec3(current_vertex_coordinates[:-1]))  # A ultima coordenada é ignorada
                     else:
-                        raise Exception(f'Modelo com número de coordenadas inválido para um vértice: {len(current_vertex_coordinates)}. Deve ser apenas 3 ou 4.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
+                        raise ValueError(f'Modelo com número de coordenadas inválido para um vértice: {len(current_vertex_coordinates)}. Deve ser apenas 3 ou 4.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
                 
                 elif line.startswith('f '):
                     # Lendo novas faces
@@ -46,7 +46,7 @@ class Model:
                     current_faces_str = line_values_str.split()
 
                     if len(current_faces_str) != 3:
-                        raise Exception(f'Modelo com número de faces inválido: {len(current_faces_str)}. Deve ser apenas 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
+                        raise ValueError(f'Modelo com número de faces inválido: {len(current_faces_str)}. Deve ser apenas 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
                     
                     vertexes_indexes = []
                     textures_indexes = []
@@ -74,11 +74,14 @@ class Model:
                             normals_indexes.append(current_face_index[2])
 
                         else:
-                            raise Exception(f'Modelo com número de índices inválido para uma face: {len(current_face_index)}. Deve ser apenas 1, 2 ou 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
+                            raise ValueError(f'Modelo com número de índices inválido para uma face: {len(current_face_index)}. Deve ser apenas 1, 2 ou 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
 
                     current_face_indexes = TriangleFaceIndexes(vertexes_indexes, textures_indexes, normals_indexes)
                     self.__faces_indexes.append(TriangleFaceIndexes(vertexes_indexes, textures_indexes, normals_indexes))
-                    self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0][0]], self.__vertexes[current_face_indexes[0][1]], self.__vertexes[current_face_indexes[0][2]]))
+                    try:
+                        self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0][0]], self.__vertexes[current_face_indexes[0][1]], self.__vertexes[current_face_indexes[0][2]]))
+                    except Exception as e:
+                        raise ValueError(f'Erro ao criar face com os índices especificados (algum índice de vértice é maior que o número de vértices). O erro ocorreu na linha {line_num + 1}:\n{line}') from e
     
     @property
     def vertexes(self):
@@ -107,3 +110,16 @@ class Model:
             - list[Triangle] - Lista de faces do modelo.
         '''
         return self.__faces
+    
+    @property
+    def faces_indexes(self):
+        '''
+        Retorna os índices das faces do modelo.
+
+        ---
+
+        Retorno:
+
+            - list[TriangleFaceIndexes] - Lista de índices das faces do modelo.
+        '''
+        return self.__faces_indexes
