@@ -18,11 +18,11 @@ class TriangleFaceIndexes:
 
         Parâmetros:
 
-            - vertex_index: int - Índice do vértice da face.
+            - vertexes_indexes: list[int] - Lista com os índices dos vértices da face.
 
-            - texture_index: int - Índice da textura da face.
+            - textures_indexes: list[Union[int, None]] - Lista com os índices das texturas da face. Pode conter None caso o índice não tenha sido especificado.
 
-            - normal_index: int - Índice da normal da face.
+            - normals_indexes: list[Union[int, None]] - Lista com os índices das normais da face. Pode conter None caso o índice não tenha sido especificado.
         '''
         if len(vertexes_indexes) != 3:
             raise Exception('vertexes_indexes deve ter tamanho 3')
@@ -86,13 +86,13 @@ class TriangleFaceIndexes:
     @property
     def normals_indexes(self):
         '''
-        Retorna o índice da normal da face.
+        Retorna uma tupla com os índices das normais da face. Pode conter None caso o índice não tenha sido especificado.
 
         ---
 
         Retorno:
 
-            - int - Índice da normal da face.
+            - tuple[int, None] - Tupla com os índices das normais da face. Pode conter None caso o índice não tenha sido especificado.
         '''
         return self.__infos[2]
     
