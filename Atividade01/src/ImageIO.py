@@ -1,11 +1,12 @@
 from typing import Union
 import numpy as np 
-from PIL import Image
+import PIL.Image
+from Atividade01.src.Image import Image
 
 
 class ImageWriter:
 
-    def __init__(self, image: Union[np.ndarray, Image.Image]):
+    def __init__(self, image: Union[np.ndarray, PIL.Image.Image, Image]):
         '''
         Construtor da classe ImageWriter. Recebe um objeto ou uma matriz representando uma imagem, para ser posteriormente salva ou visualizada.
 
@@ -13,17 +14,19 @@ class ImageWriter:
 
         Parâmetros:
 
-            - image: Union[np.ndarray, Image.Image] - Imagem a ser salva ou visualizada. Pode ser um objeto PIL.Image ou uma matriz numpy. A matriz numpy pode possuir valores entre 0 e 1 e ser do tipo float ou ser uma matriz do tipo uint8.
+            - image: Union[np.ndarray, Image, Image.Image] - Imagem a ser salva ou visualizada. Pode ser um objeto PIL.Image ou uma matriz numpy. A matriz numpy pode possuir valores entre 0 e 1 e ser do tipo float ou ser uma matriz do tipo uint8. Pode ser também um objeto Image, que é uma classe definida no arquivo Image.py.
         '''
-        if not isinstance(image, np.ndarray) and not isinstance(image, Image.Image):
-            raise TypeError('A imagem precisa ser uma matriz numpy ou um objeto PIL.Image')
+        if not isinstance(image, np.ndarray) and not isinstance(image, PIL.Image.Image) and not isinstance(image, Image):
+            raise TypeError('A imagem precisa ser uma matriz numpy, um objeto PIL.Image ou um objeto Image.')
         
         if isinstance(image, np.ndarray):
             # Faz as conversões necessárias para que a imagem seja convertida para um objeto PIL.Image
             # Como o PIL não trabalho com floats entre 0 e 1, é preciso converter para inteiro, caso necessário
             if image.dtype != np.uint8:
                 image = (image * 255).astype(np.uint8)
-            self.image = Image.fromarray(image)
+            self.image = PIL.Image.fromarray(image)
+        elif isinstance(image, Image):
+            self.image = PIL.Image.fromarray(image.to_uint8_matrix())
         else:
             # Já é um objeto PIL.Image, não precisa fazer nenhum tratamento
             self.image = image
@@ -121,7 +124,7 @@ class ImageReader:
         img_matrix = img_matrix.astype(np.uint8)
         return img_matrix
         
-    def read_as_pil_image(self, path: str) -> Image.Image:
+    def read_as_pil_image(self, path: str) -> PIL.Image.Image:
         '''
         Lê o arquivo de imagem e retorna um objeto PIL.Image representando a imagem.
         
