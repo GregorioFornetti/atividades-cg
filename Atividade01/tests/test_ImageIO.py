@@ -3,8 +3,12 @@ Testes unitários para a classes de ImageIO: ImageReader e ImageWriter.
 '''
 
 from Atividade01.src.ImageIO import ImageReader, ImageWriter
+from Atividade01.src.Image import Image
+from Atividade02.src.vectorized.Vec3 import Color
+
 import numpy as np
 import os
+import pytest
 
 test_folder = "images_test"
 
@@ -115,5 +119,24 @@ class TestImageIO:
                     img_matrix[i][j] = square_color
         
         self.read_write_test(img_matrix, f"{test_folder}/square.png")
+
+        clean_test_images_folder()
+    
+    def test_save_image_with_custom_image_obj(self):
+        clean_test_images_folder()
+
+        img = Image(2, 2)
+
+        with pytest.raises(ValueError):  # ainda não foi definido nenhum pixel
+            ImageWriter(img)
+        
+        img[0, 0] = Color([0.1, 0.2, 0.3])
+        img[0, 1] = Color([0.4, 0.5, 0.6])
+        img[1, 0] = Color([0.7, 0.8, 0.9])
+        img[1, 1] = Color([1.0, 1.0, 1.0])
+
+        img_writer = ImageWriter(img)
+
+        self.read_write_test(img.to_uint8_matrix(), f"{test_folder}/custom_image_obj.png")
 
         clean_test_images_folder()
