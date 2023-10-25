@@ -1,6 +1,6 @@
 
 import pytest
-from Atividade02.src.interactive.Vec3 import Vec3
+from Atividade02.src.interactive.Vec3 import Vec3, Color
 import numpy as np
 
 
@@ -463,3 +463,10 @@ class TestVec3:
         assert v.x == 1 / np.sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
         assert v.y == 2 / np.sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
         assert v.z == 3 / np.sqrt(1 ** 2 + 2 ** 2 + 3 ** 2)
+
+    def test_color(self):
+        c = Color(1, 2, 3)
+
+        assert c.r == 1
+        assert c.g == 2
+        assert c.b == 3

@@ -497,9 +497,20 @@ class Vec3(Vec):
         return super().unit_vector()
 
 Point3 = Vec3
-Color = Vec3
 
 class Color(Vec3):
+
+    @property
+    def r(self) -> np.float64:
+        return self.vec[0]
+    
+    @property
+    def g(self) -> np.float64:
+        return self.vec[1]
+    
+    @property
+    def b(self) -> np.float64:
+        return self.vec[2]
 
     def __repr__(self):
         return f"{int(255.999 * self.vec[0])} {int(255.999 * self.vec[1])} {int(255.999 * self.vec[2])}"
