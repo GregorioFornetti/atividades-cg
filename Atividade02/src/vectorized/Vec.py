@@ -188,6 +188,10 @@ class Vec:
             - Vec - Resultado da subtração.
 
         '''
+        # A ordem importa, pois a subtração não é comutativa
+        # EX: 1 - vec != vec - 1
+        if isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
+            return self.__class__(other - self.vec)
         return self.__sub__(other)
     
     def __mul__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -286,6 +290,10 @@ class Vec:
             - Vec - Resultado da divisão.
 
         '''
+        # A ordem importa, pois a divisão não é comutativa
+        # EX: 1 / vec != vec / 1
+        if isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
+            return self.__class__(other / self.vec)
         return self.__truediv__(other)
     
     def __iadd__(self, other: Union['Vec', np.float64]) -> 'Vec':

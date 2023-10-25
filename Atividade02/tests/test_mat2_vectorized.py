@@ -389,7 +389,7 @@ class TestMat2:
 
         assert m[0,0] == 1
         assert m[0,1] == 0.5
-        assert m[1,0] == 1/4
+        assert m[1,0] == 1/3
         assert m[1,1] == 0.25
 
     

@@ -202,7 +202,12 @@ class Vec3(Vec):
             return NotImplemented  # força a chamada do método __rsub__ do outro objeto, que pode estar implementado
     
     def __rsub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
-        return self.__sub__(other)
+        # A ordem importa, pois a subtração não é comutativa
+        # EX: 1 / vec != vec / 1
+        if isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
+            return Vec3(other - self.vec[0], other - self.vec[1], other - self.vec[2])
+        else:
+            return self.__sub__(other)
     
     def __mul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         '''
@@ -284,7 +289,12 @@ class Vec3(Vec):
             return NotImplemented  # força a chamada do método __rtruediv__ do outro objeto, que pode estar implementado
     
     def __rtruediv__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
-        return self.__truediv__(other)
+        # A ordem importa, pois a divisão não é comutativa
+        # EX: 1 / vec != vec / 1
+        if isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
+            return Vec3(other / self.vec[0], other / self.vec[1], other / self.vec[2])
+        else:
+            return self.__truediv__(other)
 
     def __iadd__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         '''

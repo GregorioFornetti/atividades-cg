@@ -194,7 +194,22 @@ class Mat:
             return NotImplemented  # força a chamada do método __rsub__ do outro objeto, que pode estar implementado
     
     def __rsub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
-        return self.__sub__(other)
+        # A ordem importa, pois a subtração não é comutativa
+        # EX: 1 - mat != mat - 1
+        if isinstance(other, Vec):
+            new_matrix = np.zeros(self.shape, dtype=np.float64)
+            for i in range(self.shape[0]):
+                for j in range(self.shape[1]):
+                    new_matrix[i,j] = other.vec[j] - self.matrix[i,j]
+            return self.__class__(new_matrix)
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
+            new_matrix = np.zeros(self.shape, dtype=np.float64)
+            for i in range(self.shape[0]):
+                for j in range(self.shape[1]):
+                    new_matrix[i,j] = other - self.matrix[i,j]
+            return self.__class__(new_matrix)
+        else:
+            return self.__sub__(other)
     
     def __mul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -288,7 +303,22 @@ class Mat:
             return NotImplemented  # força a chamada do método __rtruediv__ do outro objeto, que pode estar implementado
     
     def __rtruediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
-        return self.__truediv__(other)
+        # A ordem importa, pois a divisão não é comutativa
+        # EX: 1 / mat != mat / 1
+        if isinstance(other, Vec):
+            new_matrix = np.zeros(self.shape, dtype=np.float64)
+            for i in range(self.shape[0]):
+                for j in range(self.shape[1]):
+                    new_matrix[i,j] = other.vec[j] / self.matrix[i,j]
+            return self.__class__(new_matrix)
+        elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
+            new_matrix = np.zeros(self.shape, dtype=np.float64)
+            for i in range(self.shape[0]):
+                for j in range(self.shape[1]):
+                    new_matrix[i,j] = other / self.matrix[i,j]
+            return self.__class__(new_matrix)
+        else:
+            return self.__truediv__(other)
 
     def __iadd__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
