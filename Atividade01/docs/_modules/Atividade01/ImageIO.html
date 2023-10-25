@@ -151,66 +151,66 @@
 
 <div class="viewcode-block" id="ImageReader"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader">[documentos]</a><span class="k">class</span> <span class="nc">ImageReader</span><span class="p">:</span>
     
-<div class="viewcode-block" id="ImageReader.read_as_float_matrix"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader.read_as_float_matrix">[documentos]</a>        <span class="k">def</span> <span class="nf">read_as_float_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">            Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.</span>
-<span class="sd">            </span>
-<span class="sd">            ---</span>
+<div class="viewcode-block" id="ImageReader.read_as_float_matrix"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader.read_as_float_matrix">[documentos]</a>    <span class="k">def</span> <span class="nf">read_as_float_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.</span>
+<span class="sd">        </span>
+<span class="sd">        ---</span>
 
-<span class="sd">            Parâmetros:</span>
+<span class="sd">        Parâmetros:</span>
 
-<span class="sd">                    - path: str - Caminho do arquivo a ser lido.</span>
-<span class="sd">    </span>
-<span class="sd">            ---</span>
-<span class="sd">    </span>
-<span class="sd">            Retorno:</span>
-<span class="sd">    </span>
-<span class="sd">                    - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 1 e é do tipo float.</span>
-<span class="sd">            &#39;&#39;&#39;</span>
-            <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-            <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">img_matrix</span> <span class="o">/</span> <span class="mf">255.0</span>
-            <span class="k">return</span> <span class="n">img_matrix</span></div>
+<span class="sd">                - path: str - Caminho do arquivo a ser lido.</span>
+
+<span class="sd">        ---</span>
+
+<span class="sd">        Retorno:</span>
+
+<span class="sd">                - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 1 e é do tipo float.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">img_matrix</span> <span class="o">/</span> <span class="mf">255.0</span>
+        <span class="k">return</span> <span class="n">img_matrix</span></div>
     
-<div class="viewcode-block" id="ImageReader.read_as_uint8_matrix"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader.read_as_uint8_matrix">[documentos]</a>        <span class="k">def</span> <span class="nf">read_as_uint8_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">            Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.</span>
-<span class="sd">            </span>
-<span class="sd">            ---</span>
+<div class="viewcode-block" id="ImageReader.read_as_uint8_matrix"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader.read_as_uint8_matrix">[documentos]</a>    <span class="k">def</span> <span class="nf">read_as_uint8_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Lê o arquivo de imagem e retorna uma matriz numpy representando a imagem.</span>
+<span class="sd">        </span>
+<span class="sd">        ---</span>
 
-<span class="sd">            Parâmetros:</span>
+<span class="sd">        Parâmetros:</span>
 
-<span class="sd">                    - path: str - Caminho do arquivo a ser lido.</span>
-<span class="sd">    </span>
-<span class="sd">            ---</span>
-<span class="sd">    </span>
-<span class="sd">            Retorno:</span>
-<span class="sd">    </span>
-<span class="sd">                    - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.</span>
-<span class="sd">            &#39;&#39;&#39;</span>
-            <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-            <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">img_matrix</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">img_matrix</span></div>
+<span class="sd">                - path: str - Caminho do arquivo a ser lido.</span>
+
+<span class="sd">        ---</span>
+
+<span class="sd">        Retorno:</span>
+
+<span class="sd">                - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">img_matrix</span> <span class="o">=</span> <span class="n">img_matrix</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img_matrix</span></div>
         
-<div class="viewcode-block" id="ImageReader.read_as_pil_image"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader.read_as_pil_image">[documentos]</a>        <span class="k">def</span> <span class="nf">read_as_pil_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">            Lê o arquivo de imagem e retorna um objeto PIL.Image representando a imagem.</span>
-<span class="sd">            </span>
-<span class="sd">            ---</span>
+<div class="viewcode-block" id="ImageReader.read_as_pil_image"><a class="viewcode-back" href="../../Atividade01.html#Atividade01.ImageIO.ImageReader.read_as_pil_image">[documentos]</a>    <span class="k">def</span> <span class="nf">read_as_pil_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="o">.</span><span class="n">Image</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Lê o arquivo de imagem e retorna um objeto PIL.Image representando a imagem.</span>
+<span class="sd">        </span>
+<span class="sd">        ---</span>
 
-<span class="sd">            Parâmetros:</span>
+<span class="sd">        Parâmetros:</span>
 
-<span class="sd">                    - path: str - Caminho do arquivo a ser lido.</span>
-<span class="sd">    </span>
-<span class="sd">            ---</span>
-<span class="sd">    </span>
-<span class="sd">            Retorno:</span>
-<span class="sd">    </span>
-<span class="sd">                    - Image - Objeto PIL.Image representando a imagem.</span>
-<span class="sd">            &#39;&#39;&#39;</span>
-            <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">img</span></div></div>
+<span class="sd">                - path: str - Caminho do arquivo a ser lido.</span>
+
+<span class="sd">        ---</span>
+
+<span class="sd">        Retorno:</span>
+
+<span class="sd">                - Image - Objeto PIL.Image representando a imagem.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img</span></div></div>
 </pre></div>
 
            </div>

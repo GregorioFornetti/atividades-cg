@@ -1,32 +1,14 @@
 Atividade01 package
 ===================
 
-Submodules
-----------
+Subpackages
+-----------
 
-Atividade01.ImageIO module
---------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: Atividade01.ImageIO
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Atividade01.test\_ImageIO module
---------------------------------
-
-.. automodule:: Atividade01.test_ImageIO
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Atividade01.tutorial module
----------------------------
-
-.. automodule:: Atividade01.tutorial
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   Atividade01.src
+   Atividade01.tests
 
 Module contents
 ---------------

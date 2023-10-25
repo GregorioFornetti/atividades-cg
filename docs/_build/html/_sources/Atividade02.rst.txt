@@ -7,8 +7,8 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   Atividade02.interactive
-   Atividade02.vectorized
+   Atividade02.src
+   Atividade02.tests
 
 Module contents
 ---------------

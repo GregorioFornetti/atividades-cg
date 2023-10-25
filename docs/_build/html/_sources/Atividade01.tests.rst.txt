@@ -4,6 +4,14 @@ Atividade01.tests package
 Submodules
 ----------
 
+Atividade01.tests.test\_Image module
+------------------------------------
+
+.. automodule:: Atividade01.tests.test_Image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Atividade01.tests.test\_ImageIO module
 --------------------------------------
 

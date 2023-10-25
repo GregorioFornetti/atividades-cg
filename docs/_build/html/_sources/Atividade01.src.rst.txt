@@ -4,6 +4,14 @@ Atividade01.src package
 Submodules
 ----------
 
+Atividade01.src.Image module
+----------------------------
+
+.. automodule:: Atividade01.src.Image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Atividade01.src.ImageIO module
 ------------------------------
 
