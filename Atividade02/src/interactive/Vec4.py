@@ -174,6 +174,9 @@ class Vec4(Vec):
         else:
             raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, recebido: {type(other)}")
     
+    def __radd__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
+        return self.__add__(other)
+    
     def __sub__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
         '''
         Subtrai elemento a elemento de dois vetores. Ou subtrai um número a cada elemento do vetor.
@@ -213,6 +216,9 @@ class Vec4(Vec):
         else:
             raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, recebido: {type(other)}")
     
+    def __rsub__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
+        return self.__sub__(other)
+    
     def __mul__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
         '''
         Multiplica elemento a elemento de dois vetores. Ou multiplica um número a cada elemento do vetor.
@@ -251,6 +257,9 @@ class Vec4(Vec):
         else:
             raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, recebido: {type(other)}")
     
+    def __rmul__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
+        return self.__mul__(other)
+    
     def __truediv__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
         '''
         Divide elemento a elemento de dois vetores. Ou divide um número a cada elemento do vetor.
@@ -288,7 +297,9 @@ class Vec4(Vec):
             return Vec4(self.vec[0] / other, self.vec[1] / other, self.vec[2] / other, self.vec[3] / other)
         else:
             raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, recebido: {type(other)}")
-
+    
+    def __rtruediv__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
+        return self.__truediv__(other)
 
     def __iadd__(self, other: Union['Vec4', np.float64]) -> 'Vec4':
         '''

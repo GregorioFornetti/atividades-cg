@@ -130,6 +130,9 @@ class Mat:
         else:
             raise TypeError(f"Tipo inválido para soma, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
+    def __radd__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
+        return self.__add__(other)
+    
     def __sub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
         Subtrai elemento a elemento de duas matrizes.
@@ -161,6 +164,9 @@ class Mat:
             return self.__class__(self.matrix - other)
         else:
             raise TypeError(f"Tipo inválido para subtração, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+    
+    def __rsub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
+        return self.__sub__(other)
     
     def __mul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -194,6 +200,9 @@ class Mat:
         else:
             raise TypeError(f"Tipo inválido para multiplicação, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
     
+    def __rmul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
+        return self.__mul__(other)
+    
     def __truediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
         Divide elemento a elemento de duas matrizes.
@@ -226,6 +235,8 @@ class Mat:
         else:
             raise TypeError(f"Tipo inválido para divisão, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
 
+    def __rtruediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
+        return self.__truediv__(other)
 
     def __iadd__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
