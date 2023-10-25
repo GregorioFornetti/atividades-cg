@@ -179,6 +179,37 @@ class TestMat3:
         with pytest.raises(TypeError):
             m1 + (1, 2)
 
+    def test_add_integer_left_side(self):
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+        m = 1 + m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 3
+        assert m[0,2] == 4
+        assert m[1,0] == 5
+        assert m[1,1] == 6
+        assert m[1,2] == 7
+        assert m[2,0] == 8
+        assert m[2,1] == 9
+        assert m[2,2] == 10
+
+    def test_add_vec3_left_side(self):
+        v1 = Vec3([1, 2, 3])
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+        m = v1 + m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 4
+        assert m[0,2] == 6
+        assert m[1,0] == 5
+        assert m[1,1] == 7
+        assert m[1,2] == 9
+        assert m[2,0] == 8
+        assert m[2,1] == 10
+        assert m[2,2] == 12
+        
+
     
     def test_sub_number(self):
         m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
@@ -266,6 +297,39 @@ class TestMat3:
         with pytest.raises(TypeError):
             m1 - (1, 2)
     
+    def test_sub_integer_left_side(self):
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+        m = 1 - m1
+
+        assert m[0,0] == 0
+        assert m[0,1] == -1
+        assert m[0,2] == -2
+        assert m[1,0] == -3
+        assert m[1,1] == -4
+        assert m[1,2] == -5
+        assert m[2,0] == -6
+        assert m[2,1] == -7
+        assert m[2,2] == -8
+    
+    def test_sub_vec3_left_side(self):
+        v1 = Vec3([1, 2, 3])
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+        m = v1 - m1
+
+        assert m[0,0] == 0
+        assert m[0,1] == 0
+        assert m[0,2] == 0
+        assert m[1,0] == -3
+        assert m[1,1] == -3
+        assert m[1,2] == -3
+        assert m[2,0] == -6
+        assert m[2,1] == -6
+        assert m[2,2] == -6
+    
+
+    
     def test_mul_number(self):
         m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
         m = m * 2
@@ -351,6 +415,39 @@ class TestMat3:
         
         with pytest.raises(TypeError):
             m1 * (1, 2)
+    
+    def test_mul_integer_left_side(self):
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+        m = 2 * m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 4
+        assert m[0,2] == 6
+        assert m[1,0] == 8
+        assert m[1,1] == 10
+        assert m[1,2] == 12
+        assert m[2,0] == 14
+        assert m[2,1] == 16
+        assert m[2,2] == 18
+    
+    def test_mul_vec3_left_side(self):
+        v1 = Vec3([1, 2, 3])
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+        m = v1 * m1
+
+        assert m[0,0] == 1
+        assert m[0,1] == 4
+        assert m[0,2] == 9
+        assert m[1,0] == 4
+        assert m[1,1] == 10
+        assert m[1,2] == 18
+        assert m[2,0] == 7
+        assert m[2,1] == 16
+        assert m[2,2] == 27
+    
+
     
     def test_div_number(self):
         m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
@@ -438,6 +535,39 @@ class TestMat3:
         
         with pytest.raises(TypeError):
             m1 / (1, 2)
+    
+    def test_div_integer_left_side(self):
+        m1 = Mat3(np.array([[2, 4, 6], [8, 10, 12], [14, 16, 18]]))
+
+        m = 2 / m1
+
+        assert m[0,0] == 1
+        assert m[0,1] == 0.5
+        assert m[0,2] == 1/3
+        assert m[1,0] == 0.25
+        assert m[1,1] == 0.2
+        assert m[1,2] == 1/6
+        assert m[2,0] == 2/14
+        assert m[2,1] == 0.125
+        assert m[2,2] == 1/9
+    
+    def test_div_vec3_left_side(self):
+        v1 = Vec3([1, 2, 3])
+        m1 = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+
+        m = v1 / m1
+
+        assert m[0,0] == 1
+        assert m[0,1] == 1
+        assert m[0,2] == 1
+        assert m[1,0] == 0.25
+        assert m[1,1] == 0.4
+        assert m[1,2] == 0.5
+        assert m[2,0] == 1/7
+        assert m[2,1] == 0.25
+        assert m[2,2] == 1/3
+
+    
     
     def test_iadd_number(self):
         m = Mat3(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))

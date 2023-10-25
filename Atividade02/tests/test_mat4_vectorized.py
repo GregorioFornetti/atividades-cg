@@ -239,7 +239,64 @@ class TestMat3:
         assert m[3,1] == 0
         assert m[3,2] == 0
         assert m[3,3] == 0
+    
+    def test_add_exception(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
 
+        with pytest.raises(TypeError):
+            m1 + "1"
+        
+        with pytest.raises(TypeError):
+            m1 + [1]
+        
+        with pytest.raises(TypeError):
+            m1 + (1, 2)
+    
+    def test_add_integer_left_side(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = 1 + m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 3
+        assert m[0,2] == 4
+        assert m[0,3] == 5
+        assert m[1,0] == 6
+        assert m[1,1] == 7
+        assert m[1,2] == 8
+        assert m[1,3] == 9
+        assert m[2,0] == 10
+        assert m[2,1] == 11
+        assert m[2,2] == 12
+        assert m[2,3] == 13
+        assert m[3,0] == 14
+        assert m[3,1] == 15
+        assert m[3,2] == 16
+        assert m[3,3] == 17
+    
+    def test_add_vec4_left_side(self):
+        v1 = Vec4([1, 2, 3, 4])
+        m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = v1 + m2
+
+        assert m[0,0] == 2
+        assert m[0,1] == 4
+        assert m[0,2] == 6
+        assert m[0,3] == 8
+        assert m[1,0] == 6
+        assert m[1,1] == 8
+        assert m[1,2] == 10
+        assert m[1,3] == 12
+        assert m[2,0] == 10
+        assert m[2,1] == 12
+        assert m[2,2] == 14
+        assert m[2,3] == 16
+        assert m[3,0] == 14
+        assert m[3,1] == 16
+        assert m[3,2] == 18
+        assert m[3,3] == 20
+    
+
+    
     def test_sub_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m = m - 1
@@ -260,18 +317,6 @@ class TestMat3:
         assert m[3,1] == 13
         assert m[3,2] == 14
         assert m[3,3] == 15
-    
-    def test_add_exception(self):
-        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
-
-        with pytest.raises(TypeError):
-            m1 + "1"
-        
-        with pytest.raises(TypeError):
-            m1 + [1]
-        
-        with pytest.raises(TypeError):
-            m1 + (1, 2)
     
     def test_sub_vec4(self):
         m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -372,6 +417,51 @@ class TestMat3:
         
         with pytest.raises(TypeError):
             m1 - (1, 2)
+    
+    def test_sub_integer_left_side(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = 1 - m1
+
+        assert m[0,0] == 0
+        assert m[0,1] == -1
+        assert m[0,2] == -2
+        assert m[0,3] == -3
+        assert m[1,0] == -4
+        assert m[1,1] == -5
+        assert m[1,2] == -6
+        assert m[1,3] == -7
+        assert m[2,0] == -8
+        assert m[2,1] == -9
+        assert m[2,2] == -10
+        assert m[2,3] == -11
+        assert m[3,0] == -12
+        assert m[3,1] == -13
+        assert m[3,2] == -14
+        assert m[3,3] == -15
+    
+    def test_sub_vec4_left_side(self):
+        v1 = Vec4([1, 2, 3, 4])
+        m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = v1 - m2
+
+        assert m[0,0] == 0
+        assert m[0,1] == 0
+        assert m[0,2] == 0
+        assert m[0,3] == 0
+        assert m[1,0] == -4
+        assert m[1,1] == -4
+        assert m[1,2] == -4
+        assert m[1,3] == -4
+        assert m[2,0] == -8
+        assert m[2,1] == -8
+        assert m[2,2] == -8
+        assert m[2,3] == -8
+        assert m[3,0] == -12
+        assert m[3,1] == -12
+        assert m[3,2] == -12
+        assert m[3,3] == -12
+    
+
     
     def test_mul_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -494,6 +584,46 @@ class TestMat3:
         
         with pytest.raises(TypeError):
             m1 * (1, 2)
+    
+    def test_mul_integer_left_side(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = 2 * m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 4
+        assert m[0,2] == 6
+        assert m[0,3] == 8
+        assert m[1,0] == 10
+        assert m[1,1] == 12
+        assert m[1,2] == 14
+        assert m[1,3] == 16
+        assert m[2,0] == 18
+        assert m[2,1] == 20
+        assert m[2,2] == 22
+        assert m[2,3] == 24
+    
+    def test_mul_vec4_left_side(self):
+        v1 = Vec4([1, 2, 3, 4])
+        m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = v1 * m2
+
+        assert m[0,0] == 1
+        assert m[0,1] == 4
+        assert m[0,2] == 9
+        assert m[0,3] == 16
+        assert m[1,0] == 5
+        assert m[1,1] == 12
+        assert m[1,2] == 21
+        assert m[1,3] == 32
+        assert m[2,0] == 9
+        assert m[2,1] == 20
+        assert m[2,2] == 33
+        assert m[2,3] == 48
+        assert m[3,0] == 13
+        assert m[3,1] == 28
+        assert m[3,2] == 45
+        assert m[3,3] == 64
+
 
     def test_div_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -615,6 +745,51 @@ class TestMat3:
         
         with pytest.raises(TypeError):
             m1 / (1, 2)
+    
+    def test_div_integer_left_side(self):
+        m1 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = 2 / m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 1
+        assert m[0,2] == 2 / 3
+        assert m[0,3] == 0.5
+        assert m[1,0] == 2 / 5
+        assert m[1,1] == 1 / 3
+        assert m[1,2] == 2 / 7
+        assert m[1,3] == 0.25
+        assert m[2,0] == 2 / 9
+        assert m[2,1] == 1 / 5
+        assert m[2,2] == 2 / 11
+        assert m[2,3] == 1 / 6
+        assert m[3,0] == 2 / 13
+        assert m[3,1] == 1 / 7
+        assert m[3,2] == 2 / 15
+        assert m[3,3] == 1 / 8
+    
+    def test_div_vec4_left_side(self):
+        m1 = Vec4([1, 2, 3, 4])
+        m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
+        m = m1 / m2
+
+        assert m[0,0] == 1
+        assert m[0,1] == 1
+        assert m[0,2] == 1
+        assert m[0,3] == 1
+        assert m[1,0] == 1 / 5
+        assert m[1,1] == 1 / 3
+        assert m[1,2] == 3 / 7
+        assert m[1,3] == 1 / 2
+        assert m[2,0] == 1 / 9
+        assert m[2,1] == 1 / 5
+        assert m[2,2] == 3 / 11
+        assert m[2,3] == 1 / 3
+        assert m[3,0] == 1 / 13
+        assert m[3,1] == 1 / 7
+        assert m[3,2] == 3 / 15
+        assert m[3,3] == 1 / 4
+    
+
     
     def test_iadd_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
