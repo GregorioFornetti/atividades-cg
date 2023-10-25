@@ -26,6 +26,8 @@ class ImageWriter:
                 image = (image * 255).astype(np.uint8)
             self.image = PIL.Image.fromarray(image)
         elif isinstance(image, Image):
+            if not image.all_pixels_set:
+                raise ValueError('A imagem precisa ter todos os pixels definidos.')
             self.image = PIL.Image.fromarray(image.to_uint8_matrix())
         else:
             # Já é um objeto PIL.Image, não precisa fazer nenhum tratamento
@@ -98,7 +100,7 @@ class ImageReader:
 
                 - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 1 e é do tipo float.
         '''
-        img = Image.open(path)
+        img = PIL.Image.open(path)
         img_matrix = np.asarray(img)
         img_matrix = img_matrix / 255.0
         return img_matrix
@@ -119,7 +121,7 @@ class ImageReader:
 
                 - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.
         '''
-        img = Image.open(path)
+        img = PIL.Image.open(path)
         img_matrix = np.asarray(img)
         img_matrix = img_matrix.astype(np.uint8)
         return img_matrix
@@ -140,5 +142,5 @@ class ImageReader:
 
                 - Image - Objeto PIL.Image representando a imagem.
         '''
-        img = Image.open(path)
+        img = PIL.Image.open(path)
         return img

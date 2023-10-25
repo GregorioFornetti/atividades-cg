@@ -17,7 +17,52 @@ class Image:
 
             - height: int - Altura da imagem em pixels.
         '''
+        self.__width = width
+        self.__height = height
         self.img_matrix = np.empty((height, width), dtype=Color)
+    
+    @property
+    def width(self) -> int:
+        '''
+        Largura da imagem.
+
+        ---
+
+        Retorno:
+
+            - int - Largura da imagem em pixels.
+        '''
+        return self.__width
+    
+    @property
+    def height(self) -> int:
+        '''
+        Altura da imagem.
+
+        ---
+
+        Retorno:
+
+            - int - Altura da imagem em pixels.
+        '''
+        return self.__height
+
+    @property
+    def all_pixels_set(self) -> bool:
+        '''
+        Verifica se todos os pixels da imagem foram definidos.
+
+        ---
+
+        Retorno:
+
+            - bool - True se todos os pixels foram definidos. False caso contrário.
+        '''
+        for i in range(self.img_matrix.shape[0]):
+            for j in range(self.img_matrix.shape[1]):
+                if self.img_matrix[i, j] is None:
+                    return False
+        return True
     
     def to_uint8_matrix(self) -> np.ndarray:
         '''
@@ -29,9 +74,9 @@ class Image:
 
             - np.ndarray - Matriz numpy representando a imagem. A matriz possui valores entre 0 e 255 e é do tipo uint8.
         '''
-        img_matrix = np.empty((*self.img_matrix.shape, 3), dtype=np.uint8)
-        for i in range(self.img_matrix.shape[0]):
-            for j in range(self.img_matrix.shape[1]):
+        img_matrix = np.empty((self.height, self.width, 3), dtype=np.uint8)
+        for i in range(self.height):
+            for j in range(self.width):
                 img_matrix[i, j, 0] = int(255.999 * self.img_matrix[i, j].r)
                 img_matrix[i, j, 1] = int(255.999 * self.img_matrix[i, j].g)
                 img_matrix[i, j, 2] = int(255.999 * self.img_matrix[i, j].b)
