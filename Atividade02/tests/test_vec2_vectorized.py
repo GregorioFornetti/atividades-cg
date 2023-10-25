@@ -84,6 +84,14 @@ class TestVec2Vectorized:
         
         with pytest.raises(TypeError):
             v1 + (1, 2)
+    
+    def test_add_integer_left_side(self):
+        v1 = Vec2([1, 2])
+        v = 1 + v1
+
+        assert v.x == 2
+        assert v.y == 3
+
 
     
     def test_sub_number(self):
@@ -121,6 +129,15 @@ class TestVec2Vectorized:
         with pytest.raises(TypeError):
             v1 - (1, 2)
     
+    def test_sub_integer_left_side(self):
+        v1 = Vec2([1, 2])
+        v = 1 - v1
+
+        assert v.x == 0
+        assert v.y == -1
+    
+
+    
     def test_mul_number(self):
         v = Vec2([1, 2])
         v = v * 2
@@ -156,6 +173,15 @@ class TestVec2Vectorized:
         with pytest.raises(TypeError):
             v1 * (1, 2)
     
+    def test_mul_integer_left_side(self):
+        v1 = Vec2([1, 2])
+        v = 2 * v1
+
+        assert v.x == 2
+        assert v.y == 4
+    
+
+    
     def test_div_number(self):
         v = Vec2([2, 4])
         v = v / 2
@@ -190,6 +216,15 @@ class TestVec2Vectorized:
         
         with pytest.raises(TypeError):
             v1 / (1, 2)
+    
+    def test_div_integer_left_side(self):
+        v1 = Vec2([1, 2])
+        v = 2 / v1
+
+        assert v.x == 2
+        assert v.y == 1
+    
+    
     
     def test_iadd_number(self):
         v = Vec2([1, 2])

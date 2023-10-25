@@ -94,6 +94,16 @@ class TestVec3:
         with pytest.raises(TypeError):
             v1 + (1, 2)
     
+    def test_add_integer_left_side(self):
+        v = Vec3([1,2,3])
+        v = 1 + v
+
+        assert v.x == 2
+        assert v.y == 3
+        assert v.z == 4
+    
+
+
     def test_sub_number(self):
         v = Vec3([1, 2, 3])
         v = v - 1
@@ -131,6 +141,16 @@ class TestVec3:
         
         with pytest.raises(TypeError):
             v1 - (1, 2)
+    
+    def test_sub_integer_left_side(self):
+        v = Vec3([1,2,3])
+        v = 1 - v
+
+        assert v.x == 0
+        assert v.y == -1
+        assert v.z == -2
+    
+
     
     def test_mul_number(self):
         v = Vec3([1, 2, 3])
@@ -170,6 +190,16 @@ class TestVec3:
         with pytest.raises(TypeError):
             v1 * (1, 2)
     
+    def test_mul_integer_left_side(self):
+        v = Vec3([1,2,3])
+        v = 2 * v
+
+        assert v.x == 2
+        assert v.y == 4
+        assert v.z == 6
+    
+
+    
     def test_div_number(self):
         v = Vec3([2, 4, 6])
         v = v / 2
@@ -207,6 +237,16 @@ class TestVec3:
         
         with pytest.raises(TypeError):
             v1 / (1, 2)
+        
+    def test_div_integer_left_side(self):
+        v = Vec3([2,4,6])
+        v = 2 / v
+
+        assert v.x == 1
+        assert v.y == 0.5
+        assert v.z == 1/3
+    
+    
     
     def test_iadd_number(self):
         v = Vec3([1, 2, 3])
