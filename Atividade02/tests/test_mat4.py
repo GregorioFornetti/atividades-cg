@@ -274,7 +274,7 @@ class TestMat3:
         assert m[3,3] == 17
     
     def test_add_vec4_left_side(self):
-        v1 = Vec4([1, 2, 3, 4])
+        v1 = Vec4(1, 2, 3, 4)
         m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m = v1 + m2
 
@@ -295,7 +295,7 @@ class TestMat3:
         assert m[3,2] == 18
         assert m[3,3] == 20
     
-    
+
 
     def test_sub_number(self):
         m = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
@@ -440,7 +440,7 @@ class TestMat3:
         assert m[3,3] == -15
     
     def test_sub_vec4_left_side(self):
-        v1 = Vec4([1, 2, 3, 4])
+        v1 = Vec4(1, 2, 3, 4)
         m2 = Mat4(np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]))
         m = v1 - m2
 
