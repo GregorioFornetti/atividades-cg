@@ -120,6 +120,27 @@ class Vec:
         else:
             raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
     
+    def __radd__(self, other: Union['Vec', np.float64]) -> 'Vec':
+        '''
+        Soma elemento a elemento de dois vetores.
+        
+        Ou soma um número a cada elemento do vetor.
+
+        ---
+
+        Parâmetros:
+
+            - other: Union['Vec', np.float64] - Vetor ou número a ser somado.
+        
+        ---
+
+        Retorno:
+
+            - Vec - Resultado da soma.
+
+        '''
+        return self.__add__(other)
+    
     def __sub__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
         Subtrai elemento a elemento de dois vetores.
@@ -147,6 +168,27 @@ class Vec:
             return self.__class__(self.vec - other)
         else:
             raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+    
+    def __rsub__(self, other: Union['Vec', np.float64]) -> 'Vec':
+        '''
+        Subtrai elemento a elemento de dois vetores.
+        
+        Ou subtrai um número a cada elemento do vetor.
+
+        ---
+
+        Parâmetros:
+
+            - other: Union['Vec', np.float64] - Vetor ou número a ser usado para subtração.
+        
+        ---
+
+        Retorno:
+
+            - Vec - Resultado da subtração.
+
+        '''
+        return self.__sub__(other)
     
     def __mul__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -176,6 +218,27 @@ class Vec:
         else:
             raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
     
+    def __rmul__(self, other: Union['Vec', np.float64]) -> 'Vec':
+        '''
+        Multiplica elemento a elemento de dois vetores.
+        
+        Ou multiplica um número a cada elemento do vetor.
+
+        ---
+
+        Parâmetros:
+
+            - other: Union['Vec', np.float64] - Vetor ou número a ser usado para multiplicação.
+        
+        ---
+
+        Retorno:
+
+            - Vec - Resultado da multiplicação.
+
+        '''
+        return self.__mul__(other)
+    
     def __truediv__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
         Divide elemento a elemento de dois vetores.
@@ -203,6 +266,27 @@ class Vec:
             return self.__class__(self.vec / other)
         else:
             raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+    
+    def __rtruediv__(self, other: Union['Vec', np.float64]) -> 'Vec':
+        '''
+        Divide elemento a elemento de dois vetores.
+        
+        Ou divide um número a cada elemento do vetor.
+
+        ---
+
+        Parâmetros:
+
+            - other: Union['Vec', np.float64] - Vetor ou número a ser usado para divisão.
+        
+        ---
+
+        Retorno:
+
+            - Vec - Resultado da divisão.
+
+        '''
+        return self.__truediv__(other)
     
     def __iadd__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
