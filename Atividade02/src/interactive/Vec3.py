@@ -157,7 +157,7 @@ class Vec3(Vec):
         elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] + other, self.vec[1] + other, self.vec[2] + other)
         else:
-            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __radd__ do outro objeto, que pode estar implementado
 
     def __radd__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         return self.__add__(other)
@@ -199,7 +199,7 @@ class Vec3(Vec):
         elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] - other, self.vec[1] - other, self.vec[2] - other)
         else:
-            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rsub__ do outro objeto, que pode estar implementado
     
     def __rsub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         return self.__sub__(other)
@@ -240,7 +240,7 @@ class Vec3(Vec):
         elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] * other, self.vec[1] * other, self.vec[2] * other)
         else:
-            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rmul__ do outro objeto, que pode estar implementado
     
     def __rmul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         return self.__mul__(other)
@@ -281,7 +281,7 @@ class Vec3(Vec):
         elif isinstance(other, np.float64) or isinstance(other, float) or isinstance(other, int):
             return Vec3(self.vec[0] / other, self.vec[1] / other, self.vec[2] / other)
         else:
-            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rtruediv__ do outro objeto, que pode estar implementado
     
     def __rtruediv__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
         return self.__truediv__(other)
@@ -328,7 +328,7 @@ class Vec3(Vec):
             self.vec[1] += other
             self.vec[2] += other
         else:
-            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
         return self
     
     def __isub__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
@@ -373,7 +373,7 @@ class Vec3(Vec):
             self.vec[1] -= other
             self.vec[2] -= other
         else:
-            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
         return self
     
     def __imul__(self, other: Union['Vec3', np.float64]) -> 'Vec3':
@@ -418,7 +418,7 @@ class Vec3(Vec):
             self.vec[1] *= other
             self.vec[2] *= other
         else:
-            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
         
         return self
 
@@ -464,7 +464,7 @@ class Vec3(Vec):
             self.vec[1] /= other
             self.vec[2] /= other
         else:
-            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
         return self
     
     def __repr__(self) -> str:

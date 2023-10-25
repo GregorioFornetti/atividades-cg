@@ -128,7 +128,7 @@ class Mat:
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.matrix + other)
         else:
-            raise TypeError(f"Tipo inválido para soma, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __radd__ do outro objeto, que pode estar implementado
     
     def __radd__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         return self.__add__(other)
@@ -163,7 +163,7 @@ class Mat:
             # Subtraindo uma matriz e um número - cada elemento da matriz é subtraido com o número
             return self.__class__(self.matrix - other)
         else:
-            raise TypeError(f"Tipo inválido para subtração, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rsub__ do outro objeto, que pode estar implementado
     
     def __rsub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         return self.__sub__(other)
@@ -198,7 +198,7 @@ class Mat:
             # Multiplicando uma matriz e um número - cada elemento da matriz é multiplicado com o número
             return self.__class__(self.matrix * other)
         else:
-            raise TypeError(f"Tipo inválido para multiplicação, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rmul__ do outro objeto, que pode estar implementado
     
     def __rmul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         return self.__mul__(other)
@@ -233,7 +233,7 @@ class Mat:
             # Dividindo uma matriz e um número - cada elemento da matriz é dividido com o número
             return self.__class__(self.matrix / other)
         else:
-            raise TypeError(f"Tipo inválido para divisão, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rtruediv__ do outro objeto, que pode estar implementado
 
     def __rtruediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         return self.__truediv__(other)
@@ -272,7 +272,7 @@ class Mat:
             self.matrix += other
             return self
         else:
-            raise TypeError(f"Tipo inválido para soma, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
     
     def __isub__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -307,7 +307,7 @@ class Mat:
             self.matrix -= other
             return self
         else:
-            raise TypeError(f"Tipo inválido para subtração, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
     
     def __imul__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -342,7 +342,7 @@ class Mat:
             self.matrix *= other
             return self
         else:
-            raise TypeError(f"Tipo inválido para multiplicação, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
 
     def __itruediv__(self, other: Union['Mat', Vec, np.float64]) -> 'Mat':
         '''
@@ -377,7 +377,7 @@ class Mat:
             self.matrix /= other
             return self
         else:
-            raise TypeError(f"Tipo inválido para divisão, esperado: Mat, Vec, np.float64, recebido: {type(other)}")
+            return NotImplemented
     
     def __repr__(self) -> str:
         '''

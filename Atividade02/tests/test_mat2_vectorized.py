@@ -127,6 +127,27 @@ class TestMat2:
         with pytest.raises(TypeError):
             m1 + (1, 2)
     
+    def test_add_integer_left_side(self):
+        m = Mat2(np.array([[1, 2], [3, 4]]))
+        m = 1 + m
+
+        assert m[0,0] == 2
+        assert m[0,1] == 3
+        assert m[1,0] == 4
+        assert m[1,1] == 5
+
+    def test_add_vec2_left_side(self):
+        m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        v1 = Vec2([1, 2])
+        m = v1 + m1
+
+        assert m[0,0] == 2
+        assert m[0,1] == 4
+        assert m[1,0] == 4
+        assert m[1,1] == 6
+
+
+
     def test_sub_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
         m = m - 1
@@ -187,6 +208,27 @@ class TestMat2:
         
         with pytest.raises(TypeError):
             m1 - (1, 2)
+    
+    def test_sub_integer_left_side(self):
+        m = Mat2(np.array([[1, 2], [3, 4]]))
+        m = 1 - m
+
+        assert m[0,0] == 0
+        assert m[0,1] == -1
+        assert m[1,0] == -2
+        assert m[1,1] == -3
+    
+    def test_sub_vec2_left_side(self):
+        m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        v1 = Vec2([1, 2])
+        m = v1 - m1
+
+        assert m[0,0] == 0
+        assert m[0,1] == 0
+        assert m[1,0] == -2
+        assert m[1,1] == -2
+
+
     
     def test_mul_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
@@ -249,6 +291,27 @@ class TestMat2:
         with pytest.raises(TypeError):
             m1 * (1, 2)
     
+    def test_mul_integer_left_side(self):
+        m = Mat2(np.array([[1, 2], [3, 4]]))
+        m = 2 * m
+
+        assert m[0,0] == 2
+        assert m[0,1] == 4
+        assert m[1,0] == 6
+        assert m[1,1] == 8
+    
+    def test_mul_vec2_left_side(self):
+        m1 = Mat2(np.array([[1, 2], [3, 4]]))
+        v1 = Vec2([1, 2])
+        m = v1 * m1
+
+        assert m[0,0] == 1
+        assert m[0,1] == 4
+        assert m[1,0] == 3
+        assert m[1,1] == 8
+
+
+    
     def test_div_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
         m = m / 2
@@ -268,7 +331,6 @@ class TestMat2:
         assert m[1,0] == 3
         assert m[1,1] == 4
 
-    
     def test_div_negative_vec2(self):
         m1 = Mat2(np.array([[1, 2], [3, 4]]))
         v1 = Vec2([-1, -2])
@@ -310,6 +372,26 @@ class TestMat2:
         
         with pytest.raises(TypeError):
             m1 / (1, 2)
+    
+    def test_div_integer_left_side(self):
+        m = Mat2(np.array([[1, 2], [3, 4]]))
+        m = 2 / m
+
+        assert m[0,0] == 2
+        assert m[0,1] == 1
+        assert m[1,0] == 2/3
+        assert m[1,1] == 0.5
+    
+    def test_div_vec2_left_side(self):
+        m1 = Mat2(np.array([[4, 10], [12, 20]]))
+        v1 = Vec2([4, 5])
+        m = v1 / m1
+
+        assert m[0,0] == 1
+        assert m[0,1] == 0.5
+        assert m[1,0] == 1/4
+        assert m[1,1] == 0.25
+
     
     def test_iadd_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
@@ -372,6 +454,8 @@ class TestMat2:
         with pytest.raises(TypeError):
             m1 += (1, 2)
     
+
+    
     def test_isub_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
         m -= 1
@@ -432,6 +516,8 @@ class TestMat2:
         
         with pytest.raises(TypeError):
             m1 -= (1, 2)
+    
+
 
     def test_imul_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
@@ -494,6 +580,8 @@ class TestMat2:
         with pytest.raises(TypeError):
             m1 *= (1, 2)
     
+
+    
     def test_itruediv_number(self):
         m = Mat2(np.array([[1, 2], [3, 4]]))
         m /= 2.0
@@ -554,6 +642,8 @@ class TestMat2:
         
         with pytest.raises(TypeError):
             m1 /= (1, 2)
+    
+
     
     def test_dot(self):
         m1 = Mat2(np.array([[1, 2], [3, 4]]))

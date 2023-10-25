@@ -118,7 +118,7 @@ class Vec:
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec + other)
         else:
-            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __radd__ do outro objeto, que pode estar implementado
     
     def __radd__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -167,7 +167,7 @@ class Vec:
             # Subtraindo uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec - other)
         else:
-            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rsub__ do outro objeto, que pode estar implementado
     
     def __rsub__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -216,7 +216,7 @@ class Vec:
             # Multiplicando uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec * other)
         else:
-            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rmul__ do outro objeto, que pode estar implementado
     
     def __rmul__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -265,7 +265,7 @@ class Vec:
             # Dividindo uma matriz e um número - cada elemento da matriz é somado com o número
             return self.__class__(self.vec / other)
         else:
-            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented  # força a chamada do método __rtruediv__ do outro objeto, que pode estar implementado
     
     def __rtruediv__(self, other: Union['Vec', np.float64]) -> 'Vec':
         '''
@@ -314,7 +314,7 @@ class Vec:
             # Somando uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec += other
         else:
-            raise TypeError(f"Tipo inválido para soma, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented
         return self
 
     def __isub__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -343,7 +343,7 @@ class Vec:
             # Subtraindo uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec -= other
         else:
-            raise TypeError(f"Tipo inválido para subtração, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented
         return self
     
     def __imul__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -372,7 +372,7 @@ class Vec:
             # Multiplicando uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec *= other
         else:
-            raise TypeError(f"Tipo inválido para multiplicação, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented
         return self
     
     def __itruediv__(self, other: Union['Vec', np.float64]) -> 'Vec':
@@ -401,7 +401,7 @@ class Vec:
             # Dividindo uma matriz e um número - cada elemento da matriz é somado com o número
             self.vec /= other
         else:
-            raise TypeError(f"Tipo inválido para divisão, esperado: Vec, np.float64, float ou int, recebido: {type(other)}")
+            return NotImplemented
         return self
     
     def __repr__(self) -> str:
