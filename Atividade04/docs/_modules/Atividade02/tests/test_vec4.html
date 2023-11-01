@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atividade02.tests.test_vec4 &mdash; documentação CG </title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CG
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Pesquisar documentos" aria-label="Pesquisar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegação">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">atividades-cg</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Menu de navegação móvel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CG</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Navegação da página">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Código do módulo</a></li>
+      <li class="breadcrumb-item active">Atividade02.tests.test_vec4</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fonte para Atividade02.tests.test_vec4</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">Atividade02.src.interactive.Vec4</span> <span class="kn">import</span> <span class="n">Vec4</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="TestVec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4">[documentos]</a><span class="k">class</span> <span class="nc">TestVec4</span><span class="p">:</span>
+
+<div class="viewcode-block" id="TestVec4.test_init"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_init">[documentos]</a>    <span class="k">def</span> <span class="nf">test_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_init_excpetion"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_init_excpetion">[documentos]</a>    <span class="k">def</span> <span class="nf">test_init_excpetion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_xyz_atribuition"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_xyz_atribuition">[documentos]</a>    <span class="k">def</span> <span class="nf">test_xyz_atribuition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">0</span>
+
+        <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">4</span>
+        
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_negation"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_negation">[documentos]</a>    <span class="k">def</span> <span class="nf">test_negation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="n">v</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_getitem"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_getitem">[documentos]</a>    <span class="k">def</span> <span class="nf">test_getitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_add_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_add_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_add_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">5</span></div>
+
+<div class="viewcode-block" id="TestVec4.test_add_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_add_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_add_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">8</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">10</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">12</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_add_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_add_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_add_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_add_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_add_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_add_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">+</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_add_integer_left_side"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_add_integer_left_side">[documentos]</a>    <span class="k">def</span> <span class="nf">test_add_integer_left_side</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">v</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">5</span></div>
+    
+
+    
+<div class="viewcode-block" id="TestVec4.test_sub_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_sub_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_sub_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">3</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_sub_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_sub_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_sub_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">-</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_sub_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_sub_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_sub_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">-</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">8</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_sub_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_sub_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_sub_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">-</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">-</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_sub_integer_left_side"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_sub_integer_left_side">[documentos]</a>    <span class="k">def</span> <span class="nf">test_sub_integer_left_side</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">v</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span></div>
+    
+
+    
+<div class="viewcode-block" id="TestVec4.test_mul_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_mul_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_mul_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">8</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_mul_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_mul_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_mul_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">*</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">5</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">12</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">21</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">32</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_mul_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_mul_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_mul_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">*</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">9</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">16</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_mul_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_mul_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_mul_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">*</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_mul_integer_left_side"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_mul_integer_left_side">[documentos]</a>    <span class="k">def</span> <span class="nf">test_mul_integer_left_side</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">8</span></div>
+    
+
+    
+<div class="viewcode-block" id="TestVec4.test_div_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_div_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_div_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_div_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_div_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_div_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">/</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_div_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_div_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_div_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">/</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_div_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_div_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_div_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">/</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">/</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_div_integer_left_side"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_div_integer_left_side">[documentos]</a>    <span class="k">def</span> <span class="nf">test_div_integer_left_side</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">v</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">4</span></div>
+    
+
+    
+<div class="viewcode-block" id="TestVec4.test_iadd_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_iadd_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_iadd_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">5</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_iadd_Vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_iadd_Vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_iadd_Vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">+=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">8</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">10</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">12</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_iadd_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_iadd_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_iadd_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">+=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_iadd_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_iadd_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_iadd_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">+=</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_isub_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_isub_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_isub_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">3</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_isub_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_isub_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_isub_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">-=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_isub_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_isub_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_isub_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">-=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">8</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_isub_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_isub_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_isub_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">-=</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">-=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">-=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_imul_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_imul_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_imul_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">*=</span> <span class="mi">2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">8</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_imul_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_imul_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_imul_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">*=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">5</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">12</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">21</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">32</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_imul_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_imul_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_imul_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">*=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">9</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">16</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_imul_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_imul_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_imul_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">*=</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">*=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_itruediv_number"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_itruediv_number">[documentos]</a>    <span class="k">def</span> <span class="nf">test_itruediv_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">/=</span> <span class="mi">2</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_itruediv_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_itruediv_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_itruediv_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">/=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="mi">4</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_itruediv_negative_vec4"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_itruediv_negative_vec4">[documentos]</a>    <span class="k">def</span> <span class="nf">test_itruediv_negative_vec4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">/=</span> <span class="n">v2</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">w</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_itruediv_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_itruediv_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_itruediv_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">/=</span> <span class="s2">&quot;1&quot;</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">/=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span> <span class="o">/=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_length"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_length">[documentos]</a>    <span class="k">def</span> <span class="nf">test_length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">length</span><span class="p">()</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_squared_length"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_squared_length">[documentos]</a>    <span class="k">def</span> <span class="nf">test_squared_length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">squared_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_dot"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_dot">[documentos]</a>    <span class="k">def</span> <span class="nf">test_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">8</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_dot_exception"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_dot_exception">[documentos]</a>    <span class="k">def</span> <span class="nf">test_dot_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></div>
+    
+<div class="viewcode-block" id="TestVec4.test_unit_vector"><a class="viewcode-back" href="../../../Atividade02.tests.html#Atividade02.tests.test_vec4.TestVec4.test_unit_vector">[documentos]</a>    <span class="k">def</span> <span class="nf">test_unit_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Vec4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">unit_vector</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="n">z</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Gregório Fornetti Azevedo.</p>
+  </div>
+
+  Compilado com <a href="https://www.sphinx-doc.org/">Sphinx</a> usando um
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    fornecido por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

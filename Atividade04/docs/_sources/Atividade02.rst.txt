@@ -1,0 +1,19 @@
+Atividade02 package
+===================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   Atividade02.src
+   Atividade02.tests
+
+Module contents
+---------------
+
+.. automodule:: Atividade02
+   :members:
+   :undoc-members:
+   :show-inheritance:
