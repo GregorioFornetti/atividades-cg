@@ -1,6 +1,6 @@
 
 from Atividade02.src.vectorized.Vec3 import Vec3
-from Atividade03.src.Triangle import Triangle
+from Atividade04.src.classes.Triangle import Triangle
 from Atividade03.src.TriangleFaceIndexes import TriangleFaceIndexes
 import numpy as np
 

@@ -23,6 +23,7 @@ class Camera:
 
         self.viewport_height = 2.0
         self.viewport_width = self.viewport_height * (self.image_width / self.image_height)
+        print(self.viewport_width, self.viewport_height)
         self.focal_length = 1.0
         self.camera_center = Point3([0, 0, 0])
 

@@ -2,6 +2,8 @@
 from Atividade02.src.vectorized.Vec3 import Vec3
 import numpy as np
 
+# OBS: existe uma implementação mais completa de triângulo na Atividade04, já sendo um objeto colisível.
+
 class Triangle:
 
     def __init__(self, vertex_1: Vec3, vertex_2: Vec3, vertex_3: Vec3):
