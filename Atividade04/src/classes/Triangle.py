@@ -10,6 +10,19 @@ import numpy as np
 class Triangle(Hittable):
 
     def __init__(self, vertex_1: Point3, vertex_2: Point3, vertex_3: Point3):
+        '''
+        Construtor de um triângulo.
+
+        ---
+
+        Parâmetros:
+
+            - vertex_1: Point3 - Primeiro vértice do triângulo.
+
+            - vertex_2: Point3 - Segundo vértice do triângulo.
+
+            - vertex_3: Point3 - Terceiro vértice do triângulo.
+        '''
         self.__vertexes = np.array([vertex_1, vertex_2, vertex_3])
     
     @property
@@ -21,14 +34,23 @@ class Triangle(Hittable):
     
     @property
     def vertex_1(self) -> Point3:
+        '''
+        Retorna o primeiro vértice do triângulo.
+        '''
         return self.__vertexes[0]
     
     @property
     def vertex_2(self) -> Point3:
+        '''
+        Retorna o segundo vértice do triângulo.
+        '''
         return self.__vertexes[1]
     
     @property
     def vertex_3(self) -> Point3:
+        '''
+        Retorna o terceiro vértice do triângulo.
+        '''
         return self.__vertexes[2]
     
     def __getitem__(self, index) -> Point3:
@@ -40,6 +62,23 @@ class Triangle(Hittable):
         return self.__vertexes[index]
 
     def hit(self, ray: Ray, t_interval: Interval) -> "tuple[bool, HitRecord]":
+        '''
+        Verifica se um raio atinge a triângulo.
+
+        ---
+
+        Parâmetros:
+
+            - ray: Ray - Raio a ser verificado.
+
+            - t_interval: Interval - Intervalo de t em que o raio pode atingir a triângulo.
+        
+        ---
+
+        Retorno:
+
+            - tuple[bool, HitRecord] - Tupla contendo um booleano que indica se o raio atingiu a triângulo e um registro de acerto (hit record) com informações sobre o acerto. Caso o raio não atinja a triângulo, o registro de acerto é None.
+        '''
         # Descobrindo o vetor normal
         v1_to_v2 = self.vertex_2 - self.vertex_1
         v1_to_v3 = self.vertex_3 - self.vertex_1

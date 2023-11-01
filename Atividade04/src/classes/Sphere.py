@@ -11,18 +11,52 @@ import numpy as np
 class Sphere(Hittable):
 
     def __init__(self, center: Point3, radius: float):
+        '''
+        Construtor de uma esfera.
+        
+        ---
+
+        Parâmetros:
+
+            - center: Point3 - Centro da esfera.
+
+            - radius: float - Raio da esfera.
+        '''
         self.__center = center
         self.__radius = radius
     
     @property
     def center(self):
+        '''
+        Centro da esfera.
+        '''
         return self.__center
     
     @property
     def radius(self):
+        '''
+        Raio da esfera.
+        '''
         return self.__radius
 
     def hit(self, ray: Ray, t_interval: Interval) -> "tuple[bool, HitRecord]":
+        '''
+        Verifica se um raio atinge a esfera.
+
+        ---
+
+        Parâmetros:
+
+            - ray: Ray - Raio a ser verificado.
+
+            - t_interval: Interval - Intervalo de t em que o raio pode atingir a esfera.
+        
+        ---
+
+        Retorno:
+
+            - tuple[bool, HitRecord] - Tupla contendo um booleano que indica se o raio atingiu a esfera e um registro de acerto (hit record) com informações sobre o acerto. Caso o raio não atinja a esfera, o registro de acerto é None.
+        '''
         oc = ray.origin - self.center
         a = ray.direction.squared_length()
         half_b = oc.dot(ray.direction)

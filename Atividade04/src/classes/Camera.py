@@ -9,11 +9,17 @@ from Atividade04.src.constants import infinity
 
 from IPython.display import display
 from tqdm import tqdm
+from typing import Optional
 
 
 class Camera:
 
     def initialize(self):
+        '''
+        Inicializa a câmera, calculando e configurando variáveis necessárias para o cálculo da cor de cada pixel.
+
+        Esta função está sendo chamada no início do método render automaticamente, não é necessário chamá-la manualmente.
+        '''
         self.aspect_ratio = 16.0 / 9.0
         self.image_width = 400
 
@@ -23,7 +29,6 @@ class Camera:
 
         self.viewport_height = 2.0
         self.viewport_width = self.viewport_height * (self.image_width / self.image_height)
-        print(self.viewport_width, self.viewport_height)
         self.focal_length = 1.0
         self.camera_center = Point3([0, 0, 0])
 
@@ -41,6 +46,23 @@ class Camera:
         # Precisa adicionar 0,5 da distancia de separação dos pixels. O canto esquerdo do viewport não é o mesmo que o ponto 0,0 da imagem. O viewport precisa ter uma borda de 0,5 espaçamento de pixel para cada lado.
 
     def ray_color(self, ray: Ray, world: HittableList) -> Color:
+        '''
+        Calcula a cor de um pixel, dado um raio e uma lista de objetos que podem ser atingidos por um raio.
+
+        ---
+
+        Parâmetros:
+
+            - ray: Ray - Raio a ser verificado.
+
+            - world: HittableList - Lista de objetos que podem ser atingidos por um raio.
+        
+        ---
+
+        Retorno:
+
+            - Color - Cor do pixel.
+        '''
         hit, rec = world.hit(ray, Interval(0, infinity))
         if hit:
             return Color((0.5 * (rec.normal + Color([1, 1, 1]))).vec)
@@ -49,7 +71,24 @@ class Camera:
         t = 0.5 * (unit_direction.y + 1.0)
         return (1.0 - t) * Color([1.0, 1.0, 1.0]) + t * Color([0.5, 0.7, 1.0])
     
-    def render(self, world: HittableList, filename: str) -> Image:
+    def render(self, world: HittableList, filename: Optional[str] = None) -> Image:
+        '''
+        Renderiza a cena, gerando uma imagem.
+
+        ---
+
+        Parâmetros:
+
+            - world: HittableList - Lista de objetos que podem ser atingidos por um raio.
+
+            - filename: Optional[str] - Nome do arquivo de imagem a ser gerado. Caso não seja fornecido, a imagem não será salva e nem exibida.
+        
+        ---
+
+        Retorno:
+
+            - Image - Imagem gerada.
+        '''
         self.initialize()
 
         image = Image(self.image_width, self.image_height)
@@ -62,8 +101,9 @@ class Camera:
                 pixel_color = self.ray_color(ray, world)
                 image[j, i] = pixel_color
 
-        img_writer = ImageWriter(image)
-        img_writer.save(filename)
-        display(img_writer.image)
+        if filename is not None:
+            img_writer = ImageWriter(image)
+            img_writer.save(filename)
+            display(img_writer.image)
         
         return image
