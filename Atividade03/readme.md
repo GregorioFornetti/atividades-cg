@@ -9,8 +9,6 @@
 
 Criar classes para representar e ler objetos 3D.
 
-Descrição original da atividade:
-
 1- Criar um repositório individual no github e enviar o endereço como comentário da atividade
 
 2- Observar o formato obj, utilize algum repositório com modelos abertos, por exemplo: https://free3d.com/

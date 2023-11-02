@@ -9,8 +9,6 @@
 
 Criar classes para representar vetores e matrizes
 
-Descrição original da atividade:
-
 1- Seguir o "tutorial" até a seção 3
 
 2- Criar uma classe própria para manipular vetores e matrizes, expanda para vec2, vec4, mat2, mat3 e mat4

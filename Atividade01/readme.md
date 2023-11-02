@@ -9,8 +9,6 @@
 
 Criar classes para Input e Output de imagens.
 
-Descrição original da atividade:
-
 1- Seguir o "tutorial" até a seção 2
 
 2- Criar uma classe própria para salvar imagens, utilize bibliotecas como libpng, CImg e ImageMagick
