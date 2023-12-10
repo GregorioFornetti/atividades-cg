@@ -495,6 +495,77 @@ class Vec3(Vec):
             - Vec3 - Vetor unitário.
         '''
         return super().unit_vector()
+    
+    # Não entendi o motivo de ficar sorteando várias vezes, pq não só sortear um e depois fazer o unitário (e talvez dividir ?)
+    # Talvez seja para não enviesar a probalidade (aumentando a probabilidade) de sair um vetor unitário em direção a um
+    # do cantos do cubo, já que a probabilidade disso acontecer é maior.
+    @staticmethod
+    def random_in_unit_sphere() -> 'Vec3':
+        '''
+        Retorna um vetor aleatório dentro da esfera unitária.
+
+        Exemplo:
+
+        >>> print(Vec3.random_in_unit_sphere())
+        0.73 0.71 0.60
+
+        ---
+
+        Retorno:
+
+            - Vec3 - Vetor aleatório dentro da esfera unitária.
+        '''
+        while True:
+            p = Vec3.random_range(-1, 1)
+            if p.squared_length() >= 1:
+                continue
+            return p
+
+    @staticmethod
+    def random_unit_vector() -> 'Vec3':
+        '''
+        Retorna um vetor aleatório unitário.
+
+        Exemplo:
+
+        >>> print(Vec3.random_unit_vector())
+        0.73 0.71 0.60
+
+        ---
+
+        Retorno:
+
+            - Vec3 - Vetor aleatório unitário.
+        '''
+        return Vec3.random_in_unit_sphere().unit_vector()
+    
+    @staticmethod
+    def random_on_hemisphere(normal: 'Vec3') -> 'Vec3':
+        '''
+        Retorna um vetor aleatório na hemisfério do vetor normal.
+
+        Exemplo:
+
+        >>> print(Vec3.random_on_hemisphere(Vec3([0, 1, 0])))
+        0.73 0.71 0.60
+
+        ---
+
+        Parâmetros:
+
+            - normal: 'Vec3' - Vetor normal.
+        
+        ---
+
+        Retorno:
+
+            - Vec3 - Vetor aleatório na hemisfério do vetor normal.
+        '''
+        in_unit_sphere = Vec3.random_in_unit_sphere()
+        if in_unit_sphere.dot(normal) > 0.0:
+            return in_unit_sphere
+        else:
+            return -in_unit_sphere
 
 Point3 = Vec3
 

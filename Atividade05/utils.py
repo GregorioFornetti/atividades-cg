@@ -34,3 +34,22 @@ def random_double():
         - float - Número aleatório entre 0 e 1.
     '''
     return random.random()
+
+def random_double_range(min: float, max: float):
+    '''
+    Gera um número aleatório entre min e max.
+
+    ---
+
+    Parâmetros:
+
+        - min: float - Valor mínimo.
+        - max: float - Valor máximo.
+    
+    ---
+
+    Retorno:
+
+        - float - Número aleatório entre min e max.
+    '''
+    return min + (max - min) * random_double()
