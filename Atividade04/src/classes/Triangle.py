@@ -167,3 +167,29 @@ class Triangle(Hittable):
             normal = self.normal_1 / distance_edge_1_to_intersect_point + self.normal_2 / distance_edge_2_to_intersect_point + self.normal_3 / distance_edge_3_to_intersect_point
             normal = normal.unit_vector()
             return True, HitRecord(intersect_point, normal, t, ray)
+    
+    def scale(self, factor: float):
+        '''
+        Escala o triângulo.
+
+        ---
+
+        Parâmetros:
+
+            - factor: float - Fator de escala.
+        '''
+        for i in range(len(self.__vertexes)):
+            self.__vertexes[i] *= factor
+    
+    def translate(self, offset: Vec3):
+        '''
+        Translada o triângulo.
+
+        ---
+
+        Parâmetros:
+
+            - offset: Vec3 - Vetor de translação.
+        '''
+        for i in range(len(self.__vertexes)):
+            self.__vertexes[i] += offset

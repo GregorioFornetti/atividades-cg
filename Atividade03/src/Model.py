@@ -108,6 +108,50 @@ class Model:
                     except Exception as e:
                         raise ValueError(f'Erro ao criar face com os índices especificados (algum índice de vértice é maior que o número de vértices). O erro ocorreu na linha {line_num + 1}:\n{line}') from e
     
+        x_min = None
+        x_max = None
+        y_min = None
+        y_max = None
+        z_min = None
+        z_max = None
+        x_mean = 0
+        y_mean = 0
+        z_mean = 0
+
+        for vertex in self.__vertexes:
+            if x_min is None or vertex.x < x_min:
+                x_min = vertex.x
+            if x_max is None or vertex.x > x_max:
+                x_max = vertex.x
+            
+            if y_min is None or vertex.y < y_min:
+                y_min = vertex.y
+            if y_max is None or vertex.y > y_max:
+                y_max = vertex.y
+            
+            if z_min is None or vertex.z < z_min:
+                z_min = vertex.z
+            if z_max is None or vertex.z > z_max:
+                z_max = vertex.z
+            
+            x_mean += vertex.x
+            y_mean += vertex.y
+            z_mean += vertex.z
+
+        x_mean /= len(self.__vertexes)
+        y_mean /= len(self.__vertexes)
+        z_mean /= len(self.__vertexes)
+        mass_center = Vec3([x_mean, y_mean, z_mean])
+
+        # Delta x, y, z para fazer possivel futura escala do modelo
+        delta_x = x_max - x_min
+        delta_y = y_max - y_min
+        delta_z = z_max - z_min
+
+        # Posicionando o modelo no centro do mundo (0, 0, 0)
+        self.translate(-mass_center)
+        
+
     @property
     def vertexes(self):
         '''
@@ -148,3 +192,29 @@ class Model:
             - list[TriangleFaceIndexes] - Lista de índices das faces do modelo.
         '''
         return self.__faces_indexes
+
+    def scale(self, scale_factor: float):
+        '''
+        Escala o modelo.
+
+        ---
+
+        Parâmetros:
+
+            - scale_factor: float - Fator de escala.
+        '''
+        for vertex in self.__vertexes:
+            vertex *= scale_factor
+    
+    def translate(self, translation_vector: Vec3):
+        '''
+        Translada o modelo.
+
+        ---
+
+        Parâmetros:
+
+            - translation_vector: Vec3 - Vetor de translação.
+        '''
+        for vertex in self.__vertexes:
+            vertex += translation_vector

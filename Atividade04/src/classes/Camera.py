@@ -10,7 +10,6 @@ from Atividade04.src.utils import random_double
 
 from IPython.display import display
 from tqdm import tqdm
-from typing import Optional
 
 
 from math import sqrt
@@ -88,7 +87,6 @@ class Camera:
         image = Image(self.image_width, self.image_height)
         for j in tqdm(range(self.image_height)):
             for i in range(self.image_width):
-                # MUDOU AQUI
                 pixel_color = Color([0, 0, 0])
                 for _ in range(self.samples_per_pixel):
                     ray = self.get_ray(i, j)
@@ -101,14 +99,12 @@ class Camera:
         
         return image
 
-    # NOVO MÉTODO
     def get_ray(self, i: int, j: int) -> Ray:
         pixel_center = self.pixel00_loc + (i * self.pixel_delta_u) + (j * self.pixel_delta_v)
         pixel_sample = pixel_center + self.pixel_sample_square()
         
         return Ray(self.camera_center, pixel_sample - self.camera_center)
 
-    #NOVO MÉTODO
     def pixel_sample_square(self) -> Vec3:
         px = -0.5 + random_double()
         py = -0.5 + random_double()
