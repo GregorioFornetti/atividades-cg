@@ -3,6 +3,7 @@ from Atividade02.src.vectorized.Vec3 import Vec3
 from Atividade04.src.classes.Triangle import Triangle
 from Atividade03.src.TriangleFaceIndexes import TriangleFaceIndexes
 import numpy as np
+import re
 
 class Model:
 
@@ -23,6 +24,7 @@ class Model:
             - file_path: str - Caminho do arquivo .obj a ser lido.
         '''
         self.__vertexes: list[Vec3] = []
+        self.__normals: list[Vec3] = []
         self.__faces: list[Triangle] = []
         self.__faces_indexes: list[TriangleFaceIndexes] = []
 
@@ -40,7 +42,16 @@ class Model:
                         self.__vertexes.append(Vec3(current_vertex_coordinates[:-1]))  # A ultima coordenada é ignorada
                     else:
                         raise ValueError(f'Modelo com número de coordenadas inválido para um vértice: {len(current_vertex_coordinates)}. Deve ser apenas 3 ou 4.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
-                
+                elif line.startswith('vn '):
+                    # Lendo novas normais
+
+                    line_values_str = line.replace('vn ', '')
+                    current_normal_coordinates = [float(coordinate) for coordinate in line_values_str.split()]
+
+                    if len(current_normal_coordinates) != 3:
+                        raise ValueError(f'Modelo com número de coordenadas inválido para uma normal: {len(current_normal_coordinates)}. Deve ser apenas 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
+                    
+                    self.__normals.append(Vec3(current_normal_coordinates))
                 elif line.startswith('f '):
                     # Lendo novas faces
 
@@ -56,24 +67,33 @@ class Model:
 
                     for face_str in current_faces_str:
                         current_face_index = [int(index) - 1 if index != '' else None for index in face_str.split('/')]
-
-                        if len(current_face_index) == 1:
+                        have_normals = False
+                        
+                        if re.search(r'^\d+$', face_str):
                             # Apenas os índices dos vértices foram especificados
                             vertexes_indexes.append(current_face_index[0])
                             textures_indexes.append(None)
                             normals_indexes.append(None)
                         
-                        elif len(current_face_index) == 2:
+                        elif re.search(r'^\d+/\d+$', face_str):
                             # Os índices dos vértices e das texturas foram especificados
                             vertexes_indexes.append(current_face_index[0])
                             textures_indexes.append(current_face_index[1])
                             normals_indexes.append(None)
+
+                        elif re.search(r'^\d+//\d+$', face_str):
+                            # Os índices dos vértices e das normais foram especificados
+                            vertexes_indexes.append(current_face_index[0])
+                            textures_indexes.append(None)
+                            normals_indexes.append(current_face_index[2])
+                            have_normals = True
                         
-                        elif len(current_face_index) == 3:
-                            # Os índices dos vértices, das texturas (talvez não, mas já vai estar None) e das normais foram especificados
+                        elif re.search(r'^\d+/\d+/\d+$', face_str):
+                            # Os índices dos vértices, das texturas e das normais foram especificados
                             vertexes_indexes.append(current_face_index[0])
                             textures_indexes.append(current_face_index[1])
                             normals_indexes.append(current_face_index[2])
+                            have_normals = True
 
                         else:
                             raise ValueError(f'Modelo com número de índices inválido para uma face: {len(current_face_index)}. Deve ser apenas 1, 2 ou 3.\nO erro ocorreu na linha {line_num + 1}:\n{line}')
@@ -81,7 +101,10 @@ class Model:
                     current_face_indexes = TriangleFaceIndexes(vertexes_indexes, textures_indexes, normals_indexes)
                     self.__faces_indexes.append(TriangleFaceIndexes(vertexes_indexes, textures_indexes, normals_indexes))
                     try:
-                        self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0][0]], self.__vertexes[current_face_indexes[0][1]], self.__vertexes[current_face_indexes[0][2]]))
+                        normals = None
+                        if have_normals:
+                            normals = [self.__normals[index] for index in current_face_indexes[2]]
+                        self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0][0]], self.__vertexes[current_face_indexes[0][1]], self.__vertexes[current_face_indexes[0][2]], normals=normals))
                     except Exception as e:
                         raise ValueError(f'Erro ao criar face com os índices especificados (algum índice de vértice é maior que o número de vértices). O erro ocorreu na linha {line_num + 1}:\n{line}') from e
     

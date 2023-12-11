@@ -1,15 +1,18 @@
 
-from Atividade02.src.vectorized.Vec3 import Point3
+from typing import Union
+
+from Atividade02.src.vectorized.Vec3 import Point3, Vec3
 from Atividade04.src.classes.Hittable import Hittable
 from Atividade04.src.classes.Ray import Ray
 from Atividade04.src.classes.HitRecord import HitRecord
 from Atividade04.src.classes.Interval import Interval
+
 import numpy as np
 
 
 class Triangle(Hittable):
 
-    def __init__(self, vertex_1: Point3, vertex_2: Point3, vertex_3: Point3):
+    def __init__(self, vertex_1: Point3, vertex_2: Point3, vertex_3: Point3, normals: 'list[Point3, Point3, Point3]' = None):
         '''
         Construtor de um triângulo.
 
@@ -22,8 +25,17 @@ class Triangle(Hittable):
             - vertex_2: Point3 - Segundo vértice do triângulo.
 
             - vertex_3: Point3 - Terceiro vértice do triângulo.
+
+            - normals: tuple[Point3, Point3, Point3] - Tupla contendo as normais de cada vértice do triângulo. Caso não seja especificado, as normais serão calculadas automaticamente.
         '''
         self.__vertexes = np.array([vertex_1, vertex_2, vertex_3])
+        
+        if normals is not None:
+            for i in range(len(normals)):
+                normals[i] = normals[i].unit_vector()
+            self.__normals = np.array(normals)
+        else:
+            self.__normals = None
     
     @property
     def vertexes(self) -> np.ndarray:
@@ -52,6 +64,34 @@ class Triangle(Hittable):
         Retorna o terceiro vértice do triângulo.
         '''
         return self.__vertexes[2]
+    
+    @property
+    def normals(self) -> Union[np.ndarray, None]:
+        '''
+        Retorna um array contendo as normais de cada vértice do triângulo.
+        '''
+        return self.__normals
+    
+    @property
+    def normal_1(self) -> Union[Point3, None]:
+        '''
+        Retorna a normal do primeiro vértice do triângulo.
+        '''
+        return self.__normals[0] if self.__normals is not None else None
+    
+    @property
+    def normal_2(self) -> Union[Point3, None]:
+        '''
+        Retorna a normal do segundo vértice do triângulo.
+        '''
+        return self.__normals[1] if self.__normals is not None else None
+    
+    @property
+    def normal_3(self) -> Union[Point3, None]:
+        '''
+        Retorna a normal do terceiro vértice do triângulo.
+        '''
+        return self.__normals[2] if self.__normals is not None else None
     
     def __getitem__(self, index) -> Point3:
         '''
@@ -118,4 +158,12 @@ class Triangle(Hittable):
         if normal.dot(c) < 0:
             return False, None
         
-        return True, HitRecord(intersect_point, normal, t, ray)
+        if self.__normals is None:
+            return True, HitRecord(intersect_point, normal, t, ray)
+        else:
+            distance_edge_1_to_intersect_point = (intersect_point - self.vertex_1).squared_length()
+            distance_edge_2_to_intersect_point = (intersect_point - self.vertex_2).squared_length()
+            distance_edge_3_to_intersect_point = (intersect_point - self.vertex_3).squared_length()
+            normal = self.normal_1 / distance_edge_1_to_intersect_point + self.normal_2 / distance_edge_2_to_intersect_point + self.normal_3 / distance_edge_3_to_intersect_point
+            normal = normal.unit_vector()
+            return True, HitRecord(intersect_point, normal, t, ray)
