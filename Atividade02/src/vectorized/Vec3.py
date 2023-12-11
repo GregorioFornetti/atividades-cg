@@ -2,6 +2,7 @@
 from typing import Union
 import numpy as np
 from Atividade02.src.vectorized.Vec import Vec
+from Atividade04.src.utils import random_double_range
 
 
 class Vec3(Vec):
@@ -495,6 +496,31 @@ class Vec3(Vec):
             - Vec3 - Vetor unitário.
         '''
         return super().unit_vector()
+
+    @staticmethod
+    def random_range(min: float, max: float) -> 'Vec3':
+        '''
+        Retorna um vetor com coordenadas aleatórias entre min e max.
+
+        Exemplo:
+
+        >>> print(Vec3.random_range(0, 10))
+        7.73 1.71 6.60
+
+        ---
+
+        Parâmetros:
+
+            - min: float - Valor mínimo das coordenadas.
+            - max: float - Valor máximo das coordenadas.
+        
+        ---
+
+        Retorno:
+
+            - Vec3 - Vetor com coordenadas aleatórias.
+        '''
+        return Vec3([random_double_range(min, max), random_double_range(min, max), random_double_range(min, max)])
     
     # Não entendi o motivo de ficar sorteando várias vezes, pq não só sortear um e depois fazer o unitário (e talvez dividir ?)
     # Talvez seja para não enviesar a probalidade (aumentando a probabilidade) de sair um vetor unitário em direção a um
