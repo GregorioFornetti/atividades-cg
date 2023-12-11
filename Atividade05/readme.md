@@ -15,3 +15,5 @@
 4- Documente adequadamente
 
 ## Execução da atividade
+
+OBS: Muitas das tarefas pedidas no exercício dependem de outras implementações (das outras atividades). Muito do código dessa atividade está distribuido em mudanças das outras atividades, mas os resultados dessas mudanças podem ser todos consultados aqui, nos notebooks.

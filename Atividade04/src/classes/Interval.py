@@ -92,3 +92,40 @@ class Interval:
             - bool - True se o valor está dentro do intervalo, False caso contrário.
         '''
         return self.min <= value <= self.max
+    
+    def clamp(self, value: float):
+        '''
+        Retorna o valor se ele estiver dentro do intervalo, ou o valor mínimo ou máximo caso contrário.
+
+        Exemplo:
+
+        >>> interval = Interval(0, 10)
+        >>> interval.clamp(5)
+        5
+
+        >>> interval.clamp(15)
+        10
+
+        >>> interval.clamp(-1)
+        0
+
+        >>> interval.clamp(0)
+        0
+
+        ---
+
+        Parâmetros:
+            
+                - value: float - Valor a ser verificado.
+
+        ---
+
+        Retorno:
+
+            - float - O valor se ele estiver dentro do intervalo, ou o valor mínimo ou máximo caso contrário.
+        '''
+        if value < self.min:
+            return self.min
+        if value > self.max:
+            return self.max
+        return value

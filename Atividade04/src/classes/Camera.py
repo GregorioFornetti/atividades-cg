@@ -6,22 +6,46 @@ from Atividade04.src.classes.HittableList import HittableList
 from Atividade04.src.classes.Ray import Ray
 from Atividade04.src.classes.Interval import Interval
 from Atividade04.src.constants import infinity
+from Atividade04.src.utils import random_double
 
 from IPython.display import display
 from tqdm import tqdm
 from typing import Optional
 
 
+from math import sqrt
+
+def linear_to_gamma(linear_component: float) -> float:
+    return sqrt(linear_component)
+
+def transform_color(pixel_color: Color, samples_per_pixel: int) -> Color:
+    r = pixel_color.x
+    g = pixel_color.y
+    b = pixel_color.z
+
+    scale = 1.0 / samples_per_pixel
+    r *= scale
+    g *= scale
+    b *= scale
+
+    r = linear_to_gamma(r)
+    g = linear_to_gamma(g)
+    b = linear_to_gamma(b)
+
+    intensity = Interval(0.000, 0.999)
+
+    return Color([intensity.clamp(r), intensity.clamp(g), intensity.clamp(b)])
+
+
 class Camera:
 
-    def initialize(self):
-        '''
-        Inicializa a câmera, calculando e configurando variáveis necessárias para o cálculo da cor de cada pixel.
+    def __init__(self, image_width: int = 400, samples_per_pixel: int = 100, max_depth: int = 10):
+        self.image_width = image_width
+        self.samples_per_pixel = samples_per_pixel
+        self.max_depth = max_depth
 
-        Esta função está sendo chamada no início do método render automaticamente, não é necessário chamá-la manualmente.
-        '''
+    def initialize(self):
         self.aspect_ratio = 16.0 / 9.0
-        self.image_width = 400
 
         self.image_height = int(self.image_width / self.aspect_ratio)
         if self.image_height < 1:
@@ -45,65 +69,47 @@ class Camera:
         self.pixel00_loc = self.viewport_upper_left + 0.5 * (self.pixel_delta_u + self.pixel_delta_v)
         # Precisa adicionar 0,5 da distancia de separação dos pixels. O canto esquerdo do viewport não é o mesmo que o ponto 0,0 da imagem. O viewport precisa ter uma borda de 0,5 espaçamento de pixel para cada lado.
 
-    def ray_color(self, ray: Ray, world: HittableList) -> Color:
-        '''
-        Calcula a cor de um pixel, dado um raio e uma lista de objetos que podem ser atingidos por um raio.
+    def ray_color(self, ray: Ray, depth: int, world: HittableList) -> Color:
+        if depth <= 0:
+            return Color([0, 0, 0])
 
-        ---
-
-        Parâmetros:
-
-            - ray: Ray - Raio a ser verificado.
-
-            - world: HittableList - Lista de objetos que podem ser atingidos por um raio.
-        
-        ---
-
-        Retorno:
-
-            - Color - Cor do pixel.
-        '''
-        hit, rec = world.hit(ray, Interval(0, infinity))
+        hit, rec = world.hit(ray, Interval(0.001, infinity))
         if hit:
-            return Color((0.5 * (rec.normal + Color([1, 1, 1]))).vec)
+            direction = rec.normal + Vec3.random_unit_vector()
+            return 0.5 * self.ray_color(Ray(rec.p, direction), depth - 1, world)
         
         unit_direction = ray.direction.unit_vector()
         t = 0.5 * (unit_direction.y + 1.0)
         return (1.0 - t) * Color([1.0, 1.0, 1.0]) + t * Color([0.5, 0.7, 1.0])
     
-    def render(self, world: HittableList, filename: Optional[str] = None) -> Image:
-        '''
-        Renderiza a cena, gerando uma imagem.
-
-        ---
-
-        Parâmetros:
-
-            - world: HittableList - Lista de objetos que podem ser atingidos por um raio.
-
-            - filename: Optional[str] - Nome do arquivo de imagem a ser gerado. Caso não seja fornecido, a imagem não será salva e nem exibida.
-        
-        ---
-
-        Retorno:
-
-            - Image - Imagem gerada.
-        '''
+    def render(self, world: HittableList, filename: str) -> Image:
         self.initialize()
 
         image = Image(self.image_width, self.image_height)
         for j in tqdm(range(self.image_height)):
             for i in range(self.image_width):
-                self.pixel_center = self.pixel00_loc + (i * self.pixel_delta_u) + (j * self.pixel_delta_v)
-                self.ray_direction = self.pixel_center - self.camera_center
-                ray = Ray(self.camera_center, self.ray_direction)
+                # MUDOU AQUI
+                pixel_color = Color([0, 0, 0])
+                for _ in range(self.samples_per_pixel):
+                    ray = self.get_ray(i, j)
+                    pixel_color += self.ray_color(ray, self.max_depth, world)
+                image[j, i] = transform_color(pixel_color, self.samples_per_pixel)
 
-                pixel_color = self.ray_color(ray, world)
-                image[j, i] = pixel_color
-
-        if filename is not None:
-            img_writer = ImageWriter(image)
-            img_writer.save(filename)
-            display(img_writer.image)
+        img_writer = ImageWriter(image)
+        img_writer.save(filename)
+        display(img_writer.image)
         
         return image
+
+    # NOVO MÉTODO
+    def get_ray(self, i: int, j: int) -> Ray:
+        pixel_center = self.pixel00_loc + (i * self.pixel_delta_u) + (j * self.pixel_delta_v)
+        pixel_sample = pixel_center + self.pixel_sample_square()
+        
+        return Ray(self.camera_center, pixel_sample - self.camera_center)
+
+    #NOVO MÉTODO
+    def pixel_sample_square(self) -> Vec3:
+        px = -0.5 + random_double()
+        py = -0.5 + random_double()
+        return (px * self.pixel_delta_u) + (py * self.pixel_delta_v)
