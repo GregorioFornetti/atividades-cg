@@ -4,13 +4,14 @@ from Atividade04.src.classes.Hittable import Hittable
 from Atividade04.src.classes.Ray import Ray
 from Atividade04.src.classes.HitRecord import HitRecord
 from Atividade04.src.classes.Interval import Interval
+from Atividade06.src.Material import Material
 
 import numpy as np
 
 
 class Sphere(Hittable):
 
-    def __init__(self, center: Point3, radius: float):
+    def __init__(self, center: Point3, radius: float, material: Material):
         '''
         Construtor de uma esfera.
         
@@ -22,6 +23,7 @@ class Sphere(Hittable):
 
             - radius: float - Raio da esfera.
         '''
+        self.__material = material
         self.__center = center
         self.__radius = radius
     
@@ -76,4 +78,4 @@ class Sphere(Hittable):
             
             p = ray.at(t)
             normal = (p - self.center) / self.radius
-            return True, HitRecord(p, normal, t, ray)
+            return True, HitRecord(p, normal, t, ray, self.__material)

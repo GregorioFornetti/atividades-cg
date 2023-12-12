@@ -592,6 +592,45 @@ class Vec3(Vec):
             return in_unit_sphere
         else:
             return -in_unit_sphere
+    
+    def near_zero(self) -> bool:
+        '''
+        Retorna Verdadeiro se todos os elementos (x,y,z) do vetor são próximos de zero.
+        
+        ---
+
+        Retorno:
+
+            - bool - Se o vetor é próximo de zero.
+        '''
+        s = 1e-8
+        return (abs(self.vec[0]) < s) and (abs(self.vec[1]) < s) and (abs(self.vec[2]) < s)
+    
+    @staticmethod
+    def reflect(v: 'Vec3', n: 'Vec3') -> 'Vec3':
+        '''
+        Retorna o vetor refletido.
+
+        Exemplo:
+
+        >>> print(Vec3.reflect(Vec3([1, 2, 3]), Vec3([0, 1, 0])))
+        1.00 -2.00 3.00
+
+        ---
+
+        Parâmetros:
+
+            - v: 'Vec3' - Vetor a ser refletido.
+            
+            - n: 'Vec3' - Vetor normal.
+        
+        ---
+
+        Retorno:
+
+            - Vec3 - Vetor refletido.
+        '''
+        return v - 2 * v.dot(n) * n
 
 Point3 = Vec3
 
