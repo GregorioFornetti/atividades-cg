@@ -6,6 +6,7 @@ from Atividade04.src.classes.Hittable import Hittable
 from Atividade04.src.classes.Ray import Ray
 from Atividade04.src.classes.HitRecord import HitRecord
 from Atividade04.src.classes.Interval import Interval
+from Atividade06.src.Material import Material
 
 import numpy as np
 
@@ -52,9 +53,10 @@ def barycentric(point1: Point3, point2: Point3, point3: Point3, intersect_point:
 
     return u, v, w
 
+
 class Triangle(Hittable):
 
-    def __init__(self, vertex_1: Point3, vertex_2: Point3, vertex_3: Point3, normals: 'list[Point3, Point3, Point3]' = None):
+    def __init__(self, vertex_1: Point3, vertex_2: Point3, vertex_3: Point3, material: Material, normals: 'list[Point3, Point3, Point3]' = None):
         '''
         Construtor de um triângulo.
 
@@ -68,8 +70,11 @@ class Triangle(Hittable):
 
             - vertex_3: Point3 - Terceiro vértice do triângulo.
 
+            - material: Material - Material do triângulo.
+
             - normals: tuple[Point3, Point3, Point3] - Tupla contendo as normais de cada vértice do triângulo. Caso não seja especificado, as normais serão calculadas automaticamente.
         '''
+        self.__material = material
         self.__vertexes = np.array([vertex_1, vertex_2, vertex_3])
         
         if normals is not None:
@@ -201,14 +206,14 @@ class Triangle(Hittable):
             return False, None
         
         if self.__normals is None:
-            return True, HitRecord(intersect_point, normal, t, ray)
+            return True, HitRecord(intersect_point, normal, t, ray, self.__material)
         else:
             # Calculando as coordenadas baricêntricas
             w1, w2, w3 = barycentric(self.vertex_1, self.vertex_2, self.vertex_3, intersect_point)
             normal = w1 * self.normal_1 + w2 * self.normal_2 + w3 * self.normal_3
             normal = normal.unit_vector()
 
-            return True, HitRecord(intersect_point, normal, t, ray)
+            return True, HitRecord(intersect_point, normal, t, ray, self.__material)
     
     def scale(self, factor: float):
         '''

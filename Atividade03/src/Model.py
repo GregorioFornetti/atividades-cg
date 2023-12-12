@@ -2,12 +2,13 @@
 from Atividade02.src.vectorized.Vec3 import Vec3
 from Atividade04.src.classes.Triangle import Triangle
 from Atividade03.src.TriangleFaceIndexes import TriangleFaceIndexes
+from Atividade06.src.Material import Material
 import numpy as np
 import re
 
 class Model:
 
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str, material: Material):
         '''
         Construtor da classe Model. Recebe o caminho do arquivo .obj e o lê, armazenando os vértices e faces do modelo.
 
@@ -27,6 +28,7 @@ class Model:
         self.__normals: list[Vec3] = []
         self.__faces: list[Triangle] = []
         self.__faces_indexes: list[TriangleFaceIndexes] = []
+        self.material = material
 
         with open(file_path, 'r') as file:
             for line_num, line in enumerate(file):
@@ -104,7 +106,14 @@ class Model:
                         normals = None
                         if have_normals:
                             normals = [self.__normals[index] for index in current_face_indexes[2]]
-                        self.__faces.append(Triangle(self.__vertexes[current_face_indexes[0][0]], self.__vertexes[current_face_indexes[0][1]], self.__vertexes[current_face_indexes[0][2]], normals=normals))
+                        self.__faces.append(
+                            Triangle(
+                                self.__vertexes[current_face_indexes[0][0]],
+                                self.__vertexes[current_face_indexes[0][1]],
+                                self.__vertexes[current_face_indexes[0][2]], 
+                                material=self.material, normals=normals
+                            )
+                        )
                     except Exception as e:
                         raise ValueError(f'Erro ao criar face com os índices especificados (algum índice de vértice é maior que o número de vértices). O erro ocorreu na linha {line_num + 1}:\n{line}') from e
     

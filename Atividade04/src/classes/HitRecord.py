@@ -1,9 +1,12 @@
+
 from Atividade02.src.vectorized.Vec3 import Vec3, Point3
 from Atividade04.src.classes.Ray import Ray
+from Atividade06.src.Material import Material
+
 
 class HitRecord:
 
-    def __init__(self, p: Point3, normal: Vec3, t: float, ray: Ray):
+    def __init__(self, p: Point3, normal: Vec3, t: float, ray: Ray, material: Material):
         '''
         Construtor de um registro de acerto (hit).
 
@@ -19,6 +22,7 @@ class HitRecord:
 
             - ray: Ray - Raio que utilizado
         '''
+        self.material = material
         self.__p = p
         self.__t = t
         self.set_normal(normal, ray)
