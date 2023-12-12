@@ -473,7 +473,7 @@ class Vec3(Vec):
             - Vec3 - Resultado do produto vetorial.
         '''
         if not isinstance(other, Vec3):
-            raise TypeError(f"Tipo inválido para produto vetorial, esperado: Vec2, recebido: {type(other)}")
+            raise TypeError(f"Tipo inválido para produto vetorial, esperado: Vec3, recebido: {type(other)}")
         
         return Vec3([self.vec[1] * other.vec[2] - self.vec[2] * other.vec[1],
                     self.vec[2] * other.vec[0] - self.vec[0] * other.vec[2],
@@ -631,6 +631,32 @@ class Vec3(Vec):
             - Vec3 - Vetor refletido.
         '''
         return v - 2 * v.dot(n) * n
+
+    @staticmethod
+    def refract(uv: 'Vec3', n: 'Vec3', etai_over_etat: np.float64) -> 'Vec3':
+        '''
+        Retorna o vetor refratado.
+
+        ---
+
+        Parâmetros:
+
+            - uv: 'Vec3' - Vetor a ser refratado.
+            
+            - n: 'Vec3' - Vetor normal.
+            
+            - etai_over_etat: np.float64 - Índice de refração.
+        
+        ---
+
+        Retorno:
+
+            - Vec3 - Vetor refratado.
+        '''
+        cos_theta = min((-uv).dot(n), 1.0)
+        r_out_perp = etai_over_etat * (uv + cos_theta * n)
+        r_out_parallel = -np.sqrt(abs(1.0 - r_out_perp.squared_length())) * n
+        return r_out_perp + r_out_parallel
 
 Point3 = Vec3
 
