@@ -9,6 +9,48 @@ from Atividade04.src.classes.Interval import Interval
 
 import numpy as np
 
+def barycentric(point1: Point3, point2: Point3, point3: Point3, intersect_point: Point3):
+    '''
+    Calcula as coordenadas baricêntricas de um ponto em relação a um triângulo.
+
+    ---
+
+    Parâmetros:
+
+        - point1: Point3 - Primeiro vértice do triângulo.
+
+        - point2: Point3 - Segundo vértice do triângulo.
+
+        - point3: Point3 - Terceiro vértice do triângulo.
+        
+        - intersect_point: Point3 - Ponto a ser calculado as coordenadas baricêntricas.
+    
+    ---
+
+    Retorno:
+
+        - tuple[float, float, float] - Tupla contendo as coordenadas baricêntricas do ponto.
+    '''
+
+    # https://ceng2.ktu.edu.tr/~cakir/files/grafikler/Texture_Mapping.pdf
+    
+    v0 = point2 - point1
+    v1 = point3 - point1
+    v2 = intersect_point - point1
+
+    d00 = v0.dot(v0)
+    d01 = v0.dot(v1)
+    d11 = v1.dot(v1)
+    d20 = v2.dot(v0)
+    d21 = v2.dot(v1)
+
+    denom = d00 * d11 - d01 * d01
+
+    v = (d11 * d20 - d01 * d21) / denom
+    w = (d00 * d21 - d01 * d20) / denom
+    u = 1.0 - v - w
+
+    return u, v, w
 
 class Triangle(Hittable):
 
@@ -161,11 +203,11 @@ class Triangle(Hittable):
         if self.__normals is None:
             return True, HitRecord(intersect_point, normal, t, ray)
         else:
-            distance_edge_1_to_intersect_point = (intersect_point - self.vertex_1).squared_length()
-            distance_edge_2_to_intersect_point = (intersect_point - self.vertex_2).squared_length()
-            distance_edge_3_to_intersect_point = (intersect_point - self.vertex_3).squared_length()
-            normal = self.normal_1 / distance_edge_1_to_intersect_point + self.normal_2 / distance_edge_2_to_intersect_point + self.normal_3 / distance_edge_3_to_intersect_point
+            # Calculando as coordenadas baricêntricas
+            w1, w2, w3 = barycentric(self.vertex_1, self.vertex_2, self.vertex_3, intersect_point)
+            normal = w1 * self.normal_1 + w2 * self.normal_2 + w3 * self.normal_3
             normal = normal.unit_vector()
+
             return True, HitRecord(intersect_point, normal, t, ray)
     
     def scale(self, factor: float):
